@@ -18,7 +18,7 @@ import { CartContext } from '../context/cartContext';
 import { EditContext } from '../context/edit';
 
 function Navbar() {
-  const [loged , setLoged] = useState(true);
+  const [loged , setLoged] = useState(false);
   const { cart , setCart } = useContext(CartContext);
   const [showMenu , setShowMenu] = useState(false);
   
@@ -60,7 +60,7 @@ function Navbar() {
           {
             !loged ?  
             (
-              <div className='flex gap-1 md:gap-3 flex-1 justify-end'>
+              <div className='flex gap-1 md:gap-3 flex-1 justify-end items-center'>
                 <Tooltip title="open cart" arrow >
                   <NavLink to={"/cart"} onClick={()=>setShowMenu(false)}>
                       <div className='hover:border-[#95bf6d] hover:border-2 ease-in-out duration-300 cursor-pointer border-2 border-gray-100 text-gray-500 flex h-fit gap-2 items-center justify-center rounded-full py-1 px-[10px] bg-white drop-shadow-sm'>
@@ -83,13 +83,13 @@ function Navbar() {
 
                 <div className={ showMenu? ' bg-white w-full h-[calc(100vh-50px)] absolute left-0 top-[50px] p-10 flex flex-col justify-around ztop' : ' bg-white w-full h-[calc(100vh-50px)] absolute left-[-100%]  top-[50px] p-10 flex flex-col justify-around ztop'}>
                   <ul className='flex flex-col gap-2 text-gray-600 items-center'>
-                  <li className='navlinkPhone active linkToGoUp '><HomeRoundedIcon/> Home</li>
-                    <li className='navlinkPhone  linkToGoUp '><StorefrontRoundedIcon/> Market</li>
-                    <li className='navlinkPhone linkToGoUp '><CallRoundedIcon/>Contact</li>
+                    <li className='w-full flex justify-center' onClick={()=>setShowMenu(false)}><NavLink className={(({ isActive }) => (isActive ? 'navlinkPhone active-phone ' : ' navlinkPhone '))}  to="/"><HomeRoundedIcon/> Home</NavLink></li>
+                    <li className='w-full flex justify-center' onClick={()=>setShowMenu(false)}><NavLink className={(({ isActive }) => (isActive ? 'navlinkPhone active-phone ' : ' navlinkPhone '))}  to="/market"><StorefrontRoundedIcon/> Market</NavLink></li>
+                    <li className='w-full flex justify-center' onClick={()=>setShowMenu(false)}><NavLink className={(({ isActive }) => (isActive ? 'navlinkPhone active-phone ' : ' navlinkPhone '))}  to="/contact"><CallRoundedIcon/>Contact</NavLink></li>
                   </ul>
                   <ul className='flex flex-col gap-2 text-gray-600 items-center'>
-                    <li className='navlinkPhone linkToGoUp  '><NavLink to={"/signin"}>Sign in</NavLink></li>
-                    <li className='navlinkPhone linkToGoUp  '><NavLink to={"/signup"}>Sign up</NavLink></li>
+                    <li className='w-full flex justify-center' onClick={()=>setShowMenu(false)}><NavLink className={(({ isActive }) => (isActive ? 'navlinkPhone active-phone ' : ' navlinkPhone '))}  to="/signup">Sign Up</NavLink></li>
+                    <li className='w-full flex justify-center' onClick={()=>setShowMenu(false)}><NavLink className={(({ isActive }) => (isActive ? 'navlinkPhone active-phone ' : ' navlinkPhone '))}  to="/signin">Sign In</NavLink></li>
                   </ul>
                 </div>
 
