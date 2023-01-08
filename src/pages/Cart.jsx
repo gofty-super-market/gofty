@@ -18,7 +18,7 @@ import CardCart from '../components/CardCart';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import ShoppingCartRoundedIcon from '@mui/icons-material/ShoppingCartRounded';
 import SearchOffRoundedIcon from '@mui/icons-material/SearchOffRounded';
-
+import AlertDialog from '../components/Alert';
 
 
 
@@ -54,7 +54,6 @@ function Cart() {
   useEffect(() => {
     setEdit(ee => ee + 1)
   }, [search])
-
   useEffect(() => {
     setProducts(cart.filter(product => product.title.includes(search)).map((product, key) => {
       return (
@@ -124,27 +123,30 @@ function Cart() {
               </div>
             </div>
 
-              <div className='flex flex-col gap-3'>
-                <p className=' p-5 text-sm text-gray-600 border-l-2'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium, officiis deserunt qui maxime nihil tempore et,</p>
-                <div className='drop-shadow-md bg-white overflow-hidden text-gray-600 flex items-center border rounded-full h-10 px-3 gap-3'>
-                  <PersonRoundedIcon />
-                  <input placeholder='Enter your name' className='text-sm flex-1 outline-none h-full ' type="text" />
-                </div>
-                <div className='drop-shadow-md bg-white overflow-hidden text-gray-600 flex items-center border rounded-full h-10 px-3 gap-3'>
-                  <LocalPhoneRoundedIcon />
-                  <input placeholder='Enter phone number' className='text-sm flex-1 outline-none h-full ' type="text" />
-                </div>
-                <div className='drop-shadow-md bg-white overflow-hidden text-gray-600 flex items-center border rounded-full h-10 px-3 gap-3'>
-                  <RoomRoundedIcon />
-                  <input placeholder='Enter your location' className='text-sm flex-1 outline-none h-full ' type="text" />
-                </div>
-
-            {
-              price()? 
-                <button className='w-full md:w-fit mx-auto button my-2 bg-prime ease-in-out duration-200 text-white mt-5 flex items-center justify-center gap-2 hover:gap-3'>Check out <ArrowForwardIcon /> </button>
-              :  ""
-            }
+            <div className='flex flex-col gap-3'>
+              <p className=' p-5 text-sm text-gray-600 border-l-2'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium, officiis deserunt qui maxime nihil tempore et,</p>
+              <div className='drop-shadow-md bg-white overflow-hidden text-gray-600 flex items-center border rounded-full h-10 px-3 gap-3'>
+                <PersonRoundedIcon />
+                <input placeholder='Enter your name' className='text-sm flex-1 outline-none h-full ' type="text" />
               </div>
+              <div className='drop-shadow-md bg-white overflow-hidden text-gray-600 flex items-center border rounded-full h-10 px-3 gap-3'>
+                <LocalPhoneRoundedIcon />
+                <input placeholder='Enter phone number' className='text-sm flex-1 outline-none h-full ' type="text" />
+              </div>
+              <div className='drop-shadow-md bg-white overflow-hidden text-gray-600 flex items-center border rounded-full h-10 px-3 gap-3'>
+                <RoomRoundedIcon />
+                <input placeholder='Enter your location' className='text-sm flex-1 outline-none h-full ' type="text" />
+              </div>
+
+              {
+                price() ?
+                  <div className='flex gap-2 justify-center items-center mt-5'>
+                    <button className='flex-1 button bg-prime ease-in-out duration-200 text-white flex items-center justify-center gap-2 hover:gap-3 hover:opacity-90'>Check out <ArrowForwardIcon /> </button>
+                    <AlertDialog></AlertDialog>
+                  </div>
+                  : ""
+              }
+            </div>
           </div>
         </div>
 

@@ -178,7 +178,7 @@ body::-webkit-scrollbar-thumb {
     @apply  ease-in-out duration-300
   }
   .card:hover img{
-    @apply scale-110 
+    @apply scale-100 
   }
   .text-prime{
     @apply text-[#95BF6D]

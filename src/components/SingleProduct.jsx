@@ -84,7 +84,7 @@ function SingleProduct() {
                 <div className='w-[50%] md:w-1 h-1 md:h-36 bg-gray-200 rounded-md'></div>
                 <div className='p-6 md:p-4 flex-1 h-full flex flex-col gap-2'>
                     <h2 className='text-3xl text-gray-700'>{productInfo.title}</h2>
-                    <p className=' md:pr-5 text-sm text-gray-600'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem, sit at necessitatibus debitis sunt omnis molestiae ex assumenda amet blanditiis aliquam perspiciatis odio voluptatibus illo facere veritatis perferendis sequi nesciunt.</p>
+                                        <p className=' md:pr-5 text-sm text-gray-600'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem,</p>
                     <h3>Product Name</h3>
                     <div className='hover:scale-105 flex items-center justify-center gap-1 drop-shadow-md bg-white rounded-full w-fit border '>
                         <IconButton onClick={() => handelQChange(-1)}><NavigateBeforeRoundedIcon /></IconButton>
