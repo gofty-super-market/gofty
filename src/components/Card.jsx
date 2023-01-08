@@ -37,15 +37,15 @@ function Card({ img, title, price, description, productId }) {
                     <img className='h-[150px] md:h-[200px] object-cover' src={img} alt="" />
                 </div>
             </Link>
-            <div className='flex-1 p-4 flex flex-col'>
+            <div className='flex-1 p-3 sm:p-4 flex flex-col'>
                 <Link to={"/market/product/" + productId}>
                     <h3 className='text-xs md:text-base font-medium text-gray-700'>{title}</h3>
                     <p className='text-xs md:text-xs text-gray-600 flex-1'>{description ? description : "no description"}</p>
                 </Link>
-                <div className='flex items-end justify-between mt-1'>
-                    <h2 className='text-lg md:text-xl font-medium text-gray-700'>{price} DH</h2>
+                <div className='flex items-end justify-between mt-1 '>
+                    <h2 className='text-base md:text-xl font-medium text-gray-700 w-full'>{price} DH</h2>
                     {/* <Tooltip title="add to cart" arrow > */}
-                    <button onClick={() => addtocart()} className='button cardBtn drop-shadow-md hover:bg-[#85a864] bg-[#95BF6D] text-white p-2 rounded-xl'>
+                    <button onClick={() => addtocart()} className='button p-1 md:p-2 cardBtn drop-shadow-md hover:bg-[#85a864] bg-[#95BF6D] text-white rounded-xl'>
                         {
                             added ? <DoneRoundedIcon /> : <AddIcon />
                         }

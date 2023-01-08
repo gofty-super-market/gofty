@@ -110,7 +110,7 @@ function Cart() {
             <div className='flex md:items-center mb-3 flex-col md:flex-row gap-3 md:gap-0'>
               <div className='flex-1'>
                 <h4 className='text-lg text-gray-500'><SellRoundedIcon /> total Price</h4>
-                <h1 className='text-xl md:text-3xl font-medium'>{price() == 0 ? "0" : price() + delivery} DH</h1>
+                <h1 className='text-[3rem] font-medium text-gray-600'>{price() == 0 ? "0" : price() + delivery} DH</h1>
               </div>
               <div className='text-gray-500'>
                 <div className='flex w-full justify-between gap-3 '>
