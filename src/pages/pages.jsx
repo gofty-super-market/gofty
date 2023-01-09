@@ -12,12 +12,14 @@ import NotFoundPage from './NotFoundPage';
 import SignInPage from './SignInPage';
 import SignUpPage from './SignUpPage';
 import {motion } from "framer-motion"
+import CartFlyBtn from '../components/CartFlyBtn';
 
 function Pages({cart , setCart}) {
   return (
     <>
 
       <Navbar/>
+      <CartFlyBtn/>
       <Routes>
         <Route exact path='/' element={<Home />} />
         <Route path='/market/' element={<Market/>} />

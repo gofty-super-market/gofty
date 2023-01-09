@@ -5,6 +5,7 @@ import { Alert, CircularProgress } from '@mui/material';
 import DoneRoundedIcon from '@mui/icons-material/DoneRounded';
 import { useContext } from 'react';
 import { CartContext } from '../context/cartContext';
+import { AddToCart } from '../context/addToCart';
 import { motion } from "framer-motion"
 
 import Skeleton from '@mui/material/Skeleton';
@@ -16,6 +17,7 @@ function Card({ img, title, price, description, productId }) {
     const [added, setAdded] = useState(false);
     const [skeliton, setSkeliton] = useState(true);
     const { cart, setCart } = useContext(CartContext);
+    const { addtocart, setAddToCart } = useContext(AddToCart);
     useEffect(() => {
         setSkeliton(true)
         setTimeout(() => {
@@ -23,7 +25,8 @@ function Card({ img, title, price, description, productId }) {
         }, 500);
     }, [productId])
 
-    const addtocart = () => {
+    const addtocartHandler = () => {
+        setAddToCart(pre=>pre+1)
         let newCart = cart;
         let alreadyAdded = false;
         for (let i = 0; i < cart.length; i++) {
@@ -58,7 +61,7 @@ function Card({ img, title, price, description, productId }) {
                     <div className='flex items-end justify-between mt-1 '>
                         <h2 className='text-base md:text-xl font-medium text-gray-700 w-full'>{price} DH</h2>
                         {/* <Tooltip title="add to cart" arrow > */}
-                        <button onClick={() => addtocart()} className='button p-1 md:p-2 cardBtn drop-shadow-md hover:bg-[#85a864] bg-[#95BF6D] text-white rounded-xl'>
+                        <button onClick={() => addtocartHandler()} className='button p-1 md:p-2 cardBtn drop-shadow-md hover:bg-[#85a864] bg-[#95BF6D] text-white rounded-xl'>
                             {
                                 added ? <DoneRoundedIcon /> : <AddIcon />
                             }

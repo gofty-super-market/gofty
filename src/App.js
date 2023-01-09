@@ -10,6 +10,7 @@ import Pages from "./pages/pages";
 
 import axios from "axios"
 import ScrollToTop from "./components/ScrollToTop";
+import { AddToCart } from "./context/addToCart";
 
 
 const api = axios.create({
@@ -25,14 +26,17 @@ function App() {
 
   const [cart, setCart] = useState([]);
   const [edit, setEdit] = useState(0);
+  const [addToCart, setAddToCart] = useState(0);
 
   return (
     <BrowserRouter>
       <div>
         <CartContext.Provider value={{ cart, setCart }}>
         <EditContext.Provider value={{ edit, setEdit }}>
+        <AddToCart.Provider value={{ addToCart, setAddToCart }}>
           <ScrollToTop />
           <Pages cart={cart} setCart={setCart}/>
+        </AddToCart.Provider>
         </EditContext.Provider>
         </CartContext.Provider>
       </div>

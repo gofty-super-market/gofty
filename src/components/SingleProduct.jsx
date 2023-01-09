@@ -21,6 +21,7 @@ import { CartContext } from '../context/cartContext';
 import { EditContext } from '../context/edit';
 import { motion } from "framer-motion"
 
+import { AddToCart } from '../context/addToCart';
 const Imgs = [Img1, Img2, Img4, Img5, Img1, Img2, Img4, Img1, Img2, Img4, Img5, Img1]
 
 const api = axios.create({
@@ -34,12 +35,14 @@ function SingleProduct() {
     const { cart, setCart } = useContext(CartContext)
     const { edit, setEdit } = useContext(EditContext)
     const [productInfo, setProductInfo] = useState([])
+    const { addtocart, setAddToCart } = useContext(AddToCart);
     console.log(id)
     useEffect(() => {
         api.get("/product-" + id).then(res => setProductInfo(res.data))
     }, [])
 
-    const addtocart = () => {
+    const addtocartHandler = () => {
+        setAddToCart(pre=>pre+1)
         let newCart = cart;
         let alreadyAdded = false;
         for (let i = 0; i < cart.length; i++) {
@@ -96,7 +99,7 @@ function SingleProduct() {
                             <button onClick={() => setFavorite(!favorite)} className='hover:bg-[#f1f1f1] button bg-white  drop-shadow-md border text-[#F39221] p-2'>{favorite ? <FavoriteRoundedIcon /> : <FavoriteBorderIcon />} </button>
                         </Tooltip>
                         <button className='flex-1 sm:flex-none hover:scale-105 ease-in-out duration-300 button bg-[#95BF6D] text-white text-xs md:text-md '> Buy now </button>
-                        <button className=' sm:flex-none hover:scale-105 ease-in-out duration-300 button bg-gray-600 text-white text-xs md:text-md' onClick={() => addtocart()}><AddRoundedIcon /> Add to cart</button>
+                        <button className=' sm:flex-none hover:scale-105 ease-in-out duration-300 button bg-gray-600 text-white text-xs md:text-md' onClick={() => addtocartHandler()}><AddRoundedIcon /> Add to cart</button>
                     </div>
                 </div>
             </motion.div>
