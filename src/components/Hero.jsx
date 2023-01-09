@@ -41,7 +41,7 @@ function Hero() {
     }, [inView])
     
     return (
-        <div ref={ref} className='mt-2 md:mt-14 select-none flex flex-col-reverse lg:flex-row  py-20 px-5 md:px-10 gap-4'>
+        <div ref={ref} className='overflow-hidden mt-2 md:mt-14 select-none flex flex-col-reverse lg:flex-row  py-20 px-5 md:px-10 gap-4'>
             <motion.div animate={animation1} className='flex-1 flex flex-col justify-center gap-4 items-center md:items-start text-center md:text-left'>
                 <h1 className='select-none text-gray-600 text-[1.6rem] md:text-[3.3rem]'>GOFTY SUPERMARKET ELECTRONIC</h1>
                 <h3 className='select-none text-[#8ab167] text-[1.3rem] flex items-center gap-2'><SpaIcon /> Super healthy</h3>

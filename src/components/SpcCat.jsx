@@ -70,7 +70,7 @@ function SpcCat() {
         animate={animation}
         className=' select-none w-full max-w-[1200px] mx-auto px-5 '>
             <h1 className='text-gray-700 mt-5 md:mt-10 mb-5 text-3xl font-medium flex items-center gap-2'> {cat} </h1>
-            <div className='my-5 md:my-10 border rounded-full max-w-xs w-full h-11 flex items-center gap-2 px-1 text-gray-600 drop-shadow-md bg-white'>
+            <div className=' overflow-hidden my-5 md:my-10 border rounded-full max-w-xs w-full h-11 flex items-center gap-2 px-1 text-gray-600 drop-shadow-md bg-white'>
                 <IconButton><SearchRoundedIcon className='cursor-pointer '></SearchRoundedIcon></IconButton>
                 <input value={search} onChange={(e) => { setSearch(e.target.value) }} className='flex-1 outline-none h-full ' type="text" />
                 <IconButton className={(search ? " scale-100 " : " scale-0 ")}><CancelSharpIcon onClick={() => { setSearch("") }} className='cursor-pointer ease-in-out duration-300'></CancelSharpIcon></IconButton>

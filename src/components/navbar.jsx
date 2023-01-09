@@ -74,11 +74,11 @@ function Navbar() {
                 <NavLink to={"/signup"}><button className=' linkToGoUp hidden md:block button hover:bg-[#8ab167] bg-[#95BF6D] text-white'>Sign up</button></NavLink>
 
                 <div className='block md:hidden'>
-                  <IconButton className=' button ' onClick={()=>{handelMenuBtnsClick()}}>
+                  <button className='text-gray-600' onClick={()=>{handelMenuBtnsClick()}}>
                     {
                       showMenu? <CloseIcon /> : <MenuIcon />
                     }
-                  </IconButton>
+                  </button>
                 </div>
 
                 <div className={ showMenu? ' bg-white w-full h-[calc(100vh-50px)] absolute left-0 top-[50px] p-10 flex flex-col justify-around ztop' : ' bg-white w-full h-[calc(100vh-50px)] absolute left-[-100%]  top-[50px] p-10 flex flex-col justify-around ztop'}>
