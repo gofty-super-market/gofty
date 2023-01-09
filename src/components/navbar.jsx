@@ -63,7 +63,7 @@ function Navbar() {
               <div className='flex gap-1 md:gap-3 flex-1 justify-end items-center'>
                 <Tooltip title="open cart" arrow >
                   <NavLink to={"/cart"} onClick={()=>setShowMenu(false)}>
-                      <div className='hover:border-[#95bf6d] hover:border-2 ease-in-out duration-300 cursor-pointer border-2 border-gray-100 text-gray-500 flex h-fit gap-2 items-center justify-center rounded-full py-1 px-[10px] bg-white drop-shadow-sm'>
+                      <div className='hover:border-[#95bf6d] hover:border-2 ease-in-out duration-300 cursor-pointer border-2 border-gray-300 text-gray-500 flex h-fit gap-2 items-center justify-center rounded-full py-1 px-[10px] bg-white drop-shadow-sm'>
                           <LocalMallOutlinedIcon/>
                           <div className='w-[2px] h-5 bg-gray-200 rounded-full'></div>
                           <span className=''>{cart.length}</span>
@@ -103,7 +103,7 @@ function Navbar() {
                 
                 <Tooltip title="open cart" arrow >
                   <NavLink className=" linkToGoUp " to={"/cart"} onClick={()=>setShowMenu(false)}>
-                    <div className={ 'addedToCartAnimationOff relative hover:border-[#95bf6d] hover:border-2 ease-in-out duration-300 cursor-pointer border-2 border-gray-100 text-gray-500 flex h-fit gap-2 items-center justify-center rounded-full py-1 px-[10px] bg-white drop-shadow-sm ' }>
+                    <div className={ 'addedToCartAnimationOff relative hover:border-[#95bf6d] hover:border-2 ease-in-out duration-300 cursor-pointer border-2 border-gray-300 text-gray-500 flex h-fit gap-2 items-center justify-center rounded-full py-1 px-[10px] bg-white drop-shadow-sm ' }>
                         <LocalMallOutlinedIcon/>
                         <div className='w-[2px] h-5 bg-gray-200 rounded-full'></div>
                         <span className=''>{cart.length}</span>

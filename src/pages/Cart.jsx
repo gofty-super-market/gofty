@@ -77,7 +77,7 @@ function Cart() {
       <div className='flex gap-4 flex-col-reverse md:flex-row'>
         <div className='flex-1 p-3 md:p-0'>
           <h3 className='text-xl py-2 font-medium text-gray-700'>{cart.length} products</h3>
-          <div className='border my-2 rounded-full w-full max-w-sm h-11 flex items-center gap-2 px-1 text-gray-600 drop-shadow-md bg-white'>
+          <div className='border my-2 rounded-full max-w-xs w-full  h-11 flex items-center gap-2 px-1 text-gray-600 drop-shadow-md bg-white'>
             <IconButton><SearchRoundedIcon className='cursor-pointer '></SearchRoundedIcon></IconButton>
             <input value={search} onChange={(e) => { setSearch(e.target.value) }} className='flex-1 outline-none h-full ' type="text" />
             <IconButton className={(search ? " scale-100 " : " scale-0 ")}><CancelSharpIcon onClick={() => { setSearch("") }} className='cursor-pointer ease-in-out duration-300'></CancelSharpIcon></IconButton>
@@ -140,8 +140,8 @@ function Cart() {
 
               {
                 price() ?
-                  <div className='flex gap-2 justify-center items-center mt-5'>
-                    <button className='flex-1 button bg-prime ease-in-out duration-200 text-white flex items-center justify-center gap-2 hover:gap-3 hover:opacity-90'>Check out <ArrowForwardIcon /> </button>
+                  <div className='flex gap-2 justify-center md:justify-end items-center mt-5'>
+                    <button className='flex-1 md:flex-none button bg-prime ease-in-out duration-200 text-white flex items-center justify-center gap-2 hover:gap-3 hover:opacity-90'>Check out <ArrowForwardIcon /> </button>
                     <AlertDialog></AlertDialog>
                   </div>
                   : ""
