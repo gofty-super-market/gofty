@@ -8,6 +8,11 @@ import { Splide , SplideSlide } from "@splidejs/react-splide"
 import "@splidejs/splide/dist/css/splide.min.css"
 import LocalOfferIcon from '@mui/icons-material/LocalOffer';
 
+import { useEffect } from 'react';
+import { useInView } from 'react-intersection-observer';
+import { motion,useAnimation } from 'framer-motion';
+
+
 const imgarray = [
     "https://images.unsplash.com/photo-1610444833641-0542660a4ed7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80",
     "https://images.unsplash.com/photo-1550989460-0adf9ea622e2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80",
@@ -17,10 +22,29 @@ const imgarray = [
 
 const cardStyle = 'flex '
 function GoftyOffer() {
+
+    const { ref, inView } = useInView({
+        threshold:0.3
+    });
+    const animation = useAnimation()
+    useEffect(() => {
+        if (inView) {
+           animation.start({
+            x:0,
+            opacity:1
+           }) 
+        }else{
+            animation.start({
+                x:-100,
+                opacity:0,
+            })
+        }
+    }, [inView])
+
     const [favorite , setFavorite ] =useState(false)
   return (
     <>
-    <div className='flex flex-col justify-center my-10 '>
+    <motion.div animate={animation} ref={ref} className='flex flex-col justify-center my-10 '>
     <h1 className='mx-auto max-w-[1100px] uppercase text-2xl font-medium text-gray-700 ml-5'><LocalOfferIcon/> special offers</h1>
         <Splide options={{
             perPage:1,
@@ -58,7 +82,7 @@ function GoftyOffer() {
 
         </Splide>
 
-    </div>
+    </motion.div>
     </>
 
   )

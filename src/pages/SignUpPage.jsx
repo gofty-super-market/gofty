@@ -6,9 +6,11 @@ import { Link } from 'react-router-dom';
 import FmdGoodIcon from '@mui/icons-material/FmdGood';
 import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
 import PersonIcon from '@mui/icons-material/Person';
+import {motion} from "framer-motion"
 export default function SignInPage() {
   return (
-    <div className='text-gray-700 my-16 mb-0 md:mb-28 md:my-28 flex flex-col items-center justify-center'>
+    
+    <motion.div initial={{y:100 , opacity:.5}} animate={{y:0,opacity:1}}   className='text-gray-700 my-16 mb-0 md:mb-28 md:my-28 flex flex-col items-center justify-center'>
       <h1 className='text-3xl font-medium'>Sing Up</h1>
       <form className='gap-5 p-6 py-8 md:py-12 flex flex-col items-center w-full max-w-lg rounded-3xl  ' action="">
         <div className='flex flex-col md:flex-row w-full gap-4'>
@@ -54,6 +56,6 @@ export default function SignInPage() {
           you have aleardy an acount  ? <Link className='text-prime' to={"/signin"}>Sign in</Link>
         </div>
       </form>
-    </div>
+    </motion.div>
   )
 }

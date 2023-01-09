@@ -3,9 +3,11 @@ import logo from "../imgs/logo.png"
 import EmailIcon from '@mui/icons-material/Email';
 import HttpsIcon from '@mui/icons-material/Https';
 import { Link } from 'react-router-dom';
+import {motion} from "framer-motion"
 export default function SignInPage() {
   return (
-    <div className='text-gray-700 my-16 mb-0 md:mb-28 md:my-28 flex items-center justify-center'>
+    
+    <motion.div initial={{y:100 , opacity:.5}} animate={{y:0,opacity:1}}  className='text-gray-700 my-16 mb-0 md:mb-28 md:my-28 flex items-center justify-center'>
       <form className='gap-5 p-6 py-8 md:py-12 flex flex-col items-center w-full max-w-lg rounded-3xl  ' action="">
         <h1 className='text-3xl font-medium'>Sing In</h1>
         <h1>Welcome back to gofty </h1>
@@ -26,6 +28,6 @@ export default function SignInPage() {
           you dont have an acount ? <Link className='text-prime' to={"/signup"}>Sign Up</Link>
         </div>
       </form>
-    </div>
+    </motion.div>
   )
 }

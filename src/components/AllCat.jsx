@@ -22,7 +22,7 @@ import Img5 from "../imgs/productsImgs/5.jpg";
 import axios from "axios";
 import { useEffect } from 'react';
 import SingleCatSlider from './SingleCatSlider';
-
+import {motion} from "framer-motion"
 
 const api = axios.create({
     baseURL: "https://marrakech-quad-biking.com/demo/gofty/api"
@@ -56,7 +56,9 @@ function AllCat() {
     
     const [search , setSearch ]= useState()
     return (
-        <div className='w-full max-w-[1200px] mx-auto px-5 '>
+        <motion.div 
+        initial={{y:200}} animate={{y:0}}
+        className='w-full max-w-[1200px] mx-auto px-5 '>
             <h1 className='text-gray-700 mt-5 md:mt-10 mb-5 text-3xl font-medium flex items-center gap-2'><StorefrontRoundedIcon /> Our Market</h1>
             <form className='my-5 md:my-10 border rounded-full  max-w-xs w-full h-11 flex items-center gap-2 px-1 text-gray-600 drop-shadow-md bg-white'>
                 <IconButton><SearchRoundedIcon className='cursor-pointer '></SearchRoundedIcon></IconButton>
@@ -76,7 +78,7 @@ function AllCat() {
                 )
             }
 
-        </div>
+        </motion.div>
 
     )
 }

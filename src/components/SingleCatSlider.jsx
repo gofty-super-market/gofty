@@ -2,7 +2,7 @@ import axios from "axios"
 import { useEffect, useState } from "react"
 import { Splide, SplideSlide } from "@splidejs/react-splide"
 import { Link, useParams } from 'react-router-dom';
-
+import { motion } from "framer-motion"
 
 
 import EastRoundedIcon from '@mui/icons-material/EastRounded';
@@ -27,7 +27,7 @@ export default function SingleCatSlider({ cat, link, cat_id }) {
         (
 
             (products.length != 0) && (
-                <div>
+                <motion.div>
                     <h3 className='w-fit text-gray-700  text-2xl font-medium'><Link className='w-fit cat-link-h3 hover:pl-3 ease-in-out duration-300 border-b-2 py-1' to={cat}>{cat} <EastRoundedIcon className='opacity-0 ease-in-out duration-300' /> </Link></h3>
                     <div className='mx-auto w-full max-w-[1200px]'>
                         <Splide className='py-6' options={{
@@ -58,7 +58,7 @@ export default function SingleCatSlider({ cat, link, cat_id }) {
                             }
                         </Splide>
                     </div>
-                </div>
+                </motion.div>
             )
 
         )
