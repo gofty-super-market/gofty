@@ -74,7 +74,7 @@ function Cart() {
   return (
     <motion.div initial={{ y: 300, opacity: .5 }} animate={{ y: 0, opacity: 1 }} className="mx-auto max-w-[1100px] w-full mt-16 md:mt-28 px-4 text-gray-700">
       <h1 className='text-3xl font-medium text-gray-700 py-8 md:py-2 flex items-center gap-2 justify-center md:justify-start'><LocalMallRoundedIcon /> Shopping cart</h1>
-      <div className='flex gap-4 flex-col-reverse md:flex-row'>
+      <div className='flex gap-4 flex-col md:flex-row'>
         <div className='flex-1 p-3 md:p-0'>
           <h3 className='text-xl py-2 font-medium text-gray-700'>{cart.length} products</h3>
           <div className=' overflow-hidden border my-2 rounded-full max-w-xs w-full  h-11 flex items-center gap-2 px-1 text-gray-600 drop-shadow-md bg-white'>
@@ -97,7 +97,7 @@ function Cart() {
                 </h1>
             }
           </div>
-          <div className='flex gap-3 py-4'>
+          <div className='flex gap-3 py-6'>
             <Link to={"/market"}>
               <button className='button bg-prime ease-in-out duration-200 text-white flex items-center justify-center gap-2 hover:gap-3'>Continue shopping <ArrowForwardIcon /> </button>
             </Link>
