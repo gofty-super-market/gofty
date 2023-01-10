@@ -19,7 +19,7 @@ import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import ShoppingCartRoundedIcon from '@mui/icons-material/ShoppingCartRounded';
 import SearchOffRoundedIcon from '@mui/icons-material/SearchOffRounded';
 import AlertDialog from '../components/Alert';
-import {motion} from "framer-motion"
+import { motion } from "framer-motion"
 
 
 
@@ -72,7 +72,7 @@ function Cart() {
 
 
   return (
-    <motion.div initial={{y:300 , opacity:.5}} animate={{y:0,opacity:1}} className="mx-auto max-w-[1100px] w-full mt-16 md:mt-28 px-4 text-gray-700">
+    <motion.div initial={{ y: 300, opacity: .5 }} animate={{ y: 0, opacity: 1 }} className="mx-auto max-w-[1100px] w-full mt-16 md:mt-28 px-4 text-gray-700">
       <h1 className='text-3xl font-medium text-gray-700 py-8 md:py-2 flex items-center gap-2 justify-center md:justify-start'><LocalMallRoundedIcon /> Shopping cart</h1>
       <div className='flex gap-4 flex-col-reverse md:flex-row'>
         <div className='flex-1 p-3 md:p-0'>
@@ -97,15 +97,21 @@ function Cart() {
                 </h1>
             }
           </div>
-          <Link to={"/market"}>
-            <button className='button bg-gray-700 ease-in-out duration-200 text-white mt-5 flex items-center justify-center gap-2 hover:gap-3'>Continue shopping <ArrowForwardIcon /> </button>
-          </Link>
+          <div className='flex gap-3 py-4'>
+            <Link to={"/market"}>
+              <button className='button bg-prime ease-in-out duration-200 text-white flex items-center justify-center gap-2 hover:gap-3'>Continue shopping <ArrowForwardIcon /> </button>
+            </Link>
+            {
+              cart.length!=0 &&
+            <AlertDialog></AlertDialog>
+            }
+          </div>
 
         </div>
 
         <div className='flex-1 relative'>
 
-          <motion.div  className='border select-none bg-white flex flex-col gap-3 drop-shadow-xl w-full rounded-3xl p-5 md:p-8 md:sticky top-20'>
+          <motion.div className='border select-none bg-white flex flex-col gap-3 drop-shadow-xl w-full rounded-3xl p-5 md:p-8 md:sticky top-20'>
             <div className='flex md:items-center mb-3 flex-col md:flex-row gap-3 md:gap-0'>
               <div className='flex-1'>
                 <h4 className='text-lg text-gray-500'><SellRoundedIcon /> total Price</h4>
@@ -142,7 +148,6 @@ function Cart() {
                 price() ?
                   <div className='flex gap-2 justify-center md:justify-end items-center mt-5'>
                     <button className='flex-1 md:flex-none button bg-prime ease-in-out duration-200 text-white flex items-center justify-center gap-2 hover:gap-3 hover:opacity-90'>Check out <ArrowForwardIcon /> </button>
-                    <AlertDialog></AlertDialog>
                   </div>
                   : ""
               }

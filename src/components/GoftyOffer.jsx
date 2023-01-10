@@ -15,8 +15,8 @@ import { motion,useAnimation } from 'framer-motion';
 
 const imgarray = [
     "https://images.unsplash.com/photo-1610444833641-0542660a4ed7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80",
-    "https://images.unsplash.com/photo-1550989460-0adf9ea622e2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80",
-    "https://images.unsplash.com/photo-1506617420156-8e4536971650?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1723&q=80"
+    "https://images.unsplash.com/photo-1610444833641-0542660a4ed7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80",
+    "https://images.unsplash.com/photo-1610444833641-0542660a4ed7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80",
 ]
 
 
@@ -60,8 +60,8 @@ function GoftyOffer() {
                             <img  className='w-full h-full ease-in-out duration-300 hover:scale-105 flex-1 object-cover '  src={img} alt="" />
                         </div>
                         <div className='p-4 md:p-6  flex flex-col gap-2 flex-1'>
-                            <h3 className='text-2xl font-medium text-[#95BF6D]'>GOFTY</h3>
-                            <h4 className='text-xl font-medium text-gray-800'>99 DH</h4>
+                            <h3 className='text-2xl font-medium text-gray-700'>Offer name</h3>
+                            <h4 className='text-3xl font-medium text-gray-700'>99 DH <span className='line-through text-2xl text-gray-500'> 120 DH </span></h4>
                             <p className='max-w-none md:max-w-lg flex-1 text-gray-600 text-sm '>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloremque in voluptas omnis amet, sed cum recusandae </p>
                             <div className='flex gap-2 justify-center md:justify-end pt-2'>
                                 <Tooltip title="add to favoret" arrow >

@@ -45,10 +45,10 @@ export default function AlertDialog() {
                 </DialogContent>
                 <DialogActions>
                     <button onClick={handleClose} className="button bg-gray-300 text-black ">
-                        Disagree
+                        cancel
                     </button>
                     <button onClick={() => { handleClose(); handelClean() }} className="button bg-red-500 text-white ">
-                        Agree
+                        clear
                     </button>
                 </DialogActions>
             </Dialog>
