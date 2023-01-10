@@ -13,6 +13,7 @@ body{
 *{
   /* transition: .2s ease-in-out; */
   padding: 0%;
+  
 }
 
 
@@ -175,9 +176,6 @@ body::-webkit-scrollbar-thumb {
   }
   .card img{
     @apply  ease-in-out duration-300
-  }
-  .card:hover img{
-    @apply scale-100 
   }
   .text-prime{
     @apply text-[#95BF6D]
