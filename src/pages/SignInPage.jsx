@@ -11,11 +11,11 @@ export default function SignInPage() {
       <form className='gap-5 p-6 py-8 md:py-12 flex flex-col items-center w-full max-w-lg rounded-3xl  ' action="">
         <h1 className='text-3xl font-medium'>Sing In</h1>
         <h1>Welcome back to gofty </h1>
-        <div className='w-full border rounded-xl h-10 overflow-hidden drop-shadow-md gap-2 bg-white flex pl-2 items-center '>
+        <div className='w-full border-2 border-gray-300 rounded-xl h-10 overflow-hidden gap-2 bg-white flex pl-2 items-center  '>
           <EmailIcon />
           <input type="text" placeholder='Your Email' className='flex-1 h-full outline-none' />
         </div>
-        <div className='w-full border rounded-xl h-10 overflow-hidden drop-shadow-md gap-2 bg-white flex pl-2 items-center '>
+        <div className='w-full border-2 border-gray-300 rounded-xl h-10 overflow-hidden gap-2 bg-white flex pl-2 items-center  '>
           <HttpsIcon />
           <input type="password" placeholder='Your Email' className='flex-1 h-full outline-none' />
         </div>
