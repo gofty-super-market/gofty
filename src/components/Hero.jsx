@@ -14,7 +14,7 @@ import { useAnimation } from 'framer-motion';
 function Hero() {
 
     const { ref, inView } = useInView({
-        threshold:0.3
+        threshold:0.4
     });
     const animation1 = useAnimation()
     const animation2 = useAnimation()
@@ -42,7 +42,7 @@ function Hero() {
     
     return (
         <div ref={ref} className='overflow-hidden mt-2 md:mt-14 select-none flex flex-col-reverse lg:flex-row  py-20 px-5 md:px-10 gap-4'>
-            <motion.div animate={animation1} className='flex-1 flex flex-col justify-center gap-4 items-center md:items-start text-center md:text-left'>
+            <motion.div  animate={animation1} className='flex-1 flex flex-col justify-center gap-4 items-center md:items-start text-center md:text-left'>
                 <h1 className='select-none text-gray-600 text-[1.6rem] md:text-[3.3rem]'>GOFTY SUPERMARKET ELECTRONIC</h1>
                 <h3 className='select-none text-[#8ab167] text-[1.3rem] flex items-center gap-2'><SpaIcon /> Super healthy</h3>
                 <p className='select-none max-w-[450px] text-gray-500'>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore</p>
@@ -65,7 +65,7 @@ function Hero() {
                 </NavLink>
             </motion.div>
             <div className='flex-1 flex justify-center items-center'>
-                <motion.img animate={animation2} className='max-w-md  lg:max-w-none select-none w-full' src={HeroImg} alt="" />
+                <motion.img  animate={animation2} className='max-w-md  lg:max-w-none select-none w-full' src={HeroImg} alt="" />
             </div>
         </div>
     )

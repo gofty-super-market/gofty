@@ -104,11 +104,11 @@ function Card({ img, title, price, description, productId }) {
                         {/* <Tooltip title="add to cart" arrow > */}
                         {
                             q !== 0 &&
-                            <button onClick={() => removefromcartHandler()} className='button p-1 md:p-2 cardBtn drop-shadow-md hover:bg-red-500 bg-red-400 text-white rounded-xl '>
+                            <button onClick={() => removefromcartHandler()} className='button p-2  cardBtn drop-shadow-md hover:bg-red-500 bg-red-400 text-white rounded-xl '>
                                 <RemoveRoundedIcon />
                             </button>
                         }
-                        <button onClick={() => addtocartHandler()} className='button p-1 md:p-2 cardBtn drop-shadow-md hover:bg-[#85a864] bg-[#95BF6D] text-white rounded-xl'>
+                        <button onClick={() => addtocartHandler()} className='button p-2  cardBtn drop-shadow-md hover:bg-[#85a864] bg-[#95BF6D] text-white rounded-xl'>
                             <AddIcon />
                         </button>
                         {/* </Tooltip> */}

@@ -24,7 +24,7 @@ const cardStyle = 'flex '
 function GoftyOffer() {
 
     const { ref, inView } = useInView({
-        threshold:0.3
+        threshold:0.2
     });
     const animation = useAnimation()
     useEffect(() => {
@@ -35,7 +35,7 @@ function GoftyOffer() {
            }) 
         }else{
             animation.start({
-                x:-100,
+                x:-300,
                 opacity:0,
             })
         }
@@ -44,7 +44,7 @@ function GoftyOffer() {
     const [favorite , setFavorite ] =useState(false)
   return (
     <>
-    <motion.div animate={animation} ref={ref} className='flex flex-col justify-center my-10 '>
+    <motion.div transition={{duration:.6}} animate={animation} ref={ref} className='flex flex-col justify-center my-10 '>
     <h1 className='mx-auto max-w-[1100px] uppercase text-2xl font-medium text-gray-700 ml-5'><LocalOfferIcon/> special offers</h1>
         <Splide options={{
             perPage:1,

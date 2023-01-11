@@ -18,7 +18,7 @@ function BestSeller() {
   const [NewProducts, setNewProducts] = useState([])
 
   const { ref, inView } = useInView({
-    threshold: 0.3
+    threshold: 0.2
   });
   const animation = useAnimation()
   useEffect(() => {
@@ -29,7 +29,7 @@ function BestSeller() {
       })
     } else {
       animation.start({
-        x: -100,
+        x: -300,
         opacity: 0,
       })
     }
@@ -42,7 +42,7 @@ function BestSeller() {
   }, [])
 
   return (
-    <motion.div ref={ref} animate={animation}>
+    <motion.div transition={{duration:.6}}  ref={ref} animate={animation}>
       <h1 className='mx-auto max-w-[1100px] uppercase text-2xl font-medium text-gray-700 ml-5'><WhatshotIcon />Now Products</h1>
       <div className='mx-auto max-w-[1100px] grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-y-0 gap-4 md:gap-8 h-fit p-3 md:p-2'>
 

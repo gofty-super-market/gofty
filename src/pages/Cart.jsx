@@ -97,12 +97,12 @@ function Cart() {
                 </h1>
             }
           </div>
-          <div className='flex gap-3 py-6'>
+          <div className='flex gap-3 py-6 flex-col md:flex-row items-center'>
             <Link to={"/market"}>
               <button className='button bg-prime ease-in-out duration-200 text-white flex items-center justify-center gap-2 hover:gap-3'>Continue shopping <ArrowForwardIcon /> </button>
             </Link>
             {
-              cart.length!=0 &&
+            cart.length!=0 &&
             <AlertDialog></AlertDialog>
             }
           </div>
