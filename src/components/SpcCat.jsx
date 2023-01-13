@@ -3,13 +3,14 @@ import Card from './Card';
 import GoftyOffer from './GoftyOffer'
 import { Splide, SplideSlide } from "@splidejs/react-splide"
 import { Link, useParams } from 'react-router-dom';
-
+import ChevronRightRoundedIcon from '@mui/icons-material/ChevronRightRounded';
+import KeyboardArrowLeftRoundedIcon from '@mui/icons-material/KeyboardArrowLeftRounded';
+import { IconButton } from '@mui/material';
 
 import StorefrontRoundedIcon from '@mui/icons-material/StorefrontRounded';
 import EastRoundedIcon from '@mui/icons-material/EastRounded';
 import SearchRoundedIcon from '@mui/icons-material/SearchRounded';
 import CancelSharpIcon from '@mui/icons-material/CancelSharp';
-import { IconButton } from '@mui/material';
 import SentimentVeryDissatisfiedIcon from '@mui/icons-material/SentimentVeryDissatisfied';
 import SearchOffIcon from '@mui/icons-material/SearchOff';
 
@@ -36,27 +37,40 @@ const catList = {
 const api = axios.create({
     baseURL: "https://marrakech-quad-biking.com/demo/gofty/api"
 })
-
+// https://marrakech-quad-biking.com/demo/gofty/api/products-1-page-1
 function SpcCat() {
 
     const { cat } = useParams();
     const [search, setSearch] = useState("");
     const [products, setProducts] = useState([]);
     const animation = useAnimation()
+    const [page, setPage] = useState(1);
 
-    useEffect(()=>{
-        animation.start({y:200})
-        setTimeout(() => {
-            animation.start({y:0})
-        }, 50);
-    },[cat])
     useEffect(() => {
-        api.get("/products-" + catList[cat]).then(res => setProducts(res.data))
+        animation.start({ y: 200 })
+        setTimeout(() => {
+            animation.start({ y: 0 })
+        }, 50);
     }, [cat])
+    useEffect(() => {
+        api.get("/products-" + catList[cat] + "-page-" + page).then(res => setProducts(res.data))
+    }, [cat])
+    useEffect(() => {
+        api.get("/products-" + catList[cat] + "-page-" + page).then(res => setProducts(res.data))
+    }, [page])
 
-
+    const changePageBy=(i)=>{
+        setPage(per=>per+i)
+    }
+    useEffect(() => {
+        if(page<=1){
+            setPage(1)
+        }
+    }, [page])
+    
     const finalproducts = products.filter((product) => product.title.includes(search)).map((product, key) => {
         return (
+
             <SplideSlide key={key}>
                 <div className='mx-2 md:mx-4 my-2'>
                     <Card productId={product.id_product} img={Img1} title={product.title} description={product.description} price={product.price} />
@@ -66,9 +80,9 @@ function SpcCat() {
     })
 
     return (
-        <motion.div 
-        animate={animation}
-        className=' select-none w-full max-w-[1200px] mx-auto px-5 '>
+        <motion.div
+            animate={animation}
+            className=' select-none w-full max-w-[1200px] mx-auto px-5 '>
             <h1 className='text-gray-700 mt-5 md:mt-10 mb-5 text-3xl font-medium flex items-center gap-2'> {cat} </h1>
             <div className=' overflow-hidden my-5 md:my-10 border rounded-full max-w-xs w-full h-11 flex items-center gap-2 px-1 text-gray-600 drop-shadow-md bg-white'>
                 <IconButton><SearchRoundedIcon className='cursor-pointer '></SearchRoundedIcon></IconButton>
@@ -82,9 +96,33 @@ function SpcCat() {
             {
                 finalproducts.length != 0 ?
 
-                    <div
-                        className='mx-auto w-full max-w-[1200px] grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5'>
-                        {finalproducts}
+                    <div className='flex flex-col justify-center items-center gap-3'>
+                        <div
+                            className='mx-auto flex flex-col w-full max-w-[1200px] grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5'>
+                            {finalproducts}
+                        </div>
+                        <div className='flex gap-3 justify-center items-center bg-white rounded-full border'>
+                            {
+                                page > 1? 
+                            <IconButton
+                            onClick={()=>{changePageBy(-1)}} 
+                            >
+                                <KeyboardArrowLeftRoundedIcon />
+                            </IconButton>
+                           : 
+                            <IconButton
+                            >
+                                <KeyboardArrowLeftRoundedIcon className='text-gray-300' />
+                            </IconButton>
+                            }
+                            <div>Page {page}</div>
+
+                            <IconButton
+                            onClick={()=>{changePageBy(1)}} 
+                            >
+                                <ChevronRightRoundedIcon />
+                            </IconButton>
+                        </div>
                     </div>
                     :
                     search ?
