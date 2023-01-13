@@ -6,18 +6,42 @@ import DoneRoundedIcon from '@mui/icons-material/DoneRounded';
 import { useContext } from 'react';
 import { CartContext } from '../context/cartContext';
 import { AddToCart } from '../context/addToCart';
-import { motion } from "framer-motion"
 import RemoveRoundedIcon from '@mui/icons-material/RemoveRounded';
 import Skeleton from '@mui/material/Skeleton';
 import Stack from '@mui/material/Stack';
 
 import Img from "../../src/imgs/productsImgs/1.jpg";
 
+
+
+import { useInView } from 'react-intersection-observer';
+import { motion,useAnimation } from 'framer-motion';
+
 function Card({ img, title, price, description, productId }) {
     const [added, setAdded] = useState(false);
     const [skeliton, setSkeliton] = useState(true);
     const { cart, setCart } = useContext(CartContext);
     const { addtocart, setAddToCart } = useContext(AddToCart);
+
+
+    const { ref, inView } = useInView({
+        threshold:0.3
+    });
+    const animation = useAnimation()
+    useEffect(() => {
+        if (inView) {
+           animation.start({
+            y:0,
+            opacity:1
+           }) 
+        }else{
+            animation.start({
+                y:200,
+                opacity:0,
+            })
+        }
+    }, [inView])
+
     useEffect(() => {
         setSkeliton(true)
         setTimeout(() => {
@@ -82,7 +106,7 @@ function Card({ img, title, price, description, productId }) {
 
     return (
         !skeliton ?
-            <motion.div className='relative mx-auto card flex flex-col' >
+            <motion.div transition={{duration:.6}} ref={ref} className='relative mx-auto card flex flex-col' >
                 {
                     q !== 0 &&
                     <div className='z-10 absolute bg-prime right-3 top-3 w-6 h-6 rounded-full flex justify-center items-center text-white'>

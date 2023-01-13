@@ -19,7 +19,11 @@ export default function SignInPage() {
           <HttpsIcon />
           <input type="password" placeholder='Your Email' className='flex-1 h-full outline-none' />
         </div>
-        <div className='w-full flex justify-center'>
+
+        <div className='w-full flex items-center justify-center flex-col'>
+          <button className='button text-gray-600  w-full md:w-fit'>
+           forget the password ? 
+          </button>
           <button className='button bg-prime text-white px-8 w-full md:w-fit'>
             Sing In
           </button>
