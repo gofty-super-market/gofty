@@ -55,7 +55,7 @@ function Cart() {
     setEdit(ee => ee + 1)
   }, [search])
   useEffect(() => {
-    setProducts(cart.filter(product => product.title.includes(search)).map((product, key) => {
+    setProducts(cart.filter(product => product.title.toLowerCase().includes(search.toLowerCase())).map((product, key) => {
       return (
         <CardCart
           key={key}

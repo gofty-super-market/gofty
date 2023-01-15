@@ -68,12 +68,12 @@ function SpcCat() {
         }
     }, [page])
     
-    const finalproducts = products.filter((product) => product.title.includes(search)).map((product, key) => {
+    const finalproducts = products.filter((product) => product.title.toLowerCase().includes(search.toLowerCase())).map((product, key) => {
         return (
 
             <SplideSlide key={key}>
                 <div className='mx-2 md:mx-4 my-2'>
-                    <Card productId={product.id_product} img={Img1} title={product.title} description={product.description} price={product.price} />
+                    <Card productId={product.id_product} img={product.image} title={product.title} description={product.description} price={product.price} />
                 </div>
             </SplideSlide>
         )
