@@ -115,13 +115,13 @@ function Card({ img, title, price, description, productId }) {
                 }
                 <Link to={"/market/product/" + productId}>
                     <div className='flex-1 flex items-center justify-center overflow-hidden'>
-                        <img className='h-[150px] md:h-[200px] object-cover' src={img} alt="" />
+                        <img className='h-[150px] md:h-[200px] object-cover' src={"https://goftysupermarketelectronic.com/"+img} alt="" />
                     </div>
                 </Link>
                 <div className='flex-1 p-3 sm:p-4 flex flex-col'>
                     <Link to={"/market/product/" + productId}>
                         <h3 className='text-xs md:text-base font-medium text-gray-700'>{title}</h3>
-                        <p className='text-xs md:text-xs text-gray-600 flex-1'>{description ? description : "no description"}</p>
+                        <p className='text-xs md:text-xs text-gray-600 flex-1'>{"no description"}</p>
                         <h2 className='text-base md:text-xl font-medium text-gray-700 w-full'>{price} DH</h2>
                     </Link>
                     <div className={'flex items-end mt-1 pt-2 ' + (q != 0 ? 'justify-between' : "justify-end")}>

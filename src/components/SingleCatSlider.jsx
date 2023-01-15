@@ -12,7 +12,7 @@ import Card from "./Card";
 
 
 const api = axios.create({
-    baseURL: "https://marrakech-quad-biking.com/demo/gofty/api"
+    baseURL: "https://goftysupermarketelectronic.com/api"
 })
 
 export default function SingleCatSlider({ cat, link, cat_id }) {

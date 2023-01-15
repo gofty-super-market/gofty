@@ -25,7 +25,7 @@ import { AddToCart } from '../context/addToCart';
 const Imgs = [Img1, Img2, Img4, Img5, Img1, Img2, Img4, Img1, Img2, Img4, Img5, Img1]
 
 const api = axios.create({
-    baseURL: "https://marrakech-quad-biking.com/demo/gofty/api"
+    baseURL: "https://goftysupermarketelectronic.com/api"
 })
 
 
@@ -78,15 +78,15 @@ function SingleProduct() {
 
             <motion.div
                 initial={{x:300}} animate={{x:0}} 
-                className='border rounded-2xl bg-white overflow-hidden flex flex-col md:flex-row items-center gap-0 md:gap-4'>
+                className='border rounded-2xl p-2 md:p-4 bg-white overflow-hidden flex flex-col md:flex-row items-center gap-0 md:gap-4'>
 
                 <div className='flex-1  flex items-center justify-center'>
-                    <img className='h-[300px] md:h-full' src={Img1} alt="" />
+                    <img className='h-[300px] md:h-full' src={"https://goftysupermarketelectronic.com/"+productInfo.image} alt="" />
                 </div>
                 <div className='w-[50%] md:w-1 h-1 md:h-36 bg-gray-200 rounded-md'></div>
                 <div className='p-6 md:p-4 flex-1 h-full flex flex-col gap-2'>
                     <h2 className='text-3xl text-gray-700'>{productInfo.title}</h2>
-                    <p className=' md:pr-5 text-sm text-gray-600'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem,</p>
+                    <p className=' md:pr-5 text-sm text-gray-600'>{productInfo.description || "no description"}</p>
                     <h3>Product Name</h3>
                     <div className='hover:scale-105 flex items-center justify-center gap-1 drop-shadow-md bg-white rounded-full w-fit border '>
                         <IconButton onClick={() => handelQChange(-1)}><NavigateBeforeRoundedIcon /></IconButton>

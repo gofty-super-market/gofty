@@ -35,9 +35,9 @@ const catList = {
 }
 
 const api = axios.create({
-    baseURL: "https://marrakech-quad-biking.com/demo/gofty/api"
+    baseURL: "https://goftysupermarketelectronic.com/api"
 })
-// https://marrakech-quad-biking.com/demo/gofty/api/products-1-page-1
+// https://goftysupermarketelectronic.com/api/products-1-page-1
 function SpcCat() {
 
     const { cat } = useParams();
@@ -118,7 +118,7 @@ function SpcCat() {
                             <div>Page {page}</div>
 
                             <IconButton
-                            onClick={()=>{changePageBy(1)}} 
+                            onClick={()=>{changePageBy(1)}}
                             >
                                 <ChevronRightRoundedIcon />
                             </IconButton>

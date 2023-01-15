@@ -9,7 +9,7 @@ import { useInView } from 'react-intersection-observer';
 import { motion,useAnimation } from 'framer-motion';
 
 const api = axios.create({
-  baseURL: "https://marrakech-quad-biking.com/demo/gofty/api"
+  baseURL: "https://goftysupermarketelectronic.com/api"
 })
 
 
@@ -51,7 +51,7 @@ function BestSeller() {
           NewProducts.map((product, key) => {
             if (key < 4) {
               return (
-                <Card productId={product.id_product} key={product.id_product} img={Img1} title={product.title} price={product.price} />
+                <Card img={product.image} productId={product.id_product} key={product.id_product} title={product.title} price={product.price} />
               )
             }
           })

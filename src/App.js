@@ -14,7 +14,7 @@ import { AddToCart } from "./context/addToCart";
 
 
 const api = axios.create({
-  baseURL: "https://marrakech-quad-biking.com/demo/gofty/api"
+  baseURL: "https://goftysupermarketelectronic.com/api"
 })
 
 function App() {

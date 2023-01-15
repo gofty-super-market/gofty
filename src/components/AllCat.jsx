@@ -25,7 +25,7 @@ import SingleCatSlider from './SingleCatSlider';
 import {motion} from "framer-motion"
 
 const api = axios.create({
-    baseURL: "https://marrakech-quad-biking.com/demo/gofty/api"
+    baseURL: "https://goftysupermarketelectronic.com/api"
 })
 const Imgs = [Img1, Img2, Img4, Img5, Img1, Img2, Img4, Img1, Img2, Img4, Img5, Img1]
 
