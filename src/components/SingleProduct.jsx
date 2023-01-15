@@ -36,13 +36,28 @@ function SingleProduct() {
     const { edit, setEdit } = useContext(EditContext)
     const [productInfo, setProductInfo] = useState([])
     const { addtocart, setAddToCart } = useContext(AddToCart);
-    console.log(id)
+    const [cat, setCat] = useState([])
     useEffect(() => {
         api.get("/product-" + id).then(res => setProductInfo(res.data))
+        api.get("/categories")
+        .then(res=> res.data)
+        .then(res=> setCat(res))
     }, [])
 
+    // const [catMatherName , setCatMatherName]= useState("")
+
+    const catMatherName = ()=>{
+        for (let i = 0; i < cat.length; i++) {
+           if(cat[i].id_category==productInfo.id_category){
+            return cat[i].name
+           } 
+        }
+    } 
+
+    console.log(productInfo.id_category)
+
     const addtocartHandler = () => {
-        setAddToCart(pre=>pre+1)
+        setAddToCart(pre => pre + 1)
         let newCart = cart;
         let alreadyAdded = false;
         for (let i = 0; i < cart.length; i++) {
@@ -60,7 +75,6 @@ function SingleProduct() {
             );
         }
     }
-
     const handelQChange = (i) => {
         if (q <= 1 && i == -1) {
             setQ(1);
@@ -68,23 +82,23 @@ function SingleProduct() {
             setQ(q => q + i);
         }
     }
-
     const [favorite, setFavorite] = useState(false);
+
     return (
 
         <div className='mt-14 md:mt-20 select-none w-full max-w-[1200px] mx-auto px-5 drop-shadow-xl'>
-            <Link to={'/market/Fruits'}><h1 className='py-3 text-2xl text-gray-700 font-medium'><ArrowBackRoundedIcon /> Fruits</h1></Link>
+            <Link to={'/market/'+catMatherName()}><h1 className='py-3 text-2xl flex gap-3 items-center text-gray-700 font-medium'><ArrowBackRoundedIcon />{catMatherName() || null}</h1></Link>
 
 
             <motion.div
-                initial={{x:300}} animate={{x:0}} 
+                initial={{ x: 300 }} animate={{ x: 0 }}
                 className='border rounded-2xl p-2 md:p-4 bg-white overflow-hidden flex flex-col md:flex-row items-center gap-0 md:gap-4'>
 
                 <div className='flex-1  flex items-center justify-center'>
-                    <img className='h-[300px] md:h-full' src={"https://goftysupermarketelectronic.com/"+productInfo.image} alt="" />
+                    <img className='h-[300px] w-[300px] object-contain md:h-full' src={"https://goftysupermarketelectronic.com/" + productInfo.image} alt="" />
                 </div>
                 <div className='w-[50%] md:w-1 h-1 md:h-36 bg-gray-200 rounded-md'></div>
-                <div className='p-6 md:p-4 flex-1 h-full flex flex-col gap-2'>
+                <div className='p-6 md:p-4 w-full md:w-fit md:flex-1 h-full flex flex-col gap-2'>
                     <h2 className='text-3xl text-gray-700'>{productInfo.title}</h2>
                     <p className=' md:pr-5 text-sm text-gray-600'>{productInfo.description || "no description"}</p>
                     <h3>Product Name</h3>
@@ -94,7 +108,7 @@ function SingleProduct() {
                         <IconButton onClick={() => handelQChange(1)}><NavigateNextRoundedIcon /></IconButton>
                     </div>
                     <h3 className='py-3 text-3xl font-medium text-gray-700'>{productInfo.price * q} DH</h3>
-                    <div className='flex-1 flex gap-2 justify-center sm:justify-start'>
+                    <div className='flex-1 flex gap-2 justify-center sm:justify-end'>
                         <Tooltip title="add to favoret" arrow >
                             <button onClick={() => setFavorite(!favorite)} className='hover:bg-[#f1f1f1] button bg-white  drop-shadow-md border text-[#F39221] p-2'>{favorite ? <FavoriteRoundedIcon /> : <FavoriteBorderIcon />} </button>
                         </Tooltip>
@@ -106,7 +120,7 @@ function SingleProduct() {
 
 
 
-            <h1 className='py-3 text-2xl text-gray-700 mt-6 font-medium'>Rolated Products</h1>
+            {/* <h1 className='py-3 text-2xl text-gray-700 mt-6 font-medium'>Rolated Products</h1>
             <div className='mx-auto w-full max-w-[1200px]'>
                 <Splide className='py-3' options={{
                     perPage: 5,
@@ -173,7 +187,7 @@ function SingleProduct() {
                     }
                 </Splide>
             </div>
-
+ */}
 
 
         </div>
