@@ -17,11 +17,27 @@ const api = axios.create({
   baseURL: "https://goftysupermarketelectronic.com/api"
 })
 
-function App() {
 
+
+function App() {
+  var cartFormData = new FormData();
+  cartFormData.append('id_client',2)
   useEffect(() => {
     api.get("/product-1").then(res => {
     })
+
+    api({
+      method: "post",
+      url: "cart",
+      data: cartFormData,
+      headers: { "Content-Type": "multipart/form-data" },
+    })
+      .then(function (response) {
+        console.log(response.data);
+      })
+      .catch(function (response) {
+        console.log(response);
+      });
   }, [])
 
   const [cart, setCart] = useState([]);
@@ -32,12 +48,12 @@ function App() {
     <BrowserRouter>
       <div>
         <CartContext.Provider value={{ cart, setCart }}>
-        <EditContext.Provider value={{ edit, setEdit }}>
-        <AddToCart.Provider value={{ addToCart, setAddToCart }}>
-          <ScrollToTop />
-          <Pages cart={cart} setCart={setCart}/>
-        </AddToCart.Provider>
-        </EditContext.Provider>
+          <EditContext.Provider value={{ edit, setEdit }}>
+            <AddToCart.Provider value={{ addToCart, setAddToCart }}>
+              <ScrollToTop />
+              <Pages cart={cart} setCart={setCart} />
+            </AddToCart.Provider>
+          </EditContext.Provider>
         </CartContext.Provider>
       </div>
     </BrowserRouter>
