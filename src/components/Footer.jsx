@@ -16,9 +16,9 @@ import { Link } from "react-router-dom";
 
 export const Footer = () => {
     return (
-        <div className="w-full flex justify-center">
+        <div className="mt-3 w-full flex justify-center text-white bg-gray-800">
 
-        <div className="max-w-[1200px] text-gray-700 px-10 items-center justify-around py-16 mt-16  bg-red flex flex-col lg:flex-row gap-16 md:gap-24  ">
+        <div className="max-w-[1200px] px-10 items-center justify-around py-16 mt-16  bg-red flex flex-col lg:flex-row gap-16 md:gap-24  ">
             <div className=" flex flex-col gap-3 ">
                 <div className="flex gap-8 flex-col md:flex-row ">
                     <img src={logo} alt="" className="w-20 h-20 object-cover" />
@@ -40,7 +40,7 @@ export const Footer = () => {
                 </div>
 
             </div>
-            <div className="flex-1 flex flex-col sm:flex-row gap-10 justify-around w-full lg:w-fit text-gray-700 gap-16 md:gap-24">
+            <div className="flex-1 flex flex-col sm:flex-row justify-around w-full lg:w-fit gap-16 md:gap-24">
 
             <div className="flex flex-col gap-3">
                 <h3 className="text-xl font-medium">Our Pages</h3>
