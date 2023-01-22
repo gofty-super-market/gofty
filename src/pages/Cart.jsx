@@ -53,18 +53,16 @@ function Cart() {
   }, [cart])
   useEffect(() => {
     setEdit(ee => ee + 1)
+    console.log(cart)
   }, [search])
+  // .filter(product => product.title.toLowerCase().includes(search.toLowerCase()))
   useEffect(() => {
-    setProducts(cart.filter(product => product.title.toLowerCase().includes(search.toLowerCase())).map((product, key) => {
+    setProducts(cart.map((product, key) => {
       return (
         <CardCart
           key={key}
-          title={product.title}
-          price={product.price}
-          miniInfo={product.miniInfo}
-          img={Img1}
-          productId={product.productId}
-          q={product.q}
+          productId={product.id_product}
+          
         />
       )
     }))

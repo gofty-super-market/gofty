@@ -16,7 +16,7 @@ import { Link } from "react-router-dom";
 
 export const Footer = () => {
     return (
-        <div className="mt-3 w-full flex justify-center text-white bg-gray-800">
+        <div className="mt-6 w-full flex justify-center text-white bg-gray-800">
 
         <div className="max-w-[1200px] px-10 items-center justify-around py-16 mt-16  bg-red flex flex-col lg:flex-row gap-16 md:gap-24  ">
             <div className=" flex flex-col gap-3 ">

@@ -34,6 +34,7 @@ function App() {
     })
       .then(function (response) {
         console.log(response.data);
+        setCart(response.data)
       })
       .catch(function (response) {
         console.log(response);
