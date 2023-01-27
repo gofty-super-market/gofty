@@ -63,11 +63,20 @@ export default function CardCart({ productId, title, price, quantity, unite, id_
     }
 
     const handelRemove = (id) => {
-        let newCart = cart.filter((product) => {
-            return product.productId != id
-        })
-        setCart(newCart)
+            var cartFormData = new FormData();
+            cartFormData.append('id_cart', id_cart)
+            api(
+                {
+                    method: "post",
+                    url: "cart-delete",
+                    data: cartFormData,
+                    headers: { "Content-Type": "multipart/form-data" },
+                }
+            ).then(() => {
+                setUpdateCart(p => p + 1)
+            })
     }
+
     return (
         <div className='max-w-md flex gap-0 md:gap-4 border p-2 md:p-3 drop-shadow-md bg-white rounded-3xl'>
             <Link to={"/market/product/" + productId}>
@@ -81,7 +90,7 @@ export default function CardCart({ productId, title, price, quantity, unite, id_
                 <h3 className='text-xl font-medium flex-1 flex items-end'>{price * quantity} DH</h3>
             </div>
             <div className='flex flex-col items-end justify-between'>
-                <IconButton >
+                <IconButton onClick={handelRemove} >
                     <CloseRoundedIcon sx={{ fontSize: 20 }} />
                 </IconButton>
                 <div className='hover:scale-105 flex flex-col-reverse md:flex-row items-center justify-center md:gap-1 drop-shadow-md bg-white rounded-full w-fit border '>
