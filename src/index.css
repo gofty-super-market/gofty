@@ -19,7 +19,7 @@ body{
 
 
 body::-webkit-scrollbar {
-  width: 10px;
+  width: 4px;
 }
 
 body::-webkit-scrollbar-thumb {

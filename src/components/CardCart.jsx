@@ -10,6 +10,7 @@ import AddRoundedIcon from '@mui/icons-material/AddRounded';
 import RemoveRoundedIcon from '@mui/icons-material/RemoveRounded';
 
 import { EditContext } from '../context/edit';
+import { UpdateCart } from '../context/updateCart';
 import { Link } from 'react-router-dom';
 import axios from "axios"
 
@@ -18,57 +19,75 @@ const api = axios.create({
 })
 
 
-export default function CardCart({ productId }) {
+export default function CardCart({ productId, title, price, quantity, unite, id_cart, image }) {
     const [product, setProduct] = useState([])
     const { cart, setCart } = useContext(CartContext)
     const { edit, setEdit } = useContext(EditContext)
+    const { updateCart, setUpdateCart } = useContext(UpdateCart)
 
-    useEffect(() => {
-        api.get("/product-"+productId ).then(res => {
-            setProduct(res.data);
+    const handelQP = () => {
+        var cartFormData = new FormData();
+        cartFormData.append('id_client', 1)
+        cartFormData.append('id_product', productId)
+        cartFormData.append('quantity', Number(quantity) + 1)
+        cartFormData.append('unite', unite)
+        api(
+            {
+                method: "post",
+                url: "cart-update",
+                data: cartFormData,
+                headers: { "Content-Type": "multipart/form-data" },
+            }
+        ).then(() => {
+            setUpdateCart(p => p + 1)
         })
-    }, [])
+    }
+    const handelQM = () => {
+        if (quantity>1) {
+            var cartFormData = new FormData();
+            cartFormData.append('id_client', 1)
+            cartFormData.append('id_product', productId)
+            cartFormData.append('quantity', Number(quantity) - 1)
+            cartFormData.append('unite', unite)
+            api(
+                {
+                    method: "post",
+                    url: "cart-update",
+                    data: cartFormData,
+                    headers: { "Content-Type": "multipart/form-data" },
+                }
+            ).then(() => {
+                setUpdateCart(p => p + 1)
+            })
+        }
+    }
 
-    //   const handelQChange = (qo,id)=>{
-    //       let newCart = cart;
-    //       for (let i = 0; i < cart.length; i++) {
-    //           if(cart[i].productId === id ){
-
-    //               newCart[i].q+=qo;
-    //               if(newCart[i].q<=0){
-    //                 newCart[i].q=1
-    //               }
-    //               setCart(newCart);
-    //             }
-    //         }
-    //         setEdit(ee=>ee+1)
-    //   }
-    //   const handelRemove = (id)=>{
-    //     let newCart = cart.filter((product)=>{
-    //         return product.productId != id
-    //     })
-    //     setCart(newCart)
-    //   }
+    const handelRemove = (id) => {
+        let newCart = cart.filter((product) => {
+            return product.productId != id
+        })
+        setCart(newCart)
+    }
     return (
-        <div key={productId} className='max-w-md flex gap-0 md:gap-4 border p-2 md:p-3 drop-shadow-md bg-white rounded-3xl'>
+        <div className='max-w-md flex gap-0 md:gap-4 border p-2 md:p-3 drop-shadow-md bg-white rounded-3xl'>
             <Link to={"/market/product/" + productId}>
                 <div className='w-28 md:w-32 h-full md:h-28 overflow-hidden flex items-center justify-center'>
-                    <img src={product.image} alt="" />
+                    <img src={"https://goftysupermarketelectronic.com/" + image} alt="" />
                 </div>
             </Link>
             <div className='flex-1 p-3 flex flex-col'>
-                <h3 className='text-sm  font-medium '>{product.title}</h3>
-                <p className='text-sm'>{"item"}</p>
-                <h3 className='text-xl font-medium flex-1 flex items-end'>{product.price} DH</h3>
+                <h3 className='text-sm  font-medium '>{title}</h3>
+                <p className='text-sm'>per {unite}</p>
+                <h3 className='text-xl font-medium flex-1 flex items-end'>{price * quantity} DH</h3>
             </div>
             <div className='flex flex-col items-end justify-between'>
-                {/* <IconButton onClick={() => handelRemove(productId)} > */}
-                <CloseRoundedIcon sx={{ fontSize: 20 }} />
-                {/* </IconButton> */}
+                <IconButton >
+                    <CloseRoundedIcon sx={{ fontSize: 20 }} />
+                </IconButton>
                 <div className='hover:scale-105 flex flex-col-reverse md:flex-row items-center justify-center md:gap-1 drop-shadow-md bg-white rounded-full w-fit border '>
-                    {/* <IconButton onClick={() => handelQChange(-1, product.productId)} ><RemoveRoundedIcon sx={{ fontSize: 20 }} /></IconButton> */}
-                    <span className='font-medium text-gray-700'>{1}</span>
-                    {/* <IconButton onClick={() => handelQChange(1, product.productId)} ><AddRoundedIcon sx={{ fontSize: 20 }} /></IconButton> */}
+                    <IconButton onClick={() => handelQM()} ><RemoveRoundedIcon sx={{ fontSize: 20 }} /></IconButton>
+                    <span className='font-medium text-gray-700'>{quantity}</span>
+                    <IconButton onClick={() => handelQP()} ><AddRoundedIcon sx={{ fontSize: 20 }} /></IconButton>
                 </div>
             </div>
         </div>

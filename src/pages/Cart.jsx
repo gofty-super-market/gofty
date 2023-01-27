@@ -61,8 +61,13 @@ function Cart() {
       return (
         <CardCart
           key={key}
-          productId={product.id_product}
-          
+          title={product.product.title}
+          productId={product.product.id_product}
+          price={product.product.price}
+          image={product.product.image}
+          quantity={product.quantity}
+          unite={product.unite}
+          id_cart={product.id_cart}
         />
       )
     }))
