@@ -34,7 +34,7 @@ function Cart() {
   const price = () => {
     let p = 0;
     for (let i = 0; i < cart.length; i++) {
-      p += cart[i].price * cart[i].q
+      p += cart[i].quantity * cart[i].product.price
     }
     return p
   }
@@ -46,7 +46,7 @@ function Cart() {
   useEffect(() => {
     setEdit(ee => ee + 1)
     if (cart.length) {
-      setDelivery(30)
+      setDelivery(20)
     } else {
       setDelivery(0)
     }
@@ -57,7 +57,7 @@ function Cart() {
   }, [search])
   // .filter(product => product.title.toLowerCase().includes(search.toLowerCase()))
   useEffect(() => {
-    setProducts(cart.map((product, key) => {
+    setProducts(cart.filter(product=>product.product.title.toLowerCase().includes(search.toLowerCase())).map((product, key) => {
       return (
         <CardCart
           key={key}
