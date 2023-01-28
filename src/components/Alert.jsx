@@ -8,7 +8,7 @@ import DialogTitle from '@mui/material/DialogTitle';
 import DeleteRoundedIcon from '@mui/icons-material/DeleteRounded';
 import { CartContext } from '../context/cartContext';
 
-export default function AlertDialog() {
+export default function AlertDialog({cleanCart}) {
     const [open, setOpen] = React.useState(false);
     const { cart, setCart } = useContext(CartContext)
     const handleClickOpen = () => {
@@ -20,7 +20,7 @@ export default function AlertDialog() {
     };
 
     const handelClean = () => {
-        setCart([])
+        cleanCart()
     }
 
     return (

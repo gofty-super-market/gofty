@@ -1,43 +1,47 @@
 import React, { useEffect, useState } from 'react'
 import AddIcon from '@mui/icons-material/Add';
 import { Link } from 'react-router-dom';
+import axios from "axios"
 import { Alert, CircularProgress } from '@mui/material';
 import DoneRoundedIcon from '@mui/icons-material/DoneRounded';
 import { useContext } from 'react';
 import { CartContext } from '../context/cartContext';
+import { UpdateCart } from '../context/updateCart';
 import { AddToCart } from '../context/addToCart';
 import RemoveRoundedIcon from '@mui/icons-material/RemoveRounded';
 import Skeleton from '@mui/material/Skeleton';
 import Stack from '@mui/material/Stack';
 
-import Img from "../../src/imgs/productsImgs/1.jpg";
-
-
-
 import { useInView } from 'react-intersection-observer';
-import { motion,useAnimation } from 'framer-motion';
+import { motion, useAnimation } from 'framer-motion';
+
+const api = axios.create({
+    baseURL: "https://goftysupermarketelectronic.com/api"
+})
 
 function Card({ img, title, price, description, productId }) {
     const [added, setAdded] = useState(false);
     const [skeliton, setSkeliton] = useState(true);
+    const { updateCart, setUpdateCart } = useContext(UpdateCart)
     const { cart, setCart } = useContext(CartContext);
     const { addtocart, setAddToCart } = useContext(AddToCart);
+    const [loading , setLoading ] = useState(false)
 
 
     const { ref, inView } = useInView({
-        threshold:0.3
+        threshold: 0.3
     });
     const animation = useAnimation()
     useEffect(() => {
         if (inView) {
-           animation.start({
-            y:0,
-            opacity:1
-           }) 
-        }else{
             animation.start({
-                y:200,
-                opacity:0,
+                y: 0,
+                opacity: 1
+            })
+        } else {
+            animation.start({
+                y: 200,
+                opacity: 0,
             })
         }
     }, [inView])
@@ -49,64 +53,112 @@ function Card({ img, title, price, description, productId }) {
         }, 800);
     }, [productId])
 
-    const addtocartHandler = () => {
-        setAddToCart(pre => pre + 1)
-        let newCart = cart;
-        let alreadyAdded = false;
-        for (let i = 0; i < cart.length; i++) {
-            if (cart[i].productId == productId) {
-                newCart[i].q += 1;
-                setCart(newCart);
-                alreadyAdded = true;
-            }
-        }
-        if (!alreadyAdded) {
-            setCart(a =>
-                [{
-                    productId, description, price, title, img: Img, q: 1, miniInfo: "lorem epson"
-                }, ...a]
-            );
-        }
-        setQ(pre => pre + 1)
-    }
-
     const getProduct = cart.filter(item => {
-        return item.productId == productId
+        return item.product.id_product == productId
     })
 
+
+    const isAdded = () => {
+        for (let i = 0; i < cart.length; i++) {
+            if (cart[i].product.id_product == productId) {
+                return true
+            }
+        }
+        return false
+    }
+    const addtocartHandler = () => {
+        setLoading(true)
+        if (isAdded()) {
+            var cartFormData = new FormData();
+            cartFormData.append('id_client', 1)
+            cartFormData.append('id_product', productId)
+            cartFormData.append('quantity', Number(getProduct[0].quantity) + 1)
+            cartFormData.append('unite', "itme")
+            api(
+                {
+                    method: "post",
+                    url: "cart-update",
+                    data: cartFormData,
+                    headers: { "Content-Type": "multipart/form-data" },
+                }
+            ).then(() => {
+                setUpdateCart(p => p + 1);
+                setAddToCart(pre => pre + 1);
+                setQ(pre => pre + 1)
+            }).then(()=>{
+                setLoading(false)
+            })
+
+        } else {
+            var cartFormData = new FormData();
+            cartFormData.append('id_client', 1)
+            cartFormData.append('id_product', productId)
+            cartFormData.append('quantity', 1)
+            cartFormData.append('unite', "itme")
+            api(
+                {
+                    method: "post",
+                    url: "cart-new",
+                    data: cartFormData,
+                    headers: { "Content-Type": "multipart/form-data" },
+                }
+            ).then(() => {
+                setUpdateCart(p => p + 1);
+                setAddToCart(pre => pre + 1);
+                setQ(pre => pre + 1)
+            }).then(()=>{
+                setLoading(false)
+            })
+        }
+    }
     const [q, setQ] = useState(0);
     useEffect(() => {
         if (getProduct.length != 0) {
-            setQ(getProduct[0].q)
+            setQ(Number(getProduct[0].quantity))
         } else {
             setQ(0)
         }
     }, [])
-    useEffect(() => {
-        if (q===0) {
-            setCart(cart.filter((item) => {
-                return item.productId != productId
-            }))
-        } 
-    }, [q])
-    
 
     const removefromcartHandler = () => {
-        console.log(q)
-        let newCart = cart;
-        for (let i = 0; i < cart.length; i++) {
-            if (cart[i].productId == productId) {
-                newCart[i].q -= 1;
-                setCart(newCart);
+        var cartFormData = new FormData();
+        cartFormData.append('id_client', 1)
+        cartFormData.append('id_product', productId)
+        cartFormData.append('quantity', Number(getProduct[0].quantity) - 1)
+        cartFormData.append('unite', "itme")
+        api(
+            {
+                method: "post",
+                url: "cart-update",
+                data: cartFormData,
+                headers: { "Content-Type": "multipart/form-data" },
             }
-        }
-        setQ(pre => pre - 1)
-        setAddToCart(pre => pre + 1)
+        ).then(() => {
+            setAddToCart(pre => pre + 1);
+            if (q === 1) {
+                var cartFormData = new FormData();
+                cartFormData.append('id_cart', getProduct[0].id_cart)
+                api(
+                    {
+                        method: "post",
+                        url: "cart-delete",
+                        data: cartFormData,
+                        headers: { "Content-Type": "multipart/form-data" },
+                    }
+                ).then(() => {
+                    setUpdateCart(p => p + 1)
+                    setQ(0)
+                })
+            } else {
+                setQ(pre => pre - 1)
+                setUpdateCart(p => p + 1);
+            }
+        })
     }
 
     return (
         !skeliton ?
-            <motion.div transition={{duration:.6}} ref={ref} className='relative mx-auto card flex flex-col' >
+            <motion.div transition={{ duration: .6 }} ref={ref} className='relative mx-auto card flex flex-col' >
                 {
                     q !== 0 &&
                     <div className='z-10 absolute bg-prime right-3 top-3 w-6 h-6 rounded-full flex justify-center items-center text-white'>
@@ -115,7 +167,7 @@ function Card({ img, title, price, description, productId }) {
                 }
                 <Link to={"/market/product/" + productId}>
                     <div className='flex-1 flex items-center justify-center overflow-hidden'>
-                        <img className='h-[150px] md:h-[200px] object-contain' src={"https://goftysupermarketelectronic.com/"+img} alt="" />
+                        <img className='h-[150px] md:h-[200px] object-contain' src={"https://goftysupermarketelectronic.com/" + img} alt="" />
                     </div>
                 </Link>
                 <div className='flex-1 p-3 sm:p-4 flex flex-col'>
@@ -132,9 +184,14 @@ function Card({ img, title, price, description, productId }) {
                                 <RemoveRoundedIcon />
                             </button>
                         }
-                        <button onClick={() => addtocartHandler()} className='button p-2  cardBtn drop-shadow-md hover:bg-[#85a864] bg-[#95BF6D] text-white rounded-xl'>
+                        {!loading? 
+                        <button onClick={() => { if(!loading){addtocartHandler()}}} className='button p-2  cardBtn drop-shadow-md hover:bg-[#85a864] bg-[#95BF6D] text-white rounded-xl'>
+                            <AddIcon />
+                        </button>:
+                        <button className='button p-2  cardBtn drop-shadow-md hover:bg-[#85a864] bg-[#95BF6D] text-[#85a864] rounded-xl'>
                             <AddIcon />
                         </button>
+                        }
                         {/* </Tooltip> */}
                     </div>
                 </div>

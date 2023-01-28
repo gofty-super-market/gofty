@@ -21,6 +21,12 @@ import SearchOffRoundedIcon from '@mui/icons-material/SearchOffRounded';
 import AlertDialog from '../components/Alert';
 import { motion } from "framer-motion"
 
+import { UpdateCart } from '../context/updateCart';
+import axios from "axios"
+
+const api = axios.create({
+    baseURL: "https://goftysupermarketelectronic.com/api"
+})
 
 
 function Cart() {
@@ -29,6 +35,7 @@ function Cart() {
   const { edit, setEdit } = useContext(EditContext)
   const [products, setProducts] = useState()
   const [delivery, setDelivery] = useState(0)
+    const { updateCart, setUpdateCart } = useContext(UpdateCart)
   const [Vcart, setVcart] = useState(cart)
 
   const price = () => {
@@ -72,7 +79,20 @@ function Cart() {
       )
     }))
   }, [edit])
-
+  const cleanCart = ()=>{
+            var cartFormData = new FormData();
+            cartFormData.append('id_client', 1);
+            api(
+                {
+                    method: "post",
+                    url: "cart-clean",
+                    data: cartFormData,
+                    headers: { "Content-Type": "multipart/form-data" },
+                }
+            ).then(() => {
+                setUpdateCart(p => p + 1)
+            })
+  }
 
   return (
     <motion.div initial={{ y: 300, opacity: .5 }} animate={{ y: 0, opacity: 1 }} className="mx-auto max-w-[1100px] w-full mt-16 md:mt-28 px-4 text-gray-700">
@@ -106,7 +126,7 @@ function Cart() {
             </Link>
             {
             cart.length!=0 &&
-            <AlertDialog></AlertDialog>
+            <AlertDialog cleanCart={cleanCart}></AlertDialog>
             }
           </div>
 
