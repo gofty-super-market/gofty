@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { BrowserRouter , useLocation } from "react-router-dom";
 
+// hello
+
 import Navbar from "./components/navbar";
 import { CartContext } from "./context/cartContext";
 import { EditContext } from "./context/edit";
