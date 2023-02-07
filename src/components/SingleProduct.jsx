@@ -23,6 +23,7 @@ import { EditContext } from '../context/edit';
 import { motion } from "framer-motion"
 
 import { AddToCart } from '../context/addToCart';
+import { UserId } from '../context/userId';
 const Imgs = [Img1, Img2, Img4, Img5, Img1, Img2, Img4, Img1, Img2, Img4, Img5, Img1]
 
 const api = axios.create({
@@ -39,6 +40,7 @@ function SingleProduct() {
     const { updateCart, setUpdateCart } = useContext(UpdateCart)
     const [productInfo, setProductInfo] = useState([])
     const { addtocart, setAddToCart } = useContext(AddToCart);
+    const { userId, setUserId } = useContext(UserId)
     const [cat, setCat] = useState([]);
     const isAdded = () => {
         for (let i = 0; i < cart.length; i++) {
@@ -74,7 +76,7 @@ function SingleProduct() {
     const addtocartHandler = () => {
         if (isAdded()) {
             var cartFormData = new FormData();
-            cartFormData.append('id_client', 1)
+            cartFormData.append('id_client', userId)
             cartFormData.append('id_product', productInfo.id_product)
             cartFormData.append('quantity', Number(getProduct[0].quantity) + q)
             cartFormData.append('unite', "itme")
@@ -91,7 +93,7 @@ function SingleProduct() {
             })
         } else {
             var cartFormData = new FormData();
-            cartFormData.append('id_client', 1)
+            cartFormData.append('id_client', userId)
             cartFormData.append('id_product', productInfo.id_product)
             cartFormData.append('quantity', q)
             cartFormData.append('unite', "itme")

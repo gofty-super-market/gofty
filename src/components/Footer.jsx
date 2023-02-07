@@ -16,31 +16,32 @@ import { Link } from "react-router-dom";
 
 export const Footer = () => {
     return (
-        <div className="mt-20 w-full flex justify-center text-white bg-gray-700">
+        <>
+        <div className="mt-20 w-full flex justify-center text-white bg-prime">
 
-        <div className="max-w-[1200px] px-10 items-center justify-around py-16 mt-16  bg-red flex flex-col lg:flex-row gap-16 md:gap-24  ">
+        <div className="max-w-[1200px] px-10 items-center justify-around py-16 mt-16  bg-red flex flex-col lg:flex-row gap-12 md:gap-12  ">
             <div className=" flex flex-col gap-3 ">
                 <div className="flex gap-8 flex-col md:flex-row ">
-                    <img src={logo} alt="" className="w-20 h-20 object-cover" />
+                    <img src={logo} alt="" className="w-20 h-20 object-cover drop-shadow-lg" />
                     <div className="flex flex-col gap-3">
                         <h3 className="text-xl font-medium">GOFTY</h3>
                         <p className="max-w-lg">Lorem ipsum dolor sit amet consectetur adipisicing elit. Id reprehenderit ipsum facilis libero a nisi temporibus laboriosam expedita sit molestiae cum saepe repellendus tenetur delectus, fugiat rerum qui facere? Necessitatibus.</p>
-                        <div className="flex">
+                        <div className="flex text-white">
                             <IconButton>
-                                <InstagramIcon />
+                                <InstagramIcon className="text-white"/>
                             </IconButton>
                             <IconButton>
-                                <FacebookIcon />
+                                <FacebookIcon className="text-white"/>
                             </IconButton>
                             <IconButton>
-                                <TwitterIcon />
+                                <TwitterIcon className="text-white"/>
                             </IconButton>
                         </div>
                     </div>
                 </div>
 
             </div>
-            <div className="flex-1 flex flex-col sm:flex-row justify-around w-full lg:w-fit gap-16 md:gap-24">
+            <div className="flex-1 flex flex-col sm:flex-row justify-around w-full lg:w-fit gap-12 md:gap-12">
 
             <div className="flex flex-col gap-3">
                 <h3 className="text-xl font-medium">Our Pages</h3>
@@ -59,8 +60,17 @@ export const Footer = () => {
                     <li className="flex gap-2 items-center"><FmdGoodIcon/> somewhere in earth</li>
                 </ul>
             </div>
+            <div className="flex flex-col gap-3">
+                <h3 className="text-xl font-medium">Company</h3>
+                <ul className="flex flex-col gap-3">
+                    <li className="flex gap-2 items-center">Terms</li>
+                    <li className="flex gap-2 items-center">Privacy</li>
+                </ul>
+            </div>
             </div>
         </div>
         </div>
+        <h1 className="bg-prime text-center text-sm p-5 text-white">Copyright © 2023 Gofty Company</h1>
+        </>
     )
 }

@@ -8,9 +8,10 @@ import { CartContext } from "./context/cartContext";
 import { EditContext } from "./context/edit";
 import { UpdateCart } from "./context/updateCart";
 import { AddToCart } from "./context/addToCart";
+import { UserId } from "./context/userId";
+
+
 import Pages from "./pages/pages";
-
-
 
 import axios from "axios"
 import ScrollToTop from "./components/ScrollToTop";
@@ -25,15 +26,13 @@ const api = axios.create({
 function App() {
   const [cart, setCart] = useState([]);
   const [edit, setEdit] = useState(0);
+  const [userId, setUserId] = useState(2);
   const [updateCart, setUpdateCart] = useState(0);
   const [addToCart, setAddToCart] = useState(0);
-
-  var cartFormData = new FormData();
-  cartFormData.append('id_client', 1)
+  const cartFormData = new FormData();
+  cartFormData.append('id_client', userId)
+  
   useEffect(() => {
-    api.get("/product-1").then(res => {
-    })
-
     api({
       method: "post",
       url: "cart",
@@ -57,8 +56,10 @@ function App() {
           <EditContext.Provider value={{ edit, setEdit }}>
             <AddToCart.Provider value={{ addToCart, setAddToCart }}>
               <UpdateCart.Provider value={{ updateCart, setUpdateCart }}>
+              <UserId.Provider value={{ userId, setUserId }}>
                 <ScrollToTop />
                 <Pages cart={cart} setCart={setCart} />
+              </UserId.Provider >
               </UpdateCart.Provider >
             </AddToCart.Provider>
           </EditContext.Provider>

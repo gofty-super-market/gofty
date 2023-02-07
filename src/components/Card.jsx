@@ -7,6 +7,7 @@ import DoneRoundedIcon from '@mui/icons-material/DoneRounded';
 import { useContext } from 'react';
 import { CartContext } from '../context/cartContext';
 import { UpdateCart } from '../context/updateCart';
+import { EditContext } from '../context/edit';
 import { AddToCart } from '../context/addToCart';
 import RemoveRoundedIcon from '@mui/icons-material/RemoveRounded';
 import Skeleton from '@mui/material/Skeleton';
@@ -14,6 +15,7 @@ import Stack from '@mui/material/Stack';
 
 import { useInView } from 'react-intersection-observer';
 import { motion, useAnimation } from 'framer-motion';
+import { UserId } from '../context/userId';
 
 const api = axios.create({
     baseURL: "https://goftysupermarketelectronic.com/api"
@@ -23,10 +25,10 @@ function Card({ img, title, price, description, productId }) {
     const [added, setAdded] = useState(false);
     const [skeliton, setSkeliton] = useState(true);
     const { updateCart, setUpdateCart } = useContext(UpdateCart)
+    const { userId, setUserId } = useContext(UserId)
     const { cart, setCart } = useContext(CartContext);
     const { addtocart, setAddToCart } = useContext(AddToCart);
     const [loading , setLoading ] = useState(false)
-
 
     const { ref, inView } = useInView({
         threshold: 0.3
@@ -70,7 +72,7 @@ function Card({ img, title, price, description, productId }) {
         setLoading(true)
         if (isAdded()) {
             var cartFormData = new FormData();
-            cartFormData.append('id_client', 1)
+            cartFormData.append('id_client', userId)
             cartFormData.append('id_product', productId)
             cartFormData.append('quantity', Number(getProduct[0].quantity) + 1)
             cartFormData.append('unite', "itme")
@@ -91,7 +93,7 @@ function Card({ img, title, price, description, productId }) {
 
         } else {
             var cartFormData = new FormData();
-            cartFormData.append('id_client', 1)
+            cartFormData.append('id_client', userId)
             cartFormData.append('id_product', productId)
             cartFormData.append('quantity', 1)
             cartFormData.append('unite', "itme")
@@ -112,17 +114,18 @@ function Card({ img, title, price, description, productId }) {
         }
     }
     const [q, setQ] = useState(0);
+
     useEffect(() => {
         if (getProduct.length != 0) {
             setQ(Number(getProduct[0].quantity))
         } else {
             setQ(0)
         }
-    }, [])
+    }, [cart])
 
     const removefromcartHandler = () => {
         var cartFormData = new FormData();
-        cartFormData.append('id_client', 1)
+        cartFormData.append('id_client', userId)
         cartFormData.append('id_product', productId)
         cartFormData.append('quantity', Number(getProduct[0].quantity) - 1)
         cartFormData.append('unite', "itme")

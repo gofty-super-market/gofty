@@ -13,6 +13,7 @@ import { EditContext } from '../context/edit';
 import { UpdateCart } from '../context/updateCart';
 import { Link } from 'react-router-dom';
 import axios from "axios"
+import { UserId } from '../context/userId';
 
 const api = axios.create({
     baseURL: "https://goftysupermarketelectronic.com/api"
@@ -23,11 +24,12 @@ export default function CardCart({ productId, title, price, quantity, unite, id_
     const [product, setProduct] = useState([])
     const { cart, setCart } = useContext(CartContext)
     const { edit, setEdit } = useContext(EditContext)
+    const { userId, setUserId } = useContext(UserId)
     const { updateCart, setUpdateCart } = useContext(UpdateCart)
 
     const handelQP = () => {
         var cartFormData = new FormData();
-        cartFormData.append('id_client', 1)
+        cartFormData.append('id_client', userId)
         cartFormData.append('id_product', productId)
         cartFormData.append('quantity', Number(quantity) + 1)
         cartFormData.append('unite', unite)
@@ -45,7 +47,7 @@ export default function CardCart({ productId, title, price, quantity, unite, id_
     const handelQM = () => {
         if (quantity>1) {
             var cartFormData = new FormData();
-            cartFormData.append('id_client', 1)
+            cartFormData.append('id_client', userId)
             cartFormData.append('id_product', productId)
             cartFormData.append('quantity', Number(quantity) - 1)
             cartFormData.append('unite', unite)

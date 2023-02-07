@@ -13,6 +13,7 @@ import Img1 from "../imgs/productsImgs/1.jpg";
 import { Link } from 'react-router-dom';
 import { CartContext } from '../context/cartContext';
 import { EditContext } from '../context/edit';
+import { UserId } from '../context/userId';
 import { useEffect } from 'react';
 import CardCart from '../components/CardCart';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
@@ -32,6 +33,7 @@ const api = axios.create({
 function Cart() {
   const [search, setSearch] = useState("");
   const { cart, setCart } = useContext(CartContext)
+  const { userId, seUserId } = useContext(CartContext)
   const { edit, setEdit } = useContext(EditContext)
   const [products, setProducts] = useState()
   const [delivery, setDelivery] = useState(0)
@@ -81,7 +83,7 @@ function Cart() {
   }, [edit])
   const cleanCart = ()=>{
             var cartFormData = new FormData();
-            cartFormData.append('id_client', 1);
+            cartFormData.append('id_client', userId);
             api(
                 {
                     method: "post",

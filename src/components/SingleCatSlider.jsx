@@ -48,9 +48,9 @@ export default function SingleCatSlider({ cat, link, cat_id }) {
                             }
                         }}>
                             {
-                                products.map((product) => {
+                                products.map((product, key) => {
                                     return (
-                                        <SplideSlide className="px-2">
+                                        <SplideSlide key={key} className="px-2">
                                             <Card img={product.image} title={product.title} price={product.price} productId={product.id_product} />
                                         </SplideSlide>
                                     )
