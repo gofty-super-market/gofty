@@ -10,21 +10,24 @@ import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
 import StorefrontRoundedIcon from '@mui/icons-material/StorefrontRounded';
 import CallRoundedIcon from '@mui/icons-material/CallRounded';
 import LogoutIcon from '@mui/icons-material/Logout';
-import { Outlet, NavLink } from "react-router-dom";
+import { Outlet, NavLink, useNavigate } from "react-router-dom";
 
 import { useContext } from 'react';
 import { CartContext } from '../context/cartContext';
 
 import { EditContext } from '../context/edit';
 import { UserId } from '../context/userId';
+import { UpdateCart } from '../context/updateCart';
 
 function Navbar() {
   const [loged , setLoged] = useState(false);
     const { userId, setUserId } = useContext(UserId)
+    const { updateCart, setUpdateCart } = useContext(UpdateCart)
   const { cart , setCart } = useContext(CartContext);
   const [showMenu , setShowMenu] = useState(false);
+  const navigate = useNavigate()
   useEffect(()=>{
-    if(userId){
+    if(userId!=null){
       setLoged(true)
     }
   },[userId]) 
@@ -45,6 +48,14 @@ function Navbar() {
 
   const scrolltop = () => {
     window.scrollTo({ top: 0 });
+  }
+  const logout=()=>{
+    setUserId(null);
+    setLoged(false);
+    localStorage.setItem("GoftyUserId",null);
+    setUpdateCart(p=>p+1)
+    setCart([])
+    navigate('/')
   }
     return (
 
@@ -122,7 +133,7 @@ function Navbar() {
                   <Avatar sx={{ width: 30, height: 30 }}/>
                   </IconButton>
                   <div className='logoutbtndiv h-16 absolute w-32 hidden gap-3 justify-center items-end text-gray-700 left-[50%] translate-x-[-50%] top-10 '>
-                    <button className='bg-white py-2 px-4 rounded-lg border drop-shadow-lg'>Log out <LogoutIcon/></button>
+                    <button onClick={logout} className='bg-white py-2 px-4 rounded-lg border drop-shadow-lg'>Log out <LogoutIcon/></button>
                   </div>
                 </div>
 
@@ -141,7 +152,7 @@ function Navbar() {
                     <li className='w-full flex justify-center' onClick={()=>setShowMenu(false)}><NavLink className={(({ isActive }) => (isActive ? 'navlinkPhone active-phone ' : ' navlinkPhone '))}  to="/contact"><CallRoundedIcon/>Contact</NavLink></li>
                   </ul>
                   <ul className='flex flex-col gap-2 text-gray-600 items-center'>
-                    <li className='navlinkPhone '> <LogoutIcon/> Logout </li>
+                    <li className='navlinkPhone ' onClick={logout}> <LogoutIcon/> Logout </li>
                   </ul>
                 </div>
 

@@ -7,6 +7,8 @@ import {motion} from "framer-motion"
 import axios from "axios"
 import { UserId } from '../context/userId';
 import { UpdateCart } from '../context/updateCart';
+import { useNavigate } from 'react-router-dom';
+
 
 const api = axios.create({
   baseURL: "https://goftysupermarketelectronic.com/api"
@@ -14,6 +16,8 @@ const api = axios.create({
 
 
 export default function SignInPage() {
+  const navigate = useNavigate()
+
   const [email, setEmail]= useState("")
   const [password, setPassword]= useState("")
     const { updateCart, setUpdateCart } = useContext(UpdateCart)
@@ -39,6 +43,7 @@ export default function SignInPage() {
           localStorage.setItem("GoftyUserId",response.data)
           setUserId(response.data)
           setUpdateCart(p=>p+1)
+          navigate('/')
         }
       })
   }

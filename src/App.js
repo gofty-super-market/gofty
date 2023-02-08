@@ -25,13 +25,16 @@ const api = axios.create({
 function App() {
   const [cart, setCart] = useState([]);
   const [edit, setEdit] = useState(0);
-  const [userId, setUserId] = useState();
+  const [userId, setUserId] = useState(null);
   const [updateCart, setUpdateCart] = useState(0);
   const [addToCart, setAddToCart] = useState(0);
   const cartFormData = new FormData();
   cartFormData.append('id_client', userId)
   useEffect(()=>{
-    let ul = localStorage.getItem("GoftyUserId");
+    setUpdateCart(p=>p+1)
+  },[userId])
+  useEffect(()=>{
+    let ul = localStorage.getItem("GoftyUserId") == "null" ? null :localStorage.getItem("GoftyUserId") 
     if(ul!=null){
       setUserId(ul)
       setUpdateCart(p=>p+1)
