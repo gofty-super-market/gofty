@@ -17,7 +17,7 @@ import { Link } from "react-router-dom";
 export const Footer = () => {
     return (
         <>
-        <div className="mt-20 w-full flex justify-center text-white bg-prime">
+        <div className="mt-20 w-full flex justify-center text-white bg-[#759c53]">
 
         <div className="max-w-[1200px] px-10 items-center justify-around py-16 mt-16  bg-red flex flex-col lg:flex-row gap-12 md:gap-12  ">
             <div className=" flex flex-col gap-3 ">
@@ -70,7 +70,7 @@ export const Footer = () => {
             </div>
         </div>
         </div>
-        <h1 className="bg-prime text-center text-sm p-5 text-white">Copyright © 2023 Gofty Company</h1>
+        <h1 className="bg-[#759c53] text-center text-sm p-5 text-white">Copyright © 2023 Gofty Company</h1>
         </>
     )
 }

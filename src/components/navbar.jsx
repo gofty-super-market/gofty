@@ -71,7 +71,7 @@ function Navbar() {
           
           <ul className='hidden md:flex gap-2 text-gray-600 h-full'>
             <li className='navlink'><NavLink onClick={()=>{scrolltop()}} className={(({ isActive }) => (isActive ? ' is-active-link linkToGoUp ' : ' h-full flex items-center '))}  to="/">Home</NavLink></li>
-            <li className='navlink'><NavLink onClick={()=>{scrolltop()}} className={(({ isActive }) => (isActive ? ' is-active-link linkToGoUp' : ' h-full flex items-center '))}  to="/market">Market</NavLink></li>
+            <li className='navlink'><NavLink onClick={()=>{scrolltop()}} className={(({ isActive }) => (isActive ? ' is-active-link linkToGoUp' : ' h-full flex items-center '))}  to="/market/">Market</NavLink></li>
             <li className='navlink'><NavLink onClick={()=>{scrolltop()}} className={(({ isActive }) => (isActive ? ' is-active-link linkToGoUp' : ' h-full flex items-center '))}  to="/contact">Contact</NavLink></li>
           </ul>
           {
@@ -101,7 +101,7 @@ function Navbar() {
                 <div className={ showMenu? ' bg-white w-full h-[calc(100vh-50px)] absolute left-0 top-[50px] p-10 flex flex-col justify-around ztop' : ' bg-white w-full h-[calc(100vh-50px)] absolute left-[-100%]  top-[50px] p-10 flex flex-col justify-around ztop'}>
                   <ul className='flex flex-col gap-2 text-gray-600 items-center'>
                     <li className='w-full flex justify-center' onClick={()=>setShowMenu(false)}><NavLink className={(({ isActive }) => (isActive ? 'navlinkPhone active-phone ' : ' navlinkPhone '))}  to="/"><HomeRoundedIcon/> Home</NavLink></li>
-                    <li className='w-full flex justify-center' onClick={()=>setShowMenu(false)}><NavLink className={(({ isActive }) => (isActive ? 'navlinkPhone active-phone ' : ' navlinkPhone '))}  to="/market"><StorefrontRoundedIcon/> Market</NavLink></li>
+                    <li className='w-full flex justify-center' onClick={()=>setShowMenu(false)}><NavLink className={(({ isActive }) => (isActive ? 'navlinkPhone active-phone ' : ' navlinkPhone '))}  to="/market/"><StorefrontRoundedIcon/> Market</NavLink></li>
                     <li className='w-full flex justify-center' onClick={()=>setShowMenu(false)}><NavLink className={(({ isActive }) => (isActive ? 'navlinkPhone active-phone ' : ' navlinkPhone '))}  to="/contact"><CallRoundedIcon/>Contact</NavLink></li>
                   </ul>
                   <ul className='flex flex-col gap-2 text-gray-600 items-center'>
@@ -148,7 +148,7 @@ function Navbar() {
                 <div className={ showMenu? ' bg-white w-full h-[calc(100vh-50px)] absolute left-0 top-[50px] p-10 flex flex-col justify-around ztop ease-in-out duration-300' : ' bg-white w-full h-[calc(100vh-50px)] absolute left-[-100%]  top-[50px] p-10 flex flex-col justify-around ztop ease-in-out duration-300'}>
                   <ul className='flex flex-col gap-2 text-gray-600 items-center'>
                     <li className='w-full flex justify-center' onClick={()=>setShowMenu(false)}><NavLink className={(({ isActive }) => (isActive ? 'navlinkPhone active-phone ' : ' navlinkPhone '))}  to="/"><HomeRoundedIcon/> Home</NavLink></li>
-                    <li className='w-full flex justify-center' onClick={()=>setShowMenu(false)}><NavLink className={(({ isActive }) => (isActive ? 'navlinkPhone active-phone ' : ' navlinkPhone '))}  to="/market"><StorefrontRoundedIcon/> Market</NavLink></li>
+                    <li className='w-full flex justify-center' onClick={()=>setShowMenu(false)}><NavLink className={(({ isActive }) => (isActive ? 'navlinkPhone active-phone ' : ' navlinkPhone '))}  to="/market/"><StorefrontRoundedIcon/> Market</NavLink></li>
                     <li className='w-full flex justify-center' onClick={()=>setShowMenu(false)}><NavLink className={(({ isActive }) => (isActive ? 'navlinkPhone active-phone ' : ' navlinkPhone '))}  to="/contact"><CallRoundedIcon/>Contact</NavLink></li>
                   </ul>
                   <ul className='flex flex-col gap-2 text-gray-600 items-center'>

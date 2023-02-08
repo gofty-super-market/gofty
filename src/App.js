@@ -14,6 +14,7 @@ import Pages from "./pages/pages";
 
 import axios from "axios"
 import ScrollToTop from "./components/ScrollToTop";
+import Loading from "./components/loading";
 
 
 const api = axios.create({
@@ -27,9 +28,17 @@ function App() {
   const [edit, setEdit] = useState(0);
   const [userId, setUserId] = useState(null);
   const [updateCart, setUpdateCart] = useState(0);
+  const [loading, setLoading] =useState(true)
   const [addToCart, setAddToCart] = useState(0);
+
   const cartFormData = new FormData();
   cartFormData.append('id_client', userId)
+  useEffect(()=>{
+    setLoading(true)
+    setTimeout(() => {
+      setLoading(false)
+    }, 2000);
+  },[])
   useEffect(()=>{
     setUpdateCart(p=>p+1)
   },[userId])
@@ -67,7 +76,11 @@ function App() {
               <UpdateCart.Provider value={{ updateCart, setUpdateCart }}>
               <UserId.Provider value={{ userId, setUserId }}>
                 <ScrollToTop />
+                {
+                loading?
+                <Loading/>:
                 <Pages cart={cart} setCart={setCart} />
+                }
               </UserId.Provider >
               </UpdateCart.Provider >
             </AddToCart.Provider>
