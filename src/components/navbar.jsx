@@ -16,12 +16,18 @@ import { useContext } from 'react';
 import { CartContext } from '../context/cartContext';
 
 import { EditContext } from '../context/edit';
+import { UserId } from '../context/userId';
 
 function Navbar() {
   const [loged , setLoged] = useState(false);
+    const { userId, setUserId } = useContext(UserId)
   const { cart , setCart } = useContext(CartContext);
   const [showMenu , setShowMenu] = useState(false);
-  
+  useEffect(()=>{
+    if(userId){
+      setLoged(true)
+    }
+  },[userId]) 
   const { edit, setEdit } = useContext(EditContext)
 
   const handelMenuBtnsClick = ()=>{
@@ -115,7 +121,7 @@ function Navbar() {
                   <IconButton className=' drop-shadow-md bg-white'>
                   <Avatar sx={{ width: 30, height: 30 }}/>
                   </IconButton>
-                  <div className='logoutbtndiv h-16 absolute hidden w-32 flex gap-3 justify-center items-end text-gray-700 left-[50%] translate-x-[-50%] top-10 '>
+                  <div className='logoutbtndiv h-16 absolute w-32 hidden gap-3 justify-center items-end text-gray-700 left-[50%] translate-x-[-50%] top-10 '>
                     <button className='bg-white py-2 px-4 rounded-lg border drop-shadow-lg'>Log out <LogoutIcon/></button>
                   </div>
                 </div>

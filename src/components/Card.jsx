@@ -55,9 +55,9 @@ function Card({ img, title, price, description, productId }) {
         }, 800);
     }, [productId])
 
-    const getProduct = cart.filter(item => {
+    const getProduct =cart? cart.filter(item => {
         return item.product.id_product == productId
-    })
+    }): false
 
 
     const isAdded = () => {

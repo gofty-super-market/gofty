@@ -25,7 +25,7 @@ export const Footer = () => {
                     <img src={logo} alt="" className="w-20 h-20 object-cover drop-shadow-lg" />
                     <div className="flex flex-col gap-3">
                         <h3 className="text-xl font-medium">GOFTY</h3>
-                        <p className="max-w-lg">Lorem ipsum dolor sit amet consectetur adipisicing elit. Id reprehenderit ipsum facilis libero a nisi temporibus laboriosam expedita sit molestiae cum saepe repellendus tenetur delectus, fugiat rerum qui facere? Necessitatibus.</p>
+                        <p className="max-w-sm">Lorem ipsum dolor sit amet consectetur adipisicing elit. Id reprehenderit ipsum facilis libero a nisi temporibus laboriosam expedita sit molestiae cum saepe repellendus tenetur delectus, fugiat rerum qui facere? Necessitatibus.</p>
                         <div className="flex text-white">
                             <IconButton>
                                 <InstagramIcon className="text-white"/>

@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { BrowserRouter , useLocation } from "react-router-dom";
-
 // hello
 
 import Navbar from "./components/navbar";
@@ -26,12 +25,18 @@ const api = axios.create({
 function App() {
   const [cart, setCart] = useState([]);
   const [edit, setEdit] = useState(0);
-  const [userId, setUserId] = useState(2);
+  const [userId, setUserId] = useState();
   const [updateCart, setUpdateCart] = useState(0);
   const [addToCart, setAddToCart] = useState(0);
   const cartFormData = new FormData();
   cartFormData.append('id_client', userId)
-  
+  useEffect(()=>{
+    let ul = localStorage.getItem("GoftyUserId");
+    if(ul!=null){
+      setUserId(ul)
+      setUpdateCart(p=>p+1)
+    }
+  },[])
   useEffect(() => {
     api({
       method: "post",
@@ -40,8 +45,9 @@ function App() {
       headers: { "Content-Type": "multipart/form-data" },
     })
       .then(function (response) {
-        console.log(response.data);
+        if(Array.isArray(response.data)){
         setCart(response.data)
+        }
       })
       .catch(function (response) {
         console.log(response);
