@@ -21,7 +21,7 @@ const api = axios.create({
     baseURL: "https://goftysupermarketelectronic.com/api"
 })
 
-function Card({ img, title, price, description, productId }) {
+function Card({ img, title, price, description, productId, unite }) {
     const [added, setAdded] = useState(false);
     const [skeliton, setSkeliton] = useState(true);
     const { updateCart, setUpdateCart } = useContext(UpdateCart)
@@ -176,7 +176,7 @@ function Card({ img, title, price, description, productId }) {
                 <div className='flex-1 p-3 sm:p-4 flex flex-col'>
                     <Link to={"/market/product/" + productId}>
                         <h3 className='text-xs md:text-base font-medium text-gray-700'>{title}</h3>
-                        <p className='text-xs md:text-xs text-gray-600 flex-1'>{"no description"}</p>
+                        <p className='text-xs md:text-xs text-gray-600 flex-1'>{"per "+unite}</p>
                         <h2 className='text-base md:text-xl font-medium text-gray-700 w-full'>{price} DH</h2>
                     </Link>
                     <div className={'flex items-end mt-1 pt-2 ' + (q != 0 ? 'justify-between' : "justify-end")}>

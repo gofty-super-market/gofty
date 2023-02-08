@@ -51,7 +51,7 @@ function BestSeller() {
           NewProducts.map((product, key) => {
             if (key < 4) {
               return (
-                <Card img={product.image} productId={product.id_product} key={product.id_product} title={product.title} price={product.price} />
+                <Card unite={product.unite} img={product.image} productId={product.id_product} key={product.id_product} title={product.title} price={product.price} />
               )
             }
           })

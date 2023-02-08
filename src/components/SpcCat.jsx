@@ -73,7 +73,7 @@ function SpcCat() {
 
             <SplideSlide key={key}>
                 <div className='mx-2 md:mx-4 my-2'>
-                    <Card productId={product.id_product} img={product.image} title={product.title} description={product.description} price={product.price} />
+                    <Card unite={product.unite} productId={product.id_product} img={product.image} title={product.title} description={product.description} price={product.price} />
                 </div>
             </SplideSlide>
         )

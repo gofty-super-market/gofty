@@ -1,8 +1,8 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import logo from "../imgs/logo.png"
 import EmailIcon from '@mui/icons-material/Email';
 import HttpsIcon from '@mui/icons-material/Https';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import FmdGoodIcon from '@mui/icons-material/FmdGood';
 import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
 import PersonIcon from '@mui/icons-material/Person';
@@ -12,8 +12,20 @@ import {useFormik} from "formik"
 import * as Yup from "yup"
 import CheckCircleRoundedIcon from '@mui/icons-material/CheckCircleRounded';
 import EmailCode from '../components/EmailCode';
+import axios from "axios"
+import { UpdateCart } from '../context/updateCart';
+import { UserId } from '../context/userId';
+
+
+const api = axios.create({
+  baseURL: "https://goftysupermarketelectronic.com/api"
+})
 
 export default function SignInPage() {
+  const navigate = useNavigate()
+  const { updateCart, setUpdateCart } = useContext(UpdateCart)
+  const { userId, setUserId } = useContext(UserId)
+
   const [code , setCode]=useState(false)
   const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/
   const formik = useFormik({
@@ -36,7 +48,28 @@ export default function SignInPage() {
       address: Yup.string().required("Required"),
     }),
     onSubmit:(values)=>{
-      console.log(formik.errors)
+
+    let cartFormData = new FormData();
+    cartFormData.append('name', formik.values.firstName + " " +  formik.values.lastName)
+    cartFormData.append('email', formik.values.email)
+    cartFormData.append('phone', formik.values.tel)
+    cartFormData.append('address', formik.values.address)
+    cartFormData.append('password',formik.values.password)
+    console.log(cartFormData)
+    api({
+      method: "post",
+      url: "signup",
+      data: cartFormData,
+      headers: { "Content-Type": "multipart/form-data" },
+    })
+      .then(function (response) {
+        if(response.data!="0"){
+          localStorage.setItem("GoftyUserId",response.data)
+          setUserId(response.data)
+          setUpdateCart(p=>p+1)
+          navigate('/')
+        }
+      })
     }
   });
 
@@ -164,7 +197,7 @@ code?
         </div>
 
         <div className='w-full flex justify-center'>
-          <button onClick={()=>setCode(true)} type='submit' className='button bg-prime text-white px-8 w-full md:w-fit'>
+          <button onClick={()=>setCode(false)} type='submit' className='button bg-prime text-white px-8 w-full md:w-fit'>
             Sing Up
           </button>
         </div>

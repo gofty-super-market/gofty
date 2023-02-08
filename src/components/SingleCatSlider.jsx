@@ -51,7 +51,7 @@ export default function SingleCatSlider({ cat, link, cat_id }) {
                                 products.map((product, key) => {
                                     return (
                                         <SplideSlide key={key} className="px-2">
-                                            <Card img={product.image} title={product.title} price={product.price} productId={product.id_product} />
+                                            <Card img={product.image} unite={product.unite} title={product.title} price={product.price} productId={product.id_product} />
                                         </SplideSlide>
                                     )
                                 })
