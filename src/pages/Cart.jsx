@@ -33,7 +33,7 @@ const api = axios.create({
 function Cart() {
   const [search, setSearch] = useState("");
   const { cart, setCart } = useContext(CartContext)
-  const { userId, seUserId } = useContext(CartContext)
+  const { userId, seUserId } = useContext(UserId)
   const { edit, setEdit } = useContext(EditContext)
   const [products, setProducts] = useState()
   const [delivery, setDelivery] = useState(0)
@@ -94,6 +94,7 @@ function Cart() {
             ).then(() => {
                 setUpdateCart(p => p + 1)
             })
+
   }
 
   return (

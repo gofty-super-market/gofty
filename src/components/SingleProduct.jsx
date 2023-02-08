@@ -24,7 +24,6 @@ import { motion } from "framer-motion"
 
 import { AddToCart } from '../context/addToCart';
 import { UserId } from '../context/userId';
-const Imgs = [Img1, Img2, Img4, Img5, Img1, Img2, Img4, Img1, Img2, Img4, Img5, Img1]
 
 const api = axios.create({
     baseURL: "https://goftysupermarketelectronic.com/api"
@@ -134,14 +133,15 @@ function SingleProduct() {
                 <div className='w-[50%] md:w-1 h-1 md:h-36 bg-gray-200 rounded-md'></div>
                 <div className='p-6 md:p-4 w-full md:w-fit md:flex-1 h-full flex flex-col gap-2'>
                     <h2 className='text-3xl text-gray-700'>{productInfo.title}</h2>
-                    <p className=' md:pr-5 text-sm text-gray-600'>{productInfo.description || "no description"}</p>
-                    <h3>Product Name</h3>
+                    <h3>Per {productInfo.unite}</h3>
+                    <p className=' md:pr-5 text-sm text-gray-600'>{productInfo.description || null}</p>
+                    {q>1 && <h3 className=' text-xl font-medium text-gray-700'>{productInfo.price } DH * {q}</h3> }
+                    <h3 className='py-1 text-3xl font-medium text-gray-700'>{productInfo.price * q } DH</h3>
                     <div className='hover:scale-105 flex items-center justify-center gap-1 drop-shadow-md bg-white rounded-full w-fit border '>
                         <IconButton onClick={() => handelQChange(-1)}><NavigateBeforeRoundedIcon /></IconButton>
                         <span className='font-medium text-gray-700'>{q}</span>
                         <IconButton onClick={() => handelQChange(1)}><NavigateNextRoundedIcon /></IconButton>
                     </div>
-                    <h3 className='py-3 text-3xl font-medium text-gray-700'>{productInfo.price * q} DH</h3>
                     <div className='flex-1 flex gap-2 justify-center sm:justify-end'>
                         <Tooltip title="add to favoret" arrow >
                             <button onClick={() => setFavorite(!favorite)} className='hover:bg-[#f1f1f1] button bg-white  drop-shadow-md border text-[#F39221] p-2'>{favorite ? <FavoriteRoundedIcon /> : <FavoriteBorderIcon />} </button>
