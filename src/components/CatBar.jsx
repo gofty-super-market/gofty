@@ -22,7 +22,7 @@ const api = axios.create({
 function CatBar() {
     const [listOfCat , setListOfCat]=useState([])
     useEffect(() => {
-        api.get("/categories").then(res => setListOfCat(res.data))
+        api.get("/categories").then(res =>{ setListOfCat(res.data)})
     }, [])
     const { cat } = useParams()
   return (

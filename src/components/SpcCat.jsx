@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import Card from './Card';
 import GoftyOffer from './GoftyOffer'
 import { Splide, SplideSlide } from "@splidejs/react-splide"
@@ -21,18 +21,8 @@ import axios from "axios"
 import { useEffect } from 'react';
 
 import { animate, motion, useAnimation } from "framer-motion"
+import { CatsContext } from '../context/cats';
 
-const catList = {
-    "Fruits": 1,
-    "Légumes": 2,
-    "Crémerie": 3,
-    "Épicerie": 4,
-    "Boissons": 5,
-    "Hygiène": 6,
-    "Pâtisserie": 7,
-    "Food": 8,
-    "Electro": 9
-}
 
 const api = axios.create({
     baseURL: "https://goftysupermarketelectronic.com/api"
@@ -45,6 +35,7 @@ function SpcCat() {
     const [products, setProducts] = useState([]);
     const animation = useAnimation()
     const [page, setPage] = useState(1);
+    const { cats, setCats } = useContext(CatsContext)
 
     useEffect(() => {
         animation.start({ y: 200 })
@@ -52,12 +43,20 @@ function SpcCat() {
             animation.start({ y: 0 })
         }, 50);
     }, [cat])
+
+
+    const catId = ()=>{
+        let a = cats.filter(catt=>catt.name == cat)
+        return a[0].id_category
+    }
+
     useEffect(() => {
-        api.get("/products-" + catList[cat] + "-page-" + page).then(res => setProducts(res.data))
-    }, [cat])
-    useEffect(() => {
-        api.get("/products-" + catList[cat] + "-page-" + page).then(res => setProducts(res.data))
+        api.get("/products-" + catId() + "-page-" + page).then(res => setProducts(res.data))
     }, [page])
+    useEffect(() => {
+        api.get("/products-" + catId() + "-page-" + page).then(res => setProducts(res.data))
+        setPage(1)
+    }, [cat])
 
     const changePageBy=(i)=>{
         setPage(per=>per+i)
