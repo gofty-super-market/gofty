@@ -65,7 +65,7 @@ function Navbar() {
           <div className='flex gap-3 items-center flex-1'>
             <NavLink onClick={()=>setShowMenu(false)} className="flex gap-3 items-center" to={"/"}>
               <img className='w-6 h-6' src={Logo} alt="" />
-              <span className='text-sm md:text-xl text-gray-600 font-medium -tracking-tight'>GOFTY test</span>
+              <span className='text-sm md:text-xl text-gray-600 font-medium -tracking-tight'>GOFTY</span>
             </NavLink>
           </div>
           
