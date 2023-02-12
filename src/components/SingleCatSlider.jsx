@@ -23,7 +23,9 @@ export default function SingleCatSlider({ cat, link, cat_id }) {
         data: cartFormData,
         headers: { "Content-Type": "multipart/form-data" },
       }).then((res) => setProducts(res.data));
-    } else {
+    } else if(cat_id=="products-new"){
+      api.get("/products-new").then((res) => setProducts(res.data));
+    }else {
       api.get("/products-" + cat_id).then((res) => setProducts(res.data));
     }
   }, [cat_id]);

@@ -7,6 +7,7 @@ import axios from 'axios';
 
 import { useInView } from 'react-intersection-observer';
 import { motion,useAnimation } from 'framer-motion';
+import SingleCatSlider from './SingleCatSlider';
 
 const api = axios.create({
   baseURL: "https://goftysupermarketelectronic.com/api"
@@ -15,7 +16,6 @@ const api = axios.create({
 
 
 function BestSeller() {
-  const [NewProducts, setNewProducts] = useState([])
 
   const { ref, inView } = useInView({
         threshold:window.innerWidth>500? 0.2 : 0 ,
@@ -34,30 +34,11 @@ function BestSeller() {
       })
     }
   }, [inView])
-  useEffect(() => {
-    api.get("products-new").then(res => {
-      setNewProducts(res.data)
-    })
-
-  }, [])
-
   return (
     <motion.div transition={{duration:.6}}  ref={ref} animate={animation}>
-      <h1 className='mx-auto max-w-[1100px] uppercase text-2xl font-medium text-gray-700 ml-5'><WhatshotIcon />Now Products</h1>
-      <div className='mx-auto max-w-[1100px] grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-y-0 gap-4 md:gap-8 h-fit p-3 md:p-2'>
 
-
-        {
-          NewProducts.map((product, key) => {
-            if (key < 4) {
-              return (
-                <Card unite={product.unite} img={product.image} productId={product.id_product} key={product.id_product} title={product.title} price={product.price} />
-              )
-            }
-          })
-        }
-
-      </div>
+                <SingleCatSlider cat={"New Products "} link={null} cat_id={"products-new"}/>
+                <SingleCatSlider cat={"You may like"} link={null} cat_id={"random"}/>
     </motion.div>
   )
 }
