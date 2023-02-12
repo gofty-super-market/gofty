@@ -24,6 +24,7 @@ import { motion } from "framer-motion"
 
 import { AddToCart } from '../context/addToCart';
 import { UserId } from '../context/userId';
+import SingleCatSlider from './SingleCatSlider';
 
 const api = axios.create({
     baseURL: "https://goftysupermarketelectronic.com/api"
@@ -54,9 +55,9 @@ function SingleProduct() {
         api.get("/categories")
         .then(res=> res.data)
         .then(res=> setCat(res))
-    }, [])
+    }, [id])
 
-    // const [catMatherName , setCatMatherName]= useState("")
+    const [catMatherId , setCatMatherId]= useState("")
 
     const catMatherName = ()=>{
         for (let i = 0; i < cat.length; i++) {
@@ -64,7 +65,10 @@ function SingleProduct() {
             return cat[i].name
            } 
         }
-    } 
+    }
+    useEffect(() => {
+        setCatMatherId(productInfo.id_category)
+    }, [productInfo])
 
     console.log(productInfo.id_category)
 
@@ -128,7 +132,7 @@ function SingleProduct() {
                 className='border rounded-2xl p-2 md:p-4 bg-white overflow-hidden flex flex-col md:flex-row items-center gap-0 md:gap-4'>
 
                 <div className='flex-1  flex items-center justify-center'>
-                    <img className='h-[300px] w-[300px] object-contain md:h-full' src={"https://goftysupermarketelectronic.com/" + productInfo.image} alt="" />
+                    <img className='h-[300px] w-[300px] object-contain m-2 ' src={"https://goftysupermarketelectronic.com/" + productInfo.image} alt="" />
                 </div>
                 <div className='w-[50%] md:w-1 h-1 md:h-36 bg-gray-200 rounded-md'></div>
                 <div className='p-6 md:p-4 w-full md:w-fit md:flex-1 h-full flex flex-col gap-2'>
@@ -151,80 +155,13 @@ function SingleProduct() {
                     </div>
                 </div>
             </motion.div>
+            <motion.div initial={{x:300}} animate={{x:0}} className="p-2 pt-8">
 
+                <SingleCatSlider cat={"rolated"} link={null} cat_id={catMatherId}/>
+                <SingleCatSlider cat={"you may like"} link={null} cat_id={"random"}/>
+            </motion.div>
 
-
-            {/* <h1 className='py-3 text-2xl text-gray-700 mt-6 font-medium'>Rolated Products</h1>
-            <div className='mx-auto w-full max-w-[1200px]'>
-                <Splide className='py-3' options={{
-                    perPage: 5,
-                    arrows: false,
-                    gap: 0,
-                    breakpoints: {
-                        640: {
-                            perPage: 2,
-                        }
-                        ,
-                        850: {
-                            perPage: 3,
-                        },
-                        1200: {
-                            perPage: 4,
-                        }
-                    }
-                }}>
-                    {
-                        Imgs.map((img, key) => {
-                            return (
-                                <SplideSlide key={key}>
-                                    <div className='mx-2 md:mx-4 my-2'>
-                                        <Card img={img} />
-                                    </div>
-                                </SplideSlide>
-                            )
-                        })
-                    }
-                </Splide>
-            </div>
-
-
-
-            <h1 className='py-3 text-2xl text-gray-700 mt-6 font-medium'><WhatshotIcon /> Best seller</h1>
-            <div className='mx-auto w-full max-w-[1200px]'>
-                <Splide className='py-3' options={{
-                    perPage: 5,
-                    arrows: false,
-                    gap: 0,
-                    breakpoints: {
-                        640: {
-                            perPage: 2,
-                        }
-                        ,
-                        850: {
-                            perPage: 3,
-                        },
-                        1200: {
-                            perPage: 4,
-                        }
-                    }
-                }}>
-                    {
-                        Imgs.map((img, key) => {
-                            return (
-                                <SplideSlide key={key}>
-                                    <div className='mx-2 md:mx-4 my-2'>
-                                        <Card img={img} />
-                                    </div>
-                                </SplideSlide>
-                            )
-                        })
-                    }
-                </Splide>
-            </div>
- */}
-
-
-        </div>
+         </div> 
 
     )
 }
