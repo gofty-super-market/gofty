@@ -31,7 +31,8 @@ function App() {
 
   useEffect(() => {
     api.get("/categories").then((res) => {
-      setCats(res.data);
+      setCats(res.data.reverse());
+      console.log(res.data);
     });
   }, []);
 

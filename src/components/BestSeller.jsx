@@ -35,8 +35,7 @@ function BestSeller() {
     }
   }, [inView])
   return (
-    <motion.div transition={{duration:.6}}  ref={ref} animate={animation}>
-
+    <motion.div transition={{duration:.6}}  ref={ref} animate={animation} className="px-4">
                 <SingleCatSlider cat={"New Products "} link={null} cat_id={"products-new"}/>
                 <SingleCatSlider cat={"You may like"} link={null} cat_id={"random"}/>
     </motion.div>

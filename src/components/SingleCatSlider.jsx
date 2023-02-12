@@ -1,11 +1,12 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Splide, SplideSlide } from "@splidejs/react-splide";
 import { Link, useParams } from "react-router-dom";
 import { motion } from "framer-motion";
 
 import EastRoundedIcon from "@mui/icons-material/EastRounded";
 import Card from "./Card";
+import { CatsContext } from "../context/cats";
 
 const api = axios.create({
   baseURL: "https://goftysupermarketelectronic.com/api",
@@ -13,7 +14,17 @@ const api = axios.create({
 
 export default function SingleCatSlider({ cat, link, cat_id }) {
   const [products, setProducts] = useState([]);
-//   const [totalProducts , setTotalProducts] = useState(0);
+  const [totalProducts , setTotalProducts] = useState(0);
+  const { cats , setCats } = useContext(CatsContext)
+  useEffect(() => {
+    var total = cats.filter((cat) => cat.id_category === cat_id);
+    try{
+    if(total!=[]){
+    setTotalProducts(total[0].nbr_products);
+    }
+    }catch(err){
+    }
+  },[cat_id])
   useEffect(() => {
     if (cat_id == "random") {
       let cartFormData = new FormData();
@@ -36,16 +47,15 @@ export default function SingleCatSlider({ cat, link, cat_id }) {
       <motion.div>
         {link == null ? (
           <h3 className="w-fit text-gray-700  text-2xl font-medium">
-            {cat}{" "}
-            <EastRoundedIcon className="opacity-0 ease-in-out duration-300" />
+            {cat}
           </h3>
         ) : (
           <h3 className="w-fit text-gray-700  text-2xl font-medium">
             <Link
-              className="w-fit cat-link-h3 hover:pl-3 ease-in-out duration-300 border-b-2 py-1"
+              className="w-fit cat-link-h3 hover:pl-3 ease-in-out duration-300 border-b-2 py-1 flex items-center justify-between gap-3"
               to={cat}
             >
-              {cat}{" "}
+              {cat}{" "}{<span className="p-1 text-white px-3 text-sm bg-prime rounded-full">{totalProducts}</span>}{" "}
               <EastRoundedIcon className="opacity-0 ease-in-out duration-300" />{" "}
             </Link>
           </h3>
