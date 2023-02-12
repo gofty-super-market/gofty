@@ -13,6 +13,7 @@ import SignInPage from './SignInPage';
 import SignUpPage from './SignUpPage';
 import {motion } from "framer-motion"
 import CartFlyBtn from '../components/CartFlyBtn';
+import Welcome from './Welcome';
 
 function Pages({cart , setCart}) {
   return (
@@ -29,6 +30,7 @@ function Pages({cart , setCart}) {
         <Route cart={cart} setCart={setCart} path='/cart' element={<Cart/>} />
         <Route path="/signin" element={<SignInPage/>}/>
         <Route path="/signup" element={<SignUpPage/>}/>
+        <Route path="/welcome" element={<Welcome/>}/>
         <Route path="*" element={<NotFoundPage/>}/>
       </Routes>
       <Footer/>

@@ -49,6 +49,7 @@ export default function SignInPage() {
     }),
     onSubmit:(values)=>{
 
+          
     let cartFormData = new FormData();
     cartFormData.append('name', formik.values.firstName + " " +  formik.values.lastName)
     cartFormData.append('email', formik.values.email)
@@ -67,7 +68,7 @@ export default function SignInPage() {
           localStorage.setItem("GoftyUserId",response.data)
           setUserId(response.data)
           setUpdateCart(p=>p+1)
-          navigate('/')
+          navigate('/welcome')
         }
       })
     }
@@ -197,7 +198,7 @@ code?
         </div>
 
         <div className='w-full flex justify-center'>
-          <button onClick={()=>setCode(false)} type='submit' className='button bg-prime text-white px-8 w-full md:w-fit'>
+          <button onClick={()=>{setCode(false)}} type='submit' className='button bg-prime text-white px-8 w-full md:w-fit'>
             Sing Up
           </button>
         </div>

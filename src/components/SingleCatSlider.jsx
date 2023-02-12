@@ -13,6 +13,7 @@ const api = axios.create({
 
 export default function SingleCatSlider({ cat, link, cat_id }) {
   const [products, setProducts] = useState([]);
+//   const [totalProducts , setTotalProducts] = useState(0);
   useEffect(() => {
     if (cat_id == "random") {
       let cartFormData = new FormData();

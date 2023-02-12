@@ -44,7 +44,7 @@ function AllCat() {
             {
                 search? "hello in search " :
                 (
-                    cats.reverse().map((cat, key) => {
+                    cats.map((cat, key) => {
                         return (
                             <SingleCatSlider key={key} cat={cat.name} link={("/market/"+cat.name)} cat_id={cat.id_category}/>
                             )

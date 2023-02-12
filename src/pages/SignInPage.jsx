@@ -43,7 +43,7 @@ export default function SignInPage() {
           localStorage.setItem("GoftyUserId", response.data)
           setUserId(response.data)
           setUpdateCart(p => p + 1)
-          navigate('/')
+          navigate('/welcome')
         }
       })
   }
