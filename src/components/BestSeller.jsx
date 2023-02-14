@@ -10,7 +10,7 @@ import { motion,useAnimation } from 'framer-motion';
 import SingleCatSlider from './SingleCatSlider';
 
 const api = axios.create({
-  baseURL: "https://goftysupermarketelectronic.com/api"
+  baseURL: "http://ayshadashboard.com/api"
 })
 
 

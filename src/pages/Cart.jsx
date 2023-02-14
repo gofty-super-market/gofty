@@ -26,7 +26,7 @@ import { UpdateCart } from '../context/updateCart';
 import axios from "axios"
 
 const api = axios.create({
-    baseURL: "https://goftysupermarketelectronic.com/api"
+    baseURL: "http://ayshadashboard.com/api"
 })
 
 

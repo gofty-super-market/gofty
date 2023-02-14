@@ -27,7 +27,7 @@ import { UserId } from '../context/userId';
 import SingleCatSlider from './SingleCatSlider';
 
 const api = axios.create({
-    baseURL: "https://goftysupermarketelectronic.com/api"
+    baseURL: "http://ayshadashboard.com/api"
 })
 
 
@@ -132,7 +132,7 @@ function SingleProduct() {
                 className='border rounded-2xl p-2 md:p-4 bg-white overflow-hidden flex flex-col md:flex-row items-center gap-0 md:gap-4'>
 
                 <div className='flex-1  flex items-center justify-center'>
-                    <img className='h-[300px] w-[300px] object-contain m-2 ' src={"https://goftysupermarketelectronic.com/" + productInfo.image} alt="" />
+                    <img className='h-[300px] w-[300px] object-contain m-2 ' src={"http://ayshadashboard.com/" + productInfo.image} alt="" />
                 </div>
                 <div className='w-[50%] md:w-1 h-1 md:h-36 bg-gray-200 rounded-md'></div>
                 <div className='p-6 md:p-4 w-full md:w-fit md:flex-1 h-full flex flex-col gap-2'>

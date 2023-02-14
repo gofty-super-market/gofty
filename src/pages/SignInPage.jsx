@@ -11,7 +11,7 @@ import { useNavigate } from 'react-router-dom';
 
 
 const api = axios.create({
-  baseURL: "https://goftysupermarketelectronic.com/api"
+  baseURL: "http://ayshadashboard.com/api"
 })
 
 

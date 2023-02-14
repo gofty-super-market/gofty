@@ -17,7 +17,7 @@ import Loading from "./components/loading";
 import { CatsContext } from "./context/cats";
 
 const api = axios.create({
-  baseURL: "https://goftysupermarketelectronic.com/api",
+  baseURL: "http://ayshadashboard.com/api",
 });
 
 function App() {

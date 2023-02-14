@@ -22,9 +22,9 @@ import { animate, motion, useAnimation } from "framer-motion";
 import { CatsContext } from "../context/cats";
 
 const api = axios.create({
-  baseURL: "https://goftysupermarketelectronic.com/api",
+  baseURL: "http://ayshadashboard.com/api",
 });
-// https://goftysupermarketelectronic.com/api/products-1-page-1
+// http://ayshadashboard.com/api/products-1-page-1
 function SpcCat() {
   const { cat } = useParams();
   const [search, setSearch] = useState("");
