@@ -18,6 +18,11 @@ import { CartContext } from '../context/cartContext';
 import { EditContext } from '../context/edit';
 import { UserId } from '../context/userId';
 import { UpdateCart } from '../context/updateCart';
+import axios from 'axios';
+
+const api = axios.create({
+    baseURL: "https://ayshadashboard.com/api"
+})
 
 function Navbar() {
   const [loged , setLoged] = useState(false);
@@ -25,13 +30,17 @@ function Navbar() {
     const { updateCart, setUpdateCart } = useContext(UpdateCart)
   const { cart , setCart } = useContext(CartContext);
   const [showMenu , setShowMenu] = useState(false);
+  const [ userIfno, setUserInfo ] = useState({name:" "})
   const navigate = useNavigate()
   useEffect(()=>{
     if(userId!=null){
       setLoged(true)
+      api.get("/client-"+userId).then((res) => {setUserInfo(res.data);console.log(res.data)});
+
     }
   },[userId]) 
   const { edit, setEdit } = useContext(EditContext)
+  
 
   const handelMenuBtnsClick = ()=>{
     setShowMenu(!showMenu);
@@ -129,10 +138,8 @@ function Navbar() {
                 </Tooltip>
                 
                 <div className=' logout hidden md:block relative'>
-                  <IconButton className=' drop-shadow-md bg-white'>
-                  <Avatar sx={{ width: 30, height: 30 }}/>
-                  </IconButton>
-                  <div className='logoutbtndiv h-16 absolute w-32 hidden gap-3 justify-center items-end text-gray-700 left-[50%] translate-x-[-50%] top-10 '>
+                  <Avatar className='mx-2' sx={{ width: 40, height: 40 }}>{userIfno.name[0].toUpperCase()}</Avatar>
+                  <div  className='logoutbtndiv h-16 absolute w-32 hidden gap-3 justify-center items-end text-gray-700 left-[50%] translate-x-[-50%] top-10 '>
                     <button onClick={logout} className='bg-white py-2 px-4 rounded-lg border drop-shadow-lg'>Log out <LogoutIcon/></button>
                   </div>
                 </div>

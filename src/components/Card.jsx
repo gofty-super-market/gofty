@@ -18,7 +18,7 @@ import { motion, useAnimation } from 'framer-motion';
 import { UserId } from '../context/userId';
 
 const api = axios.create({
-    baseURL: "http://ayshadashboard.com/api"
+    baseURL: "https://ayshadashboard.com/api"
 })
 
 function Card({ img, title, price, description, productId, unite }) {
@@ -170,7 +170,7 @@ function Card({ img, title, price, description, productId, unite }) {
                 }
                 <Link to={"/market/product/" + productId}>
                     <div className='flex-1 flex items-center justify-center overflow-hidden'>
-                        <img className='h-[150px] md:h-[200px] object-contain' src={"http://ayshadashboard.com/" + img} alt="" />
+                        <img className='h-[150px] md:h-[200px] object-contain' src={"https://ayshadashboard.com/" + img} alt="" />
                     </div>
                 </Link>
                 <div className='flex-1 p-3 sm:p-4 flex flex-col'>

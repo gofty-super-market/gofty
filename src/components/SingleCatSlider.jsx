@@ -9,7 +9,7 @@ import Card from "./Card";
 import { CatsContext } from "../context/cats";
 
 const api = axios.create({
-  baseURL: "http://ayshadashboard.com/api",
+  baseURL: "https://ayshadashboard.com/api",
 });
 
 export default function SingleCatSlider({ cat, link, cat_id }) {

@@ -16,7 +16,7 @@ import axios from "axios"
                         // ]
 
 const api = axios.create({
-    baseURL: "http://ayshadashboard.com/api"
+    baseURL: "https://ayshadashboard.com/api"
 })
 
 function CatBar() {

@@ -16,7 +16,7 @@ import axios from "axios"
 import { UserId } from '../context/userId';
 
 const api = axios.create({
-    baseURL: "http://ayshadashboard.com/api"
+    baseURL: "https://ayshadashboard.com/api"
 })
 
 
@@ -83,7 +83,7 @@ export default function CardCart({ productId, title, price, quantity, unite, id_
         <div className='max-w-md flex gap-0 md:gap-4 border p-2 md:p-3 drop-shadow-md bg-white rounded-3xl'>
             <Link to={"/market/product/" + productId}>
                 <div className='w-28 md:w-32 h-full md:h-28 overflow-hidden flex items-center justify-center'>
-                    <img src={"http://ayshadashboard.com/" + image} alt="" />
+                    <img src={"https://ayshadashboard.com/" + image} alt="" />
                 </div>
             </Link>
             <div className='flex-1 p-3 flex flex-col'>
