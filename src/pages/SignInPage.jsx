@@ -8,6 +8,7 @@ import axios from "axios"
 import { UserId } from '../context/userId';
 import { UpdateCart } from '../context/updateCart';
 import { useNavigate } from 'react-router-dom';
+import { LogedinContext } from '../context/Logedin';
 
 
 const api = axios.create({
@@ -23,12 +24,17 @@ export default function SignInPage() {
   const { userId, setUserId } = useContext(UserId)
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
+  const {logedin,setLogedin} = useContext(LogedinContext);
+
 
   const singInCheck = (event) => {
 
     let cartFormData = new FormData();
     cartFormData.append('email', email)
     cartFormData.append('password', password)
+    cartFormData.append('id_client', userId||0)
+
+
 
     console.log(cartFormData)
     event.preventDefault();
@@ -43,6 +49,8 @@ export default function SignInPage() {
           localStorage.setItem("GoftyUserId", response.data)
           setUserId(response.data)
           setUpdateCart(p => p + 1)
+          setLogedin(true)
+          localStorage.setItem("Loged",true);
           navigate('/welcome')
         }
       })

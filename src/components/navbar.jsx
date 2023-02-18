@@ -19,6 +19,7 @@ import { EditContext } from '../context/edit';
 import { UserId } from '../context/userId';
 import { UpdateCart } from '../context/updateCart';
 import axios from 'axios';
+import { LogedinContext } from '../context/Logedin';
 
 const api = axios.create({
     baseURL: "https://ayshadashboard.com/api"
@@ -30,18 +31,20 @@ function Navbar() {
     const { updateCart, setUpdateCart } = useContext(UpdateCart)
   const { cart , setCart } = useContext(CartContext);
   const [showMenu , setShowMenu] = useState(false);
-  const [ userIfno, setUserInfo ] = useState({name:" "})
+  const [ userInfo, setUserInfo ] = useState({fname:" ",lname:" "})
+  const {logedin,setLogedin} = useContext(LogedinContext)
   const navigate = useNavigate()
+
   useEffect(()=>{
-    if(userId!=null){
-      setLoged(true)
+    if(userId!=null&& logedin ){
+      setLoged(false)
       api.get("/client-"+userId).then((res) => {setUserInfo(res.data);console.log(res.data)});
 
     }
-  },[userId]) 
+  },[logedin]) 
   const { edit, setEdit } = useContext(EditContext)
   
-
+  console.log(userInfo)
   const handelMenuBtnsClick = ()=>{
     setShowMenu(!showMenu);
     scrolltop()
@@ -64,6 +67,8 @@ function Navbar() {
     localStorage.setItem("GoftyUserId",null);
     setUpdateCart(p=>p+1)
     setCart([])
+    localStorage.setItem("Loged",false)
+    setLogedin(false)
     navigate('/')
   }
     return (
@@ -84,7 +89,7 @@ function Navbar() {
             <li className='navlink'><NavLink onClick={()=>{scrolltop()}} className={(({ isActive }) => (isActive ? ' is-active-link linkToGoUp' : ' h-full flex items-center '))}  to="/contact">Contact</NavLink></li>
           </ul>
           {
-            !loged ?  
+            !logedin ?  
             (
               <div className='flex gap-1 md:gap-3 flex-1 justify-end items-center'>
                 <Tooltip title="open cart" arrow >
@@ -138,7 +143,11 @@ function Navbar() {
                 </Tooltip>
                 
                 <div className=' logout hidden md:block relative'>
-                  <Avatar className='mx-2' sx={{ width: 40, height: 40 }}>{userIfno.name[0].toUpperCase()}</Avatar>
+                  <Avatar className='mx-2' sx={{ width: 40, height: 40 }}>
+                    {
+                    userInfo?.fname[0].toUpperCase()+userInfo?.lname[0].toUpperCase()
+                    }
+                    </Avatar>
                   <div  className='logoutbtndiv h-16 absolute w-32 hidden gap-3 justify-center items-end text-gray-700 left-[50%] translate-x-[-50%] top-10 '>
                     <button onClick={logout} className='bg-white py-2 px-4 rounded-lg border drop-shadow-lg'>Log out <LogoutIcon/></button>
                   </div>

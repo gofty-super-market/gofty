@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { BrowserRouter, useLocation } from "react-router-dom";
 // hello
 
@@ -15,6 +15,7 @@ import axios from "axios";
 import ScrollToTop from "./components/ScrollToTop";
 import Loading from "./components/loading";
 import { CatsContext } from "./context/cats";
+import { LogedinContext, LogedinProvider } from "./context/Logedin";
 
 const api = axios.create({
   baseURL: "https://ayshadashboard.com/api",
@@ -28,6 +29,7 @@ function App() {
   const [updateCart, setUpdateCart] = useState(0);
   const [loading, setLoading] = useState(true);
   const [addToCart, setAddToCart] = useState(0);
+  const {logedin,setLogedin} = useContext(LogedinContext);
 
   useEffect(() => {
     api.get("/categories").then((res) => {
@@ -35,7 +37,6 @@ function App() {
       console.log(res.data);
     });
   }, []);
-
   const cartFormData = new FormData();
   cartFormData.append("id_client", userId);
   useEffect(() => {
@@ -54,6 +55,16 @@ function App() {
         : localStorage.getItem("GoftyUserId");
     if (ul != null) {
       setUserId(ul);
+      setUpdateCart((p) => p + 1);
+    }
+  }, []);
+  useEffect(() => {
+    let ll =
+      localStorage.getItem("Loged") == "null"
+        ? null
+        : localStorage.getItem("Loged");
+    if (ll != null) {
+      setLogedin(true);
       setUpdateCart((p) => p + 1);
     }
   }, []);
@@ -86,9 +97,9 @@ function App() {
                     <ScrollToTop />
                     {loading ? (
                       <Loading />
-                    ) : (
-                      <Pages cart={cart} setCart={setCart} />
-                    )}
+                      ) : (
+                        <Pages cart={cart} setCart={setCart} />
+                        )}
                   </CatsContext.Provider>
                 </UserId.Provider>
               </UpdateCart.Provider>

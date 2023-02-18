@@ -15,6 +15,7 @@ import EmailCode from '../components/EmailCode';
 import axios from "axios"
 import { UpdateCart } from '../context/updateCart';
 import { UserId } from '../context/userId';
+import { LogedinContext } from '../context/Logedin';
 
 
 const api = axios.create({
@@ -26,6 +27,7 @@ export default function SignInPage() {
   const { updateCart, setUpdateCart } = useContext(UpdateCart)
   const { userId, setUserId } = useContext(UserId)
 
+  const {logedin,setLogedin} = useContext(LogedinContext)
   const [code , setCode]=useState(false)
   const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/
   const formik = useFormik({
@@ -51,11 +53,13 @@ export default function SignInPage() {
 
           
     let cartFormData = new FormData();
-    cartFormData.append('name', formik.values.firstName + " " +  formik.values.lastName)
+    cartFormData.append('fname', formik.values.firstName )
+    cartFormData.append('lname',  formik.values.lastName)
     cartFormData.append('email', formik.values.email)
     cartFormData.append('phone', formik.values.tel)
     cartFormData.append('address', formik.values.address)
     cartFormData.append('password',formik.values.password)
+    cartFormData.append('id_client',userId||0)
     console.log(cartFormData)
     api({
       method: "post",
@@ -68,9 +72,13 @@ export default function SignInPage() {
           localStorage.setItem("GoftyUserId",response.data)
           setUserId(response.data)
           setUpdateCart(p=>p+1)
+          setLogedin(true)
+          localStorage.setItem("Loged",true);
           navigate('/welcome')
         }
-      })
+      }).catch((error)=>
+        console.log("error")
+      )
     }
   });
 
