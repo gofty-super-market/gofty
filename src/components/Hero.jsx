@@ -45,7 +45,7 @@ function Hero() {
             <motion.div  animate={animation1} className='flex-1 flex flex-col justify-center gap-4 items-center md:items-start text-center md:text-left'>
                 <h1 className='select-none text-gray-600 text-[1.6rem] md:text-[3.3rem]'>GOFTY SUPERMARKET ELECTRONIC</h1>
                 <h3 className='select-none text-[#8ab167] text-[1.3rem] flex items-center gap-2'><SpaIcon /> Super healthy</h3>
-                <p className='select-none max-w-[450px] text-gray-500'>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore</p>
+                <p className='select-none max-w-[450px] text-gray-500'>Nous offrons toutes sortes de produits alimentaires aux mêmes prix du marché avec une livraison à domicile garantie</p>
                 {/* 
             <form className='-z-1 flex flex-col gap-4 w-full '>
                 <div className='border input-z drop-shadow-lg md:w-[80%] bg-white h-12 rounded-full flex overflow-hidden gap-3 items-center justify-center px-4'>
