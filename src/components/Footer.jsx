@@ -19,7 +19,7 @@ export const Footer = () => {
         <>
         <div className="mt-20 w-full flex justify-center text-white bg-[#759c53]">
 
-        <div className="max-w-[1200px] px-10 items-center justify-around py-16 mt-16  bg-red flex flex-col lg:flex-row gap-12 md:gap-12  ">
+        <div className="max-w-[1300px] px-10 items-center justify-around py-16 mt-16  bg-red flex flex-col lg:flex-row gap-12 md:gap-12  ">
             <div className=" flex flex-col gap-3 ">
                 <div className="flex gap-8 flex-col md:flex-row ">
                     <img src={logo} alt="" className="w-20 h-20 object-cover drop-shadow-lg" />

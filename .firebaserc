@@ -1,7 +1,8 @@
 {
   "projects": {
     "default": "gofty-d3425",
-    "hosting": "gofty-d3425"
+    "hosting": "gofty-d3425",
+    "gofty": "gofty-d3425"
   },
   "targets": {},
   "etags": {}
