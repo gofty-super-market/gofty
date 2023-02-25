@@ -6,8 +6,8 @@ import { IconButton } from "@mui/material";
 import PhoneIcon from '@mui/icons-material/Phone';
 import EmailIcon from '@mui/icons-material/Email';
 import FmdGoodIcon from '@mui/icons-material/FmdGood';
-
-
+import VerifiedUserIcon from '@mui/icons-material/VerifiedUser';
+import ListAltIcon from '@mui/icons-material/ListAlt';
 import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
 import StorefrontRoundedIcon from '@mui/icons-material/StorefrontRounded';
 import LocalMallRoundedIcon from '@mui/icons-material/LocalMallRounded';
@@ -25,7 +25,7 @@ export const Footer = () => {
                     <img src={logo} alt="" className="w-20 h-20 object-cover drop-shadow-lg" />
                     <div className="flex flex-col gap-3">
                         <h3 className="text-xl font-medium">GOFTY</h3>
-                        <p className="max-w-sm">Lorem ipsum dolor sit amet consectetur adipisicing elit. Id reprehenderit ipsum facilis libero a nisi temporibus laboriosam expedita sit molestiae cum saepe repellendus tenetur delectus, fugiat rerum qui facere? Necessitatibus.</p>
+                        <p className="max-w-sm">Nous offrons toutes sortes de produits alimentaires aux mêmes prix du marché avec une livraison à domicile garantie</p>
                         <div className="flex text-white">
                             <IconButton>
                                 <InstagramIcon className="text-white"/>
@@ -57,14 +57,14 @@ export const Footer = () => {
                 <ul className="flex flex-col gap-3">
                     <li className="flex gap-2 items-center"><PhoneIcon/>123546789</li>
                     <li className="flex gap-2 items-center"><EmailIcon/> contact@gofty.com</li>
-                    <li className="flex gap-2 items-center"><FmdGoodIcon/> somewhere in earth</li>
+                    <li className="flex gap-2 items-center"><FmdGoodIcon/>La fondation hassan 2, berradi 1 Marrakech</li>
                 </ul>
             </div>
             <div className="flex flex-col gap-3">
                 <h3 className="text-xl font-medium">Company</h3>
                 <ul className="flex flex-col gap-3">
-                    <li className="flex gap-2 items-center">Terms</li>
-                    <li className="flex gap-2 items-center">Privacy</li>
+                    <Link to={"/terms"}><li className="flex gap-2 items-center">< ListAltIcon/>Terms</li></Link>
+                    <Link to={"/privacy"}><li className="flex gap-2 items-center"><VerifiedUserIcon/> Privacy</li></Link>
                 </ul>
             </div>
             </div>

@@ -104,13 +104,13 @@ function Contact() {
             <li>
               <FacebookIcon /> lorem ipsum{" "}
             </li>
-            <li>
+            <li className="flex gap-2">
               <a href="https://www.instagram.com/gofty.supermarket.electronic/?igshid=NTdlMDg3MTY%3D">
                 <InstagramIcon /> gofty.supermarket.electronic{" "}
               </a>
             </li>
-            <li>
-              <RoomRoundedIcon /> lorem ipsum{" "}
+            <li className="flex gap-2">
+              <RoomRoundedIcon /> La fondation hassan 2, berradi 1 Marrakech{" "}
             </li>
           </ul>
         </div>
