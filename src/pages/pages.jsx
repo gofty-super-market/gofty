@@ -16,6 +16,7 @@ import CartFlyBtn from '../components/CartFlyBtn';
 import Welcome from './Welcome';
 import Terms from './Terms';
 import Privacy from './Privacy';
+import Thanks from './Thanks';
 
 function Pages({cart , setCart}) {
   return (
@@ -33,6 +34,7 @@ function Pages({cart , setCart}) {
         <Route path="/signin" element={<SignInPage/>}/>
         <Route path="/signup" element={<SignUpPage/>}/>
         <Route path="/welcome" element={<Welcome/>}/>
+        <Route path="/thanks" element={<Thanks/>}/>
         <Route path="/terms" element={<Terms/>}/>
         <Route path="/privacy" element={<Privacy/>}/>
         <Route path="*" element={<NotFoundPage/>}/>

@@ -10,7 +10,7 @@ import LocalMallRoundedIcon from "@mui/icons-material/LocalMallRounded";
 import SellRoundedIcon from "@mui/icons-material/SellRounded";
 import DoneRoundedIcon from "@mui/icons-material/DoneRounded";
 import Img1 from "../imgs/productsImgs/1.jpg";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { CartContext } from "../context/cartContext";
 import { EditContext } from "../context/edit";
 import { UserId } from "../context/userId";
@@ -39,11 +39,11 @@ function Cart() {
   const [delivery, setDelivery] = useState(0);
   const { updateCart, setUpdateCart } = useContext(UpdateCart);
   const [Vcart, setVcart] = useState(cart);
-  const [userInfo , setUserInfo] =  useState({})
-  const [ name , setName ] = useState("")
-  const [ phone , setPhone ] = useState("")
-  const [ address , setAddress ] = useState("")
-  const {logedin , setLogedin} = useContext(LogedinContext)
+  const [userInfo, setUserInfo] = useState({});
+  const [name, setName] = useState("");
+  const [phone, setPhone] = useState("");
+  const [address, setAddress] = useState("");
+  const { logedin, setLogedin } = useContext(LogedinContext);
   const price = () => {
     let p = 0;
     for (let i = 0; i < cart.length; i++) {
@@ -114,7 +114,27 @@ function Cart() {
       setUpdateCart((p) => p + 1);
     });
   };
+  const navigate = useNavigate() 
 
+  const thanks = ()=>{
+    navigate('/')
+  }
+  const checkout = ()=>{
+    var cartFormData = new FormData();
+    cartFormData.append("id_client", userId);
+    cartFormData.append("name", name);
+    cartFormData.append("phone", phone);
+    cartFormData.append("address", address);
+    api({
+      method: "post",
+      url: "checkout",
+      data: cartFormData,
+      headers: { "Content-Type": "multipart/form-data" },
+    }).then(() => {
+      cleanCart()
+      thanks()
+    });
+  }
   return (
     <motion.div
       initial={{ y: 300, opacity: 0.5 }}
@@ -213,7 +233,9 @@ function Cart() {
                   className="text-sm flex-1 outline-none h-full "
                   type="text"
                   value={name}
-                  hange={(e) => {setName(e.target.value)}}
+                  onChange={(e) => {
+                    setName(e.target.value);
+                  }}
                 />
               </div>
               <div className="drop-shadow-md bg-white overflow-hidden text-gray-600 flex items-center border rounded-full h-10 px-3 gap-3">
@@ -223,7 +245,9 @@ function Cart() {
                   className="text-sm flex-1 outline-none h-full "
                   type="text"
                   value={phone}
-                  hange={(e) => {setPhone(e.target.value)}}
+                  onChange={(e) => {
+                    setPhone(e.target.value);
+                  }}
                 />
               </div>
               <div className="drop-shadow-md bg-white overflow-hidden text-gray-600 flex items-center border rounded-full h-10 px-3 gap-3">
@@ -233,13 +257,15 @@ function Cart() {
                   className="text-sm flex-1 outline-none h-full "
                   type="text"
                   value={address}
-                  hange={(e) => {setAddress(e.target.value)}}
+                  onChange={(e) => {
+                    setAddress(e.target.value);
+                  }}
                 />
               </div>
 
               {price() ? (
                 <div className="flex gap-2 justify-center md:justify-end items-center mt-5">
-                  <button className="flex-1 md:flex-none button bg-prime ease-in-out duration-200 text-white flex items-center justify-center gap-2 hover:gap-3 hover:opacity-90">
+                  <button onClick={checkout} className="flex-1 md:flex-none button bg-prime ease-in-out duration-200 text-white flex items-center justify-center gap-2 hover:gap-3 hover:opacity-90">
                     Check out <ArrowForwardIcon />{" "}
                   </button>
                 </div>
