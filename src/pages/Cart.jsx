@@ -117,7 +117,7 @@ function Cart() {
   const navigate = useNavigate() 
 
   const thanks = ()=>{
-    navigate('/')
+    navigate('/thanks')
   }
   const checkout = ()=>{
     var cartFormData = new FormData();
