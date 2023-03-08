@@ -28,7 +28,7 @@ export default function SignInPage() {
   const { userId, setUserId } = useContext(UserId)
   const  [resdata,setResdata]= useState()
   const {logedin,setLogedin} = useContext(LogedinContext)
-  const [code , setCode]=useState(true)
+  const [code , setCode]=useState(false)
   const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/
   const formik = useFormik({
     initialValues:{
@@ -89,6 +89,8 @@ export default function SignInPage() {
           localStorage.setItem("Loged",true);
           setUpdateCart(p=>p+1)
           setLogedin(true)
+          setUserId(resdata)
+          navigate("/welcome")
   }
   return (
 

@@ -5,7 +5,7 @@ import KeyIcon from "@mui/icons-material/Key";
 import { UserId } from "../context/userId";
 import axios from "axios";
 
-export default function EmailCode({ emailCode }) {
+export default function EmailCode({ confirmCode }) {
   const api = axios.create({
     baseURL: "https://ayshadashboard.com/api",
   });
@@ -24,7 +24,7 @@ export default function EmailCode({ emailCode }) {
       headers: { "Content-Type": "multipart/form-data" },
     }).then((res) => {
       if (res.data == "1") {
-        emailCode();
+        confirmCode();
       } else {
         alert("code validation is not correct");
       }

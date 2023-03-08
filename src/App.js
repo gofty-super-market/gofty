@@ -60,7 +60,7 @@ function App() {
   }, []);
   useEffect(() => {
     let ll =
-      localStorage.getItem("Loged") == "null"
+      localStorage.getItem("Loged") == "false"
         ? null
         : localStorage.getItem("Loged");
     if (ll != null) {

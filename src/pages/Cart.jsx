@@ -44,6 +44,7 @@ function Cart() {
   const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
   const { logedin, setLogedin } = useContext(LogedinContext);
+  const [err, setErr ] = useState(false)
   const price = () => {
     let p = 0;
     for (let i = 0; i < cart.length; i++) {
@@ -119,8 +120,11 @@ function Cart() {
   const thanks = ()=>{
     navigate('/thanks')
   }
-  const checkout = ()=>{
-    var cartFormData = new FormData();
+  const checkout = (event)=>{
+      event.preventDefault();
+    if(price()&&name&&phone&&address){
+
+      var cartFormData = new FormData();
     cartFormData.append("id_client", userId);
     cartFormData.append("name", name);
     cartFormData.append("phone", phone);
@@ -134,6 +138,9 @@ function Cart() {
       cleanCart()
       thanks()
     });
+    }else{
+      setErr(true)
+    }
   }
   return (
     <motion.div
@@ -198,7 +205,7 @@ function Cart() {
           </div>
         </div>
 
-        <div className="flex-1 relative">
+        <form onSubmit={checkout} className="flex-1 relative">
           <motion.div className="border select-none bg-white flex flex-col gap-3 drop-shadow-xl w-full rounded-3xl p-5 md:p-8 md:sticky top-20">
             <div className="flex md:items-center mb-3 flex-col md:flex-row gap-3 md:gap-0">
               <div className="flex-1">
@@ -233,6 +240,7 @@ function Cart() {
                   className="text-sm flex-1 outline-none h-full "
                   type="text"
                   value={name}
+                  required
                   onChange={(e) => {
                     setName(e.target.value);
                   }}
@@ -243,8 +251,9 @@ function Cart() {
                 <input
                   placeholder="Enter phone number"
                   className="text-sm flex-1 outline-none h-full "
-                  type="text"
+                  type="tel"
                   value={phone}
+                  required
                   onChange={(e) => {
                     setPhone(e.target.value);
                   }}
@@ -256,6 +265,7 @@ function Cart() {
                   placeholder="Enter your location"
                   className="text-sm flex-1 outline-none h-full "
                   type="text"
+                  required
                   value={address}
                   onChange={(e) => {
                     setAddress(e.target.value);
@@ -263,18 +273,25 @@ function Cart() {
                 />
               </div>
 
-              {price() ? (
+                  {
+                    err? "something went wrong" : null
+                  }
+              {price()&&name &&phone &&address ? (
                 <div className="flex gap-2 justify-center md:justify-end items-center mt-5">
-                  <button onClick={checkout} className="flex-1 md:flex-none button bg-prime ease-in-out duration-200 text-white flex items-center justify-center gap-2 hover:gap-3 hover:opacity-90">
+                  <button  className="flex-1 md:flex-none button bg-prime ease-in-out duration-200 text-white flex items-center justify-center gap-2 hover:gap-3 hover:opacity-90">
                     Check out <ArrowForwardIcon />{" "}
                   </button>
                 </div>
               ) : (
-                ""
+                <div className="flex gap-2 justify-center md:justify-end items-center mt-5">
+                  <button className="flex-1 md:flex-none button bg-gray-400 ease-in-out duration-200 text-white flex items-center justify-center gap-2 hover:gap-3 hover:opacity-90">
+                    Check out <ArrowForwardIcon />{" "}
+                  </button>
+                </div>
               )}
             </div>
           </motion.div>
-        </div>
+        </form>
       </div>
     </motion.div>
   );
