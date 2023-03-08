@@ -3,7 +3,7 @@ import LocalPhoneIcon from "@mui/icons-material/LocalPhone";
 import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import RoomRoundedIcon from "@mui/icons-material/RoomRounded";
-import FacebookIcon from '@mui/icons-material/Facebook';
+import FacebookIcon from "@mui/icons-material/Facebook";
 import EmailRoundedIcon from "@mui/icons-material/EmailRounded";
 import SendRoundedIcon from "@mui/icons-material/SendRounded";
 import { CircularProgress } from "@mui/material";
@@ -43,11 +43,13 @@ function Contact() {
                 placeholder="first name"
                 type="text"
                 className="input flex-1"
+                required
               />
               <input
                 placeholder="last name"
                 type="text"
                 className="input flex-1"
+                required
               />
             </div>
             <div className="flex gap-3 flex-col md:flex-row">
@@ -55,11 +57,20 @@ function Contact() {
                 placeholder="tele"
                 type="number"
                 className="input flex-1"
+                required
               />
-              <input placeholder="city" type="text" className="input flex-1" />
+              <input 
+              placeholder="city" 
+              required
+              type="text" 
+              className="input flex-1" />
             </div>
             <div className="flex flex-col">
-              <input placeholder="Your email" type="email " className="input" />
+              <input 
+              placeholder="Your email" 
+              type="email " 
+              required
+              className="input" />
             </div>
             <div className="flex flex-col">
               <textarea
