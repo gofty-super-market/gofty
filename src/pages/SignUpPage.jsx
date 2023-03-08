@@ -26,9 +26,9 @@ export default function SignInPage() {
   const navigate = useNavigate()
   const { updateCart, setUpdateCart } = useContext(UpdateCart)
   const { userId, setUserId } = useContext(UserId)
-
+  const  [resdata,setResdata]= useState()
   const {logedin,setLogedin} = useContext(LogedinContext)
-  const [code , setCode]=useState(false)
+  const [code , setCode]=useState(true)
   const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/
   const formik = useFormik({
     initialValues:{
@@ -69,23 +69,33 @@ export default function SignInPage() {
     })
       .then(function (response) {
         if(response.data!="0"){
-          localStorage.setItem("GoftyUserId",response.data)
+          setResdata(response.data)
           setUserId(response.data)
-          setUpdateCart(p=>p+1)
-          setLogedin(true)
-          localStorage.setItem("Loged",true);
-          navigate('/welcome')
+          // localStorage.setItem("GoftyUserId",response.data)
+          // setUpdateCart(p=>p+1)
+          // setLogedin(true)
+          // localStorage.setItem("Loged",true);
+
+          setCode(true)  
+          console.log(response.data)
         }
       }).catch((error)=>
         console.log("error")
       )
     }
   });
-
+  const confirmCode = () => {
+          localStorage.setItem("GoftyUserId",resdata)
+          localStorage.setItem("Loged",true);
+          setUpdateCart(p=>p+1)
+          setLogedin(true)
+  }
   return (
 
 code?
-  <EmailCode/>
+  <EmailCode
+    confirmCode={confirmCode}
+  />
 :
     <motion.div
       initial={{ y: 100, opacity: .5 }}
