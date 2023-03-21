@@ -15,6 +15,7 @@ import {
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import { Link } from "react-router-dom";
 import SingleCatSlider from "../components/SingleCatSlider";
+import OrdersHistory from "../components/OrdersHistory";
 
 const api = axios.create({
   baseURL: "https://ayshadashboard.com/api",
@@ -91,44 +92,7 @@ function Profile() {
           </button>
           </Link>
         </div>
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint
-          similique eligendi quisquam natus! Magnam tempora aliquid iste
-          mollitia obcaecati ipsa aspernatur soluta cumque distinctio quos
-          placeat, molestiae architecto eius fugiat! Aliquid, quis rerum beatae
-          earum illum repellendus? Minus exercitationem atque deleniti esse
-          laudantium minima, quos omnis a eos ut rerum vitae maiores similique
-          incidunt corporis, optio illo itaque alias unde? Id maiores
-          perspiciatis repellat laboriosam, alias quibusdam dolorum corrupti, ab
-          inventore incidunt aliquam corporis iste ducimus autem tempore nostrum
-          modi ipsam at nihil praesentium suscipit ipsa voluptate. Suscipit,
-          veniam reprehenderit. In qui libero labore cupiditate laudantium vero
-          harum suscipit ipsam voluptatem? Neque optio ducimus illum iure
-          necessitatibus, nam laborum asperiores tempore corporis est dolores
-          porro earum ea facere libero in! Maxime deserunt odit quia veritatis
-          non corporis? Necessitatibus magnam consequatur placeat minus
-          reiciendis ullam labore error molestiae? Reprehenderit, consectetur?
-          Quos totam harum adipisci ipsa neque assumenda eaque accusamus
-          perferendis hic. Voluptates animi neque laudantium reprehenderit sit
-          vero impedit non sint ab, maiores repudiandae consequuntur, tenetur
-          iure eos fuga suscipit eius nesciunt est delectus accusamus vitae
-          voluptate perferendis ut. Voluptatum, rem? Fugit distinctio dolorem,
-          fugiat labore nulla similique accusamus eaque deleniti dolor nihil
-          autem veritatis dolore. Officiis mollitia fugit praesentium quisquam
-          maxime rerum magni harum atque ratione repudiandae iste, dolores
-          beatae. Veritatis labore porro dicta non. Exercitationem quo
-          recusandae fuga dolor? Fugit odio mollitia molestiae tempora quod
-          magni molestias inventore ex, qui doloremque officia tenetur quis,
-          nesciunt veniam minus distinctio praesentium. Doloribus doloremque
-          voluptatem dolore quae distinctio? Quasi alias adipisci praesentium
-          deleniti facilis consequatur hic non, repudiandae fugiat? Saepe
-          consectetur optio repellat voluptatem sunt at dignissimos, ad rerum
-          exercitationem. Delectus, obcaecati. Incidunt, vel, ipsa repellat
-          officiis ea hic odio dolorum placeat aperiam quisquam adipisci
-          voluptatem quasi accusamus, veniam eum velit consequuntur quidem
-          labore! Suscipit distinctio autem, fuga accusamus ab repellendus
-          consequuntur.
-        </p>
+        <OrdersHistory/>          
       </div>
     </div>
   );
