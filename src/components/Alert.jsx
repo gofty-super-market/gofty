@@ -11,6 +11,7 @@ import { CartContext } from '../context/cartContext';
 export default function AlertDialog({cleanCart}) {
     const [open, setOpen] = React.useState(false);
     const { cart, setCart } = useContext(CartContext)
+
     const handleClickOpen = () => {
         setOpen(true);
     };
