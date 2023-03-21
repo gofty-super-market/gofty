@@ -1,0 +1,11 @@
+[core]
+	repositoryformatversion = 0
+	filemode = true
+	bare = false
+	logallrefupdates = true
+[remote "gofty"]
+	url = https://github.com/tchi-sama/gofty.git
+	fetch = +refs/heads/*:refs/remotes/gofty/*
+[branch "master"]
+	remote = gofty
+	merge = refs/heads/master
