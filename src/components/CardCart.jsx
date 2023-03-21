@@ -82,8 +82,8 @@ export default function CardCart({ productId, title, price, quantity, unite, id_
     return (
         <div className='max-w-md flex gap-0 md:gap-4 border p-2 md:p-3 drop-shadow-md bg-white rounded-3xl'>
             <Link to={"/market/product/" + productId}>
-                <div className='w-28 md:w-32 h-full md:h-28 overflow-hidden flex items-center justify-center'>
-                    <img src={"https://ayshadashboard.com/" + image} alt="" />
+                <div className='w-28 md:w-32 h-full max-h-32 md:h-28 overflow-hidden flex items-center justify-center'>
+                    <img className='w-full h-full object-contain' src={"https://ayshadashboard.com/" + image} alt="" />
                 </div>
             </Link>
             <div className='flex-1 p-3 flex flex-col'>

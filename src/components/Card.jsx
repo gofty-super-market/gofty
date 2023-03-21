@@ -113,28 +113,28 @@ function Card({ img, title, price, description, productId, unite }) {
             setLoading(false);
           });
       }
-    }else{
-        var cartFormData = new FormData();
-        cartFormData.append("id_client", "0");
-        cartFormData.append("id_product", productId);
-        cartFormData.append("quantity",1);
-        cartFormData.append("unite", "itme");
-        api({
-          method: "post",
-          url: "cart-new",
-          data: cartFormData,
-          headers: { "Content-Type": "multipart/form-data" },
+    } else {
+      var cartFormData = new FormData();
+      cartFormData.append("id_client", "0");
+      cartFormData.append("id_product", productId);
+      cartFormData.append("quantity", 1);
+      cartFormData.append("unite", "itme");
+      api({
+        method: "post",
+        url: "cart-new",
+        data: cartFormData,
+        headers: { "Content-Type": "multipart/form-data" },
+      })
+        .then((res) => {
+          setUpdateCart((p) => p + 1);
+          setAddToCart((pre) => pre + 1);
+          setQ((pre) => pre + 1);
+          setUserId(res.data);
+          localStorage.setItem("GoftyUserId", res.data);
         })
-          .then((res) => {
-            setUpdateCart((p) => p + 1);
-            setAddToCart((pre) => pre + 1);
-            setQ((pre) => pre + 1);
-            setUserId(res.data)
-            localStorage.setItem("GoftyUserId", res.data)
-          })
-          .then(() => {
-            setLoading(false);
-          });
+        .then(() => {
+          setLoading(false);
+        });
     }
   };
   const [q, setQ] = useState(0);
@@ -180,11 +180,12 @@ function Card({ img, title, price, description, productId, unite }) {
   };
 
   return !skeliton ? (
-    <motion.div
-      transition={{ duration: 0.6 }}
-      ref={ref}
-      className="relative mx-auto card flex flex-col"
-    >
+    // <motion.div
+    //   transition={{ duration: 0.6 }}
+    //   ref={ref}
+    //   className="relative mx-auto card flex flex-col"
+    // >
+    <div className="the-card">
       {q !== 0 && (
         <div className="z-10 absolute bg-prime right-3 top-3 w-6 h-6 rounded-full flex justify-center items-center text-white">
           {q}
@@ -213,40 +214,31 @@ function Card({ img, title, price, description, productId, unite }) {
         </Link>
         <div
           className={
-            "flex items-end mt-1 pt-2 " +
-            (q != 0 ? "justify-between" : "justify-end")
+            "flex items-end justify-between mt-1 pt-2"
           }
         >
           {/* <Tooltip title="add to cart" arrow > */}
           {q !== 0 && (
+            
             <button
-              onClick={() => removefromcartHandler()}
-              className="button p-2  cardBtn drop-shadow-md hover:bg-red-500 bg-red-400 text-white rounded-xl "
+            onClick={(e) => { e.preventDefault(); removefromcartHandler()}}
+              className="cursor-pointer z-10 button p-2  cardBtn drop-shadow-md hover:bg-red-500 bg-red-400 text-white rounded-xl "
             >
               <RemoveRoundedIcon />
             </button>
           )}
-          {!loading ? (
             <button
-              onClick={() => {
-                if (!loading) {
-                  addtocartHandler();
-                }
-              }}
-              className="button p-2  cardBtn drop-shadow-md hover:bg-[#85a864] bg-[#95BF6D] text-white rounded-xl"
+              onClick={(e) => {e.preventDefault(); addtocartHandler()}}
+              className="cursor-pointer z-10 button p-2  cardBtn drop-shadow-md hover:bg-[#85a864] bg-[#95BF6D] text-white rounded-xl"
             >
               <AddIcon />
             </button>
-          ) : (
-            <button className="button p-2  cardBtn drop-shadow-md hover:bg-[#85a864] bg-[#95BF6D] text-[#85a864] rounded-xl">
-              <AddIcon />
-            </button>
-          )}
           {/* </Tooltip> */}
         </div>
       </div>
       {/* <img className='absolute w-10' src={img} alt="" /> */}
-    </motion.div>
+      {/* </motion.div> */}
+    </div>
   ) : (
     <>
       <Stack spacing={1} className="rounded-3xl overflow-hidden">

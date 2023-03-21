@@ -24,7 +24,6 @@ import { CatsContext } from "../context/cats";
 const api = axios.create({
   baseURL: "https://ayshadashboard.com/api",
 });
-// https://ayshadashboard.com/api/products-1-page-1
 function SpcCat() {
   const { cat } = useParams();
   const [search, setSearch] = useState("");

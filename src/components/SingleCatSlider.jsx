@@ -13,7 +13,7 @@ const api = axios.create({
 });
 
 export default function SingleCatSlider({ cat, link, cat_id }) {
-  const [products, setProducts] = useState([]);
+  const [products, setProducts] = useState([{},{},{}]);
   const [totalProducts , setTotalProducts] = useState(0);
   const { cats , setCats } = useContext(CatsContext)
   useEffect(() => {

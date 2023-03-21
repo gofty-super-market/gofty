@@ -194,6 +194,12 @@ body::-webkit-scrollbar-thumb {
   display: flex !important;
 }
 
+
+.lang:hover .langbtndiv{
+  display: flex !important;
+  flex-direction: column;
+}
+
 .catbarscrall::-webkit-scrollbar {
   height:0px;
 }
@@ -201,4 +207,35 @@ body::-webkit-scrollbar-thumb {
 
 .cat-link-h3:hover svg{
     opacity: 1;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* cart section of css  */
+
+
+.the-card{
+  background-color: white;
+  border-radius: 20px;
+  overflow: hidden;
+  padding-top:4px;
+  position: relative;
 }

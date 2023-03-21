@@ -1,4 +1,4 @@
-import { IconButton } from "@mui/material";
+import { FormControl, IconButton, InputLabel, MenuItem, Select } from "@mui/material";
 import React, { useContext } from "react";
 import { useState } from "react";
 import SearchRoundedIcon from "@mui/icons-material/SearchRounded";
@@ -25,6 +25,7 @@ import { motion } from "framer-motion";
 import { UpdateCart } from "../context/updateCart";
 import axios from "axios";
 import { LogedinContext } from "../context/Logedin";
+// import { Select } from "@chakra-ui/react";
 
 const api = axios.create({
   baseURL: "https://ayshadashboard.com/api",
@@ -44,7 +45,7 @@ function Cart() {
   const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
   const { logedin, setLogedin } = useContext(LogedinContext);
-  const [err, setErr ] = useState(false)
+  const [err, setErr] = useState(false);
   const price = () => {
     let p = 0;
     for (let i = 0; i < cart.length; i++) {
@@ -115,33 +116,32 @@ function Cart() {
       setUpdateCart((p) => p + 1);
     });
   };
-  const navigate = useNavigate() 
+  const navigate = useNavigate();
 
-  const thanks = ()=>{
-    navigate('/thanks')
-  }
-  const checkout = (event)=>{
-      event.preventDefault();
-    if(price()&&name&&phone&&address){
-
+  const thanks = () => {
+    navigate("/thanks");
+  };
+  const checkout = (event) => {
+    event.preventDefault();
+    if (price() && name && phone && address) {
       var cartFormData = new FormData();
-    cartFormData.append("id_client", userId);
-    cartFormData.append("name", name);
-    cartFormData.append("phone", phone);
-    cartFormData.append("address", address);
-    api({
-      method: "post",
-      url: "checkout",
-      data: cartFormData,
-      headers: { "Content-Type": "multipart/form-data" },
-    }).then(() => {
-      cleanCart()
-      thanks()
-    });
-    }else{
-      setErr(true)
+      cartFormData.append("id_client", userId);
+      cartFormData.append("name", name);
+      cartFormData.append("phone", phone);
+      cartFormData.append("address", address);
+      api({
+        method: "post",
+        url: "checkout",
+        data: cartFormData,
+        headers: { "Content-Type": "multipart/form-data" },
+      }).then(() => {
+        cleanCart();
+        thanks();
+      });
+    } else {
+      setErr(true);
     }
-  }
+  };
   return (
     <motion.div
       initial={{ y: 300, opacity: 0.5 }}
@@ -273,12 +273,47 @@ function Cart() {
                 />
               </div>
 
-                  {
-                    err? "something went wrong" : null
-                  }
-              {price()&&name &&phone &&address ? (
+              <div>
+                <p>delivery :</p>
+                <div className="flex flex-col md:flex-row p-4 gap-4">
+                  <FormControl fullWidth>
+                    <InputLabel id="demo-simple-select-label">
+                      delivery method
+                    </InputLabel>
+                    <Select
+                      // value={age}
+                      label="delevery method"
+                      // onChange={handleChange}
+                    >
+                      <MenuItem value={10}>normal delivery</MenuItem>
+                      <MenuItem value={20}>SL5 delivery</MenuItem>
+                    </Select>
+                  </FormControl>
+
+                  <FormControl fullWidth>
+                    <InputLabel id="demo-simple-select-label">
+                      delivery time
+                    </InputLabel>
+                    <Select
+                      // value={age}
+                      label="delivery time"
+                      // onChange={handleChange}
+                    >
+                      <MenuItem value={10}>10</MenuItem>
+                      <MenuItem value={20}>11</MenuItem>
+                      <MenuItem value={30}>12</MenuItem>
+                      <MenuItem value={40}>13</MenuItem>
+                      <MenuItem value={50}>14</MenuItem>
+                      <MenuItem value={60}>15</MenuItem>
+                    </Select>
+                  </FormControl>
+                </div>
+              </div>
+
+              {err ? "something went wrong" : null}
+              {price() && name && phone && address ? (
                 <div className="flex gap-2 justify-center md:justify-end items-center mt-5">
-                  <button  className="flex-1 md:flex-none button bg-prime ease-in-out duration-200 text-white flex items-center justify-center gap-2 hover:gap-3 hover:opacity-90">
+                  <button className="flex-1 md:flex-none button bg-prime ease-in-out duration-200 text-white flex items-center justify-center gap-2 hover:gap-3 hover:opacity-90">
                     Check out <ArrowForwardIcon />{" "}
                   </button>
                 </div>

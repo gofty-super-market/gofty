@@ -17,6 +17,9 @@ import Welcome from './Welcome';
 import Terms from './Terms';
 import Privacy from './Privacy';
 import Thanks from './Thanks';
+import Profile from './Profile';
+import Favorite from './Favorite';
+import History from './History';
 
 function Pages({cart , setCart}) {
   return (
@@ -37,6 +40,9 @@ function Pages({cart , setCart}) {
         <Route path="/thanks" element={<Thanks/>}/>
         <Route path="/terms" element={<Terms/>}/>
         <Route path="/privacy" element={<Privacy/>}/>
+        <Route path="/Profile" element={<Profile/>}/>
+        <Route path="/Favorite" element={<Favorite/>}/>
+        <Route path="/History" element={<History/>}/>
         <Route path="*" element={<NotFoundPage/>}/>
       </Routes>
       <Footer/>
