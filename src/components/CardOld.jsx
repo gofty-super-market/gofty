@@ -11,18 +11,9 @@ import { EditContext } from "../context/edit";
 import { AddToCart } from "../context/addToCart";
 import RemoveRoundedIcon from "@mui/icons-material/RemoveRounded";
 import Skeleton from "@mui/material/Skeleton";
-
 import Stack from "@mui/material/Stack";
 
-import MuiCard from "@mui/material/Card";
-import CardActions from "@mui/material/CardActions";
-import CardContent from "@mui/material/CardContent";
-import CardMedia from "@mui/material/CardMedia";
-import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
-
 import { useInView } from "react-intersection-observer";
-
 import { motion, useAnimation } from "framer-motion";
 import { UserId } from "../context/userId";
 
@@ -187,59 +178,81 @@ function Card({ img, title, price, description, productId, unite }) {
       }
     });
   };
-  return (
-    <MuiCard sx={{ padding: 1, maxWidth: 360, marginY: 2, borderRadius: 6 }}>
-      <div className="flex justify-center">
-        <Link to={"/market/product/" + productId}>
+
+  return !skeliton ? (
+    // <motion.div
+    //   transition={{ duration: 0.6 }}
+    //   ref={ref}
+    //   className="relative mx-auto card flex flex-col"
+    // >
+    <div className="the-card">
+      {q !== 0 && (
+        <div className="z-10 absolute bg-prime right-3 top-3 w-6 h-6 rounded-full flex justify-center items-center text-white">
+          {q}
+        </div>
+      )}
+      <Link to={"/market/product/" + productId}>
+        <div className="flex-1 flex items-center justify-center overflow-hidden">
           <img
-            className="h-[120px] md:h-[150px] object-contain"
+            className="h-[150px] md:h-[200px] object-contain"
             src={"https://ayshadashboard.com/" + img}
             alt=""
           />
-        </Link>
-      </div>
-      <div className="p-2">
+        </div>
+      </Link>
+      <div className="flex-1 p-3 sm:p-4 flex flex-col">
         <Link to={"/market/product/" + productId}>
-        <Typography
-          gutterBottom
-          variant="body2"
-          className="break-all"
-          color="text.secondary"
-        >
-          {title?.substr(0, 20)}
-          {title?.length > 20 ? ".." : null}
-        </Typography>
+          <h3 className="text-xs md:text-base font-medium text-gray-700">
+            {title}
+          </h3>
+          <p className="text-xs md:text-xs text-gray-600 flex-1">
+            {"per " + unite}
+          </p>
+          <h2 className="text-base md:text-xl font-medium text-gray-700 w-full">
+            {price} DH
+          </h2>
         </Link>
-        <Typography variant="p" component="div">
-          {price} DH
-        </Typography>
-      </div>
-      <div
-        className={
-          q > 0 ? "flex justify-between px-2" : "flex justify-end px-2"
-        }
-      >
-        {q > 0 && (
-          <>
+        <div
+          className={
+            "flex items-end justify-between mt-1 pt-2"
+          }
+        >
+          {/* <Tooltip title="add to cart" arrow > */}
+          {q !== 0 && (
+            
             <button
-              onClick={removefromcartHandler}
-              size="small"
-              className="bg-red-400 button p-2 px-3 text-white"
+            onClick={(e) => { e.preventDefault(); removefromcartHandler()}}
+              className="cursor-pointer z-10 button p-2  cardBtn drop-shadow-md hover:bg-red-500 bg-red-400 text-white rounded-xl "
             >
               <RemoveRoundedIcon />
             </button>
-            <p className="text-center flex px-4 float-right">{q}</p>
-          </>
-        )}
-        <button
-          onClick={addtocartHandler}
-          size="small"
-          className="bg-prime button p-2 px-3 text-white"
-        >
-          <AddIcon />
-        </button>
+          )}
+            <button
+              onClick={(e) => {e.preventDefault(); addtocartHandler()}}
+              className="cursor-pointer z-10 button p-2  cardBtn drop-shadow-md hover:bg-[#85a864] bg-[#95BF6D] text-white rounded-xl"
+            >
+              <AddIcon />
+            </button>
+          {/* </Tooltip> */}
+        </div>
       </div>
-    </MuiCard>
+      {/* <img className='absolute w-10' src={img} alt="" /> */}
+      {/* </motion.div> */}
+    </div>
+  ) : (
+    <>
+      <Stack spacing={1} className="rounded-3xl overflow-hidden">
+        <Skeleton variant="rectangular" height={210} />
+        <div className="p-2">
+          <Skeleton variant="text" sx={{ fontSize: "1rem" }} />
+          <Skeleton variant="text" sx={{ fontSize: "1rem" }} />
+          <div className="flex justify-between items-end">
+            <Skeleton width={50} height={20} />
+            <Skeleton variant="circular" width={40} height={40} />
+          </div>
+        </div>
+      </Stack>
+    </>
   );
 }
 
