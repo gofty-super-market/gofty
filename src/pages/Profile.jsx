@@ -42,13 +42,13 @@ function Profile() {
   }, [logedin]);
   return (
     <div className="mx-auto max-w-[1100px] w-full mt-16 sm:mt-28 px-4 text-gray-700 items-center">
-      <div className="w-full flex flex-col sm:flex-row gap-4  md:gap-8 h-fit bg-white p-5 rounded-xl drop-shadow-xl max-w-[600px]">
+      <div className="w-full flex flex-col sm:flex-row gap-4  md:gap-8 h-fit bg-white p-5 rounded-xl drop-shadow-lg md:max-w-[600px]">
         <div className="flex gap-4 flex-1">
 
         <Avatar
           sx={{
-            height: "100px",
-            width: "100px",
+            height: "80px",
+            width: "80px",
             fontSize: "40px",
             backgroundColor: "#759c53",
           }}
@@ -58,16 +58,16 @@ function Profile() {
             : null}
         </Avatar>
         <div className=" flex flex-col items-start flex-1">
-          <h2 className="text-xl">
+          <h2 className="text-sm md:text-xl break-all">
             {userInfo?.fname + " " + userInfo?.lname == " "
               ? userInfo?.fname + " " + userInfo?.lname
               : "user name"}
           </h2>
-          <h3 className="text-sm">{userInfo?.email || "user email"}</h3>
-          <h3 className="text-sm">
+          <h3 className="text-xs md:text-sm break-all">{userInfo?.email || "user email"}</h3>
+          <h3 className="text-xs md:text-sm break-all">
             {userInfo?.phone|| "phone number"}
           </h3>
-          <h3 className="text-sm">
+          <h3 className="text-xs md:text-sm break-all">
             {userInfo?.address|| "address"}
           </h3>
         </div>
@@ -80,22 +80,22 @@ function Profile() {
       </div>
 
       <div className="my-10">
-        <div className="flex">
-          <h1 className="text-3xl py-4 flex-1 flex gap-4  items-center"><Favorite sx={{ fontSize: 50 }} />Favorate</h1>
+        <div className="flex items-center">
+          <h1 className="text-2xl pt-2 flex-1 flex gap-2  items-center"><Favorite sx={{ fontSize: 30 }} />Favorate</h1>
           <Link to={"/favorite"}>
           <button className="flex-1 h-fit md:flex-none button bg-prime ease-in-out duration-200 text-white flex items-center justify-center gap-2 hover:gap-3 hover:opacity-90">
-            See all <ArrowForwardIcon />{" "}
+            <ArrowForwardIcon />{" "}
           </button>
           </Link>
         </div>
           <SingleCatSlider cat={""} link={null} cat_id={"random"}/>
       </div>
       <div>
-        <div className="flex">
-          <h1 className="text-3xl py-4 flex-1 flex gap-4  items-center"><HistoryIcon sx={{ fontSize: 50 }} />Orders History</h1>
+        <div className="flex items-center">
+          <h1 className="text-2xl py-4 flex-1 flex gap-2  items-center"><HistoryIcon sx={{ fontSize: 30 }} />Orders History</h1>
           <Link to={"/history"}>
           <button className="flex-1 h-fit md:flex-none button bg-prime ease-in-out duration-200 text-white flex items-center justify-center gap-2 hover:gap-3 hover:opacity-90">
-            See all <ArrowForwardIcon />{" "}
+            <ArrowForwardIcon />{" "}
           </button>
           </Link>
         </div>

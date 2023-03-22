@@ -206,8 +206,7 @@ function Card({ img, title, price, description, productId, unite }) {
           className="break-all"
           color="text.secondary"
         >
-          {title?.substr(0, 20)}
-          {title?.length > 20 ? ".." : null}
+          {title?.substr(0, 19)}
         </Typography>
         </Link>
         <Typography variant="p" component="div">
@@ -216,7 +215,7 @@ function Card({ img, title, price, description, productId, unite }) {
       </div>
       <div
         className={
-          q > 0 ? "flex justify-between px-2" : "flex justify-end px-2"
+          q > 0 ? "flex justify-between items-center px-2" : "flex justify-end px-2"
         }
       >
         {q > 0 && (
@@ -224,7 +223,7 @@ function Card({ img, title, price, description, productId, unite }) {
             <button
               onClick={removefromcartHandler}
               size="small"
-              className="bg-red-400 button p-2 px-3 text-white"
+              className="bg-red-400 button p-1 px-2 text-white"
             >
               <RemoveRoundedIcon />
             </button>
@@ -234,7 +233,7 @@ function Card({ img, title, price, description, productId, unite }) {
         <button
           onClick={addtocartHandler}
           size="small"
-          className="bg-prime button p-2 px-3 text-white"
+          className="bg-prime button p-1 px-2 text-white"
         >
           <AddIcon />
         </button>
