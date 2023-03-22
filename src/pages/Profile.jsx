@@ -2,18 +2,20 @@ import { Avatar } from "@mui/material";
 import React, { useContext, useEffect, useState } from "react";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { LogedinContext } from "../context/Logedin";
+import HistoryIcon from '@mui/icons-material/History';
 import axios from "axios";
 import { UserId } from "../context/userId";
 import {
   ArrowRight,
   ArrowRightAlt,
   ArrowRightSharp,
+  Favorite,
   OpenInBrowser,
   OpenInFull,
 } from "@mui/icons-material";
 
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
-import { Link } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import SingleCatSlider from "../components/SingleCatSlider";
 import OrdersHistory from "../components/OrdersHistory";
 
@@ -22,9 +24,14 @@ const api = axios.create({
 });
 function Profile() {
   const [userInfo, setUserInfo] = useState({ fname: " ", lname: " " });
-
+  const navigate = useNavigate()
   const { userId, setUserId } = useContext(UserId);
   const { logedin, setLogedin } = useContext(LogedinContext);
+  useEffect(()=>{
+    if(logedin==!true && !userId){
+      navigate("/signin") 
+    }
+  },[userId])
 
   useEffect(() => {
     if (userId != null && logedin) {
@@ -74,7 +81,7 @@ function Profile() {
 
       <div className="my-10">
         <div className="flex">
-          <h1 className="text-3xl py-4 flex-1">Favorate</h1>
+          <h1 className="text-3xl py-4 flex-1 flex gap-4  items-center"><Favorite sx={{ fontSize: 50 }} />Favorate</h1>
           <Link to={"/favorite"}>
           <button className="flex-1 h-fit md:flex-none button bg-prime ease-in-out duration-200 text-white flex items-center justify-center gap-2 hover:gap-3 hover:opacity-90">
             See all <ArrowForwardIcon />{" "}
@@ -85,7 +92,7 @@ function Profile() {
       </div>
       <div>
         <div className="flex">
-          <h1 className="text-3xl py-4 flex-1">History</h1>
+          <h1 className="text-3xl py-4 flex-1 flex gap-4  items-center"><HistoryIcon sx={{ fontSize: 50 }} />Orders History</h1>
           <Link to={"/history"}>
           <button className="flex-1 h-fit md:flex-none button bg-prime ease-in-out duration-200 text-white flex items-center justify-center gap-2 hover:gap-3 hover:opacity-90">
             See all <ArrowForwardIcon />{" "}
