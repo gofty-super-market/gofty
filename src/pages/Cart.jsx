@@ -45,6 +45,36 @@ function Cart() {
   const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
   const { logedin, setLogedin } = useContext(LogedinContext);
+
+  const [deleveryMethod,setDeliveryMethod]=useState(0)
+  const dayHours = ["00:00","01:00","02:00","03:00","04:00","05:00","06:00","07:00","08:00","09:00","10:00","11:00","12:00","13:00","14:00","15:00","16:00","17:00","18:00","19:00","20:00","21:00","22:00","23:00"]
+  const [Hours , setHours]=useState(dayHours)
+  const [HourSelect, setHourSelect]=useState(0)
+
+  useEffect(()=>{
+    if(deleveryMethod==0){
+      setHours(dayHours)
+    }else{
+      api.get("sl5-hours").then((res)=>{
+        setHours(res.data)
+        console.log(res.data)
+      })
+    }
+  },[deleveryMethod])
+  
+
+const handleMethodChange = (event) => {
+  setDeliveryMethod(event.target.value);
+  setHourSelect(" ")
+};
+
+const handleHourChange = (event) => {
+  setHourSelect(event.target.value);
+};
+
+
+
+
   const [err, setErr] = useState(false);
   const price = () => {
     let p = 0;
@@ -116,6 +146,14 @@ function Cart() {
     });
   };
   const navigate = useNavigate();
+
+
+
+
+
+
+
+
 
   const thanks = () => {
     navigate("/thanks");
@@ -280,12 +318,12 @@ function Cart() {
                       delivery method
                     </InputLabel>
                     <Select
-                      value={1}
-                      label="delevery method"
-                      // onChange={handleChange}
+                      value={deleveryMethod}
+                      label="delivery method"
+                      onChange={handleMethodChange}
                     >
-                      <MenuItem value={1}>normal delivery</MenuItem>
-                      <MenuItem value={2}>SL5 delivery</MenuItem>
+                      <MenuItem value={0}>normal delivery</MenuItem>
+                      <MenuItem value={1}>SL5 delivery</MenuItem>
                     </Select>
                   </FormControl>
 
@@ -294,16 +332,15 @@ function Cart() {
                       delivery time
                     </InputLabel>
                     <Select
-                      value={1}
+                      value={HourSelect}
                       label="delivery time"
-                      // onChange={handleChange}
+                      onChange={handleHourChange}
                     >
-                      <MenuItem value={1}>10</MenuItem>
-                      <MenuItem value={2}>11</MenuItem>
-                      <MenuItem value={3}>12</MenuItem>
-                      <MenuItem value={4}>13</MenuItem>
-                      <MenuItem value={5}>14</MenuItem>
-                      <MenuItem value={6}>15</MenuItem>
+                      {
+                        Hours.map((hour,key)=>{
+                          return (<MenuItem key={key} value={key}>{hour}</MenuItem>)
+                        })
+                      }
                     </Select>
                   </FormControl>
                 </div>
