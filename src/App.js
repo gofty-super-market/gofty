@@ -45,6 +45,7 @@ function App() {
       setFavs(res.data);
     });
   }, [userId]);
+  
   useEffect(() => {
     FavFormData.append("id_client", userId );
     api({

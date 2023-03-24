@@ -11,20 +11,20 @@ import { EditContext } from "../context/edit";
 import { AddToCart } from "../context/addToCart";
 import RemoveRoundedIcon from "@mui/icons-material/RemoveRounded";
 import Skeleton from "@mui/material/Skeleton";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import FavoriteRoundedIcon from "@mui/icons-material/FavoriteRounded";
 
 import Stack from "@mui/material/Stack";
 
 import MuiCard from "@mui/material/Card";
-import CardActions from "@mui/material/CardActions";
-import CardContent from "@mui/material/CardContent";
-import CardMedia from "@mui/material/CardMedia";
-import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 
 import { useInView } from "react-intersection-observer";
 
 import { motion, useAnimation } from "framer-motion";
 import { UserId } from "../context/userId";
+import { FavContext } from "../context/FavContext";
+import { LogedinContext } from "../context/Logedin";
 
 const api = axios.create({
   baseURL: "https://ayshadashboard.com/api",
@@ -38,6 +38,7 @@ function Card({ img, title, price, description, productId, unite }) {
   const { cart, setCart } = useContext(CartContext);
   const { addtocart, setAddToCart } = useContext(AddToCart);
   const [loading, setLoading] = useState(false);
+  const { logedin, setLogedin } = useContext(LogedinContext);
 
   const { ref, inView } = useInView({
     threshold: 0.3,
@@ -197,8 +198,96 @@ function Card({ img, title, price, description, productId, unite }) {
       }
     });
   };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  const [favorite, setFavorite] = useState(false);
+  const { favs, setFavs } = useContext(FavContext);
+
+  useEffect(() => {
+    const favF = favs.filter((fav) => fav.id_product == productId);
+    if (favF.length > 0) {
+      setFavorite(true);
+    } else {
+      setFavorite(false);
+    }
+  }, [favs]);
+
+  useEffect(() => {
+    const favF = favs.filter((fav) => fav.id_product == productId);
+    if (favF.length > 0) {
+      setFavorite(true);
+    } else {
+      setFavorite(false);
+    }
+  }, [productId]);
+
+
+  const getIdFavorite = () => {
+    const favF = favs.filter((fav) => fav.id_product == productId);
+    if (favF.length > 0) {
+      return favF[0].id_favorite;
+    } else {
+      return null;
+    }
+  };
+
+  const handleFav = () => {
+    if (!favorite) {
+      const FavFormData = new FormData();
+      FavFormData.append("id_client", userId);
+      FavFormData.append("id_product", productId);
+      api({
+        method: "post",
+        url: "favorite-add",
+        data: FavFormData,
+        headers: { "Content-Type": "multipart/form-data" },
+      }).then((res) => {
+        setFavorite(true);
+      });
+    } else {
+      const FavFormData = new FormData();
+      FavFormData.append("id_favorite", getIdFavorite());
+      api({
+        method: "post",
+        url: "favorite-delete",
+        data: FavFormData,
+        headers: { "Content-Type": "multipart/form-data" },
+      }).then((res) => {
+        setFavorite(false);
+      });
+    }
+    setUpdateCart(p=>p+1)
+  };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   return (
-    <MuiCard sx={{ padding: 1, maxWidth: 360, marginY: 2, borderRadius: 6 }}>
+    <MuiCard sx={{ padding: 1, maxWidth: 360, marginY: 2, borderRadius: 6,position : "relative" }}>
       <div className="flex justify-center">
         <Link to={"/market/product/" + productId}>
           <img
@@ -249,6 +338,15 @@ function Card({ img, title, price, description, productId, unite }) {
         >
           <AddIcon />
         </button>
+{logedin &&
+
+              <button
+              onClick={handleFav}
+                className="hover:bg-[#f1f1f1] button bg-white  drop-shadow-sm border text-[#F39221] p-2 absolute top-2 right-2"
+                >
+                {favorite ? <FavoriteRoundedIcon /> : <FavoriteBorderIcon />}{" "}
+              </button>
+              }
       </div>
     </MuiCard>
   );
