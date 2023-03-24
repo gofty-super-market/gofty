@@ -28,7 +28,24 @@ function AllCat() {
     const [catsProducts,setCatsProducts]=useState([]);
     const { cats, setCats } = useContext(CatsContext);
     const [search , setSearch ]= useState()
-    
+
+  const [searchRes, setSearchRes] = useState([]);
+
+  const HiFormData = new FormData();
+  useEffect(() => {
+    HisFormData.append("nbr_orders", 2 );
+    api({
+      method: "post",
+      url: "orders-3",
+      data: HisFormData,
+      headers: { "Content-Type": "multipart/form-data" },
+    }).then((res) => {
+      setHistory(res.data);
+      console.log(res.data);
+      console.log(userId)
+    });
+  }, [userId]);
+
     return (
         <motion.div 
         initial={{y:200}} animate={{y:0}}
@@ -42,7 +59,11 @@ function AllCat() {
                 
             </form>
             {
-                search? "hello in search " :
+                search? 
+                    <div>
+
+                    </div>
+                :
                 (
                     cats.map((cat, key) => {
                         return (
