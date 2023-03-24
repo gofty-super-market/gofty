@@ -69,26 +69,67 @@ function SpcCat() {
     }
   }, [page]);
 
-  const finalproducts = products
-    .filter((product) =>
-      product.title.toLowerCase().includes(search.toLowerCase())
-    )
-    .map((product, key) => {
-      return (
-        <SplideSlide key={key}>
-          <div className="mx-2 md:mx-4 my-2">
-            <Card
-              unite={product.unite}
-              productId={product.id_product}
-              img={product.image}
-              title={product.title}
-              description={product.description}
-              price={product.price}
-            />
-          </div>
-        </SplideSlide>
-      );
-    });
+  // search -
+
+  const [searchRes, setSearchRes] = useState([]);
+  const [loadingSearch, setLoadingSearch] = useState(false);
+
+  const searchFormData = new FormData();
+  useEffect(() => {
+    setSearchRes([]);
+    if (search && search != " " && search != "0") {
+      setLoadingSearch(true);
+      searchFormData.append("phrase", search);
+      searchFormData.append("id_category", catId());
+      api({
+        method: "post",
+        url: "products-search",
+        data: searchFormData,
+        headers: { "Content-Type": "multipart/form-data" },
+      }).then((res) => {
+        console.log(res.data);
+        setSearchRes(res.data);
+        setLoadingSearch(false);
+      });
+    } else {
+      setSearchRes([]);
+    }
+  }, [search]);
+  useEffect(() => {
+    if (search == "") {
+      setSearchRes([]);
+    }
+  }, [search, loadingSearch]);
+
+  const finalproductsSearch = searchRes.map((product, key) => {
+    return (
+      <div key={key} className="mx-2 md:mx-4 my-2">
+        <Card
+          unite={product.unite}
+          productId={product.id_product}
+          img={product.image}
+          title={product.title}
+          description={product.description}
+          price={product.price}
+        />
+      </div>
+    );
+  });
+
+  const finalproducts = products.map((product, key) => {
+    return (
+      <div key={key} className="mx-2 md:mx-4 my-2">
+        <Card
+          unite={product.unite}
+          productId={product.id_product}
+          img={product.image}
+          title={product.title}
+          description={product.description}
+          price={product.price}
+        />
+      </div>
+    );
+  });
 
   return (
     <motion.div
@@ -120,18 +161,24 @@ function SpcCat() {
           ></CancelSharpIcon>
         </IconButton>
       </div>
-
-      {search && (
-        <h1 className="text-xl font-medium px-3 text-gray-500">
-          {finalproducts.length} results
-        </h1>
-      )}
       {finalproducts.length != 0 ? (
         <div className="flex flex-col justify-center items-center gap-3">
+            {search &&
+              (loadingSearch ? (
+                <h3 className="text-2xl w-full text-gray-600 py-2">Searching...</h3>
+              ) : (
+                <h3 className="text-2xl w-full text-gray-600 py-2">
+                  {searchRes?.length > 0
+                    ? searchRes?.length + " result"
+                    : " no results"}
+                </h3>
+              ))}
           <div className="mx-auto flex flex-col w-full max-w-[1200px] grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
-            {finalproducts}
+            {search ? finalproductsSearch : finalproducts}
           </div>
-          <div className="flex gap-3 justify-center items-center bg-white rounded-full border">
+          {
+            !search &&
+            <div className="flex gap-3 justify-center items-center bg-white rounded-full border">
             {page > 1 ? (
               <IconButton
                 onClick={() => {
@@ -149,21 +196,21 @@ function SpcCat() {
               Page {page} / {pages()}{" "}
             </div>
 
-            {(Number(page) < Number(pages())) ? (
+            {Number(page) < Number(pages()) ? (
               <IconButton
                 onClick={() => {
                   changePageBy(1);
                 }}
-              >
+                >
                 <ChevronRightRoundedIcon />
               </IconButton>
             ) : (
-              <IconButton
-              >
+              <IconButton>
                 <ChevronRightRoundedIcon className="text-gray-300" />
               </IconButton>
             )}
           </div>
+          }
         </div>
       ) : search ? (
         <div className="py-16 flex flex-col gap-3 items-center justify-center">
