@@ -64,11 +64,6 @@ function Card({ img, title, price, description, productId, unite }) {
     }, 800);
   }, [productId]);
 
-  const getProduct = cart
-    ? cart.filter((item) => {
-        return item.product.id_product == productId;
-      })
-    : false;
 
   const isAdded = () => {
     for (let i = 0; i < cart.length; i++) {
@@ -148,13 +143,28 @@ function Card({ img, title, price, description, productId, unite }) {
   };
   const [q, setQ] = useState(0);
 
+  const getProduct = !cart?.length==0
+    ? cart.filter((item) => {
+        return item.product.id_product == productId;
+      })
+    : false;
+
   useEffect(() => {
-    if (getProduct.length != 0) {
-      setQ(Number(getProduct[0].quantity));
-    } else {
-      setQ(0);
-    }
+      if (getProduct?.length != 0) {
+        setQ(Number(getProduct[0]?.quantity));
+      } else {
+        setQ(0);
+      }
   }, [cart]);
+
+  useEffect(() => {
+      if (getProduct?.length != 0) {
+        setQ(Number(getProduct[0]?.quantity));
+      } else {
+        setQ(0);
+      }
+  }, [productId]);
+
 
   const removefromcartHandler = () => {
     var cartFormData = new FormData();
@@ -200,14 +210,14 @@ function Card({ img, title, price, description, productId, unite }) {
       </div>
       <div className="p-2">
         <Link to={"/market/product/" + productId}>
-        <Typography
-          gutterBottom
-          variant="body2"
-          className="break-all"
-          color="text.secondary"
-        >
-          {title?.substr(0, 19)}
-        </Typography>
+          <Typography
+            gutterBottom
+            variant="body2"
+            className="break-all"
+            color="text.secondary"
+          >
+            {title?.substr(0, 19)}
+          </Typography>
         </Link>
         <Typography variant="p" component="div">
           {price} DH
@@ -215,7 +225,9 @@ function Card({ img, title, price, description, productId, unite }) {
       </div>
       <div
         className={
-          q > 0 ? "flex justify-between items-center px-2" : "flex justify-end px-2"
+          q > 0
+            ? "flex justify-between items-center px-2"
+            : "flex justify-end px-2"
         }
       >
         {q > 0 && (

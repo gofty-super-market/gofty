@@ -67,7 +67,6 @@ function Cart() {
   }, [cart]);
   useEffect(() => {
     setEdit((ee) => ee + 1);
-    console.log(cart);
   }, [search]);
 
   useEffect(() => {
@@ -281,12 +280,12 @@ function Cart() {
                       delivery method
                     </InputLabel>
                     <Select
-                      // value={age}
+                      value={1}
                       label="delevery method"
                       // onChange={handleChange}
                     >
-                      <MenuItem value={10}>normal delivery</MenuItem>
-                      <MenuItem value={20}>SL5 delivery</MenuItem>
+                      <MenuItem value={1}>normal delivery</MenuItem>
+                      <MenuItem value={2}>SL5 delivery</MenuItem>
                     </Select>
                   </FormControl>
 
@@ -295,16 +294,16 @@ function Cart() {
                       delivery time
                     </InputLabel>
                     <Select
-                      // value={age}
+                      value={1}
                       label="delivery time"
                       // onChange={handleChange}
                     >
-                      <MenuItem value={10}>10</MenuItem>
-                      <MenuItem value={20}>11</MenuItem>
-                      <MenuItem value={30}>12</MenuItem>
-                      <MenuItem value={40}>13</MenuItem>
-                      <MenuItem value={50}>14</MenuItem>
-                      <MenuItem value={60}>15</MenuItem>
+                      <MenuItem value={1}>10</MenuItem>
+                      <MenuItem value={2}>11</MenuItem>
+                      <MenuItem value={3}>12</MenuItem>
+                      <MenuItem value={4}>13</MenuItem>
+                      <MenuItem value={5}>14</MenuItem>
+                      <MenuItem value={6}>15</MenuItem>
                     </Select>
                   </FormControl>
                 </div>

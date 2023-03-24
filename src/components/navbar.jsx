@@ -40,13 +40,11 @@ function Navbar() {
       setLoged(false);
       api.get("/client-" + userId).then((res) => {
         setUserInfo(res.data);
-        console.log(res.data);
       });
     }
   }, [logedin]);
   const { edit, setEdit } = useContext(EditContext);
 
-  console.log(userInfo);
   const handelMenuBtnsClick = () => {
     setShowMenu(!showMenu);
     scrolltop();

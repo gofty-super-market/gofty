@@ -25,6 +25,7 @@ import { motion } from "framer-motion";
 import { AddToCart } from "../context/addToCart";
 import { UserId } from "../context/userId";
 import SingleCatSlider from "./SingleCatSlider";
+import { FavContext } from "../context/FavContext";
 
 const api = axios.create({
   baseURL: "https://ayshadashboard.com/api",
@@ -39,6 +40,7 @@ function SingleProduct() {
   const [productInfo, setProductInfo] = useState([]);
   const { addtocart, setAddToCart } = useContext(AddToCart);
   const { userId, setUserId } = useContext(UserId);
+  const { favs, setFavs } = useContext(FavContext);
   const [cat, setCat] = useState([]);
   const isAdded = () => {
     for (let i = 0; i < cart.length; i++) {
@@ -48,6 +50,64 @@ function SingleProduct() {
     }
     return false;
   };
+
+  const [favorite, setFavorite] = useState(false);
+
+  useEffect(() => {
+    const favF = favs.filter((fav) => fav.id_product == productInfo.id_product);
+    if (favF.length > 0) {
+      setFavorite(true);
+    } else {
+      setFavorite(false);
+    }
+  }, [favs]);
+
+  useEffect(() => {
+    const favF = favs.filter((fav) => fav.id_product == productInfo.id_product);
+    if (favF.length > 0) {
+      setFavorite(true);
+    } else {
+      setFavorite(false);
+    }
+  }, [productInfo]);
+
+  const getIdFavorite = () => {
+    const favF = favs.filter((fav) => fav.id_product == productInfo.id_product);
+    if (favF.length > 0) {
+      return favF[0].id_favorite;
+    } else {
+      return null;
+    }
+  };
+
+  const handleFav = () => {
+    if (!favorite) {
+      const FavFormData = new FormData();
+      FavFormData.append("id_client", userId);
+      FavFormData.append("id_product", productInfo.id_product);
+      api({
+        method: "post",
+        url: "favorite-add",
+        data: FavFormData,
+        headers: { "Content-Type": "multipart/form-data" },
+      }).then((res) => {
+        setFavorite(true);
+      });
+    } else {
+      const FavFormData = new FormData();
+      FavFormData.append("id_favorite", getIdFavorite());
+      api({
+        method: "post",
+        url: "favorite-delete",
+        data: FavFormData,
+        headers: { "Content-Type": "multipart/form-data" },
+      }).then((res) => {
+        setFavorite(false);
+      });
+    }
+    setUpdateCart(p=>p+1)
+  };
+
   useEffect(() => {
     api.get("/product-" + id).then((res) => setProductInfo(res.data));
     api
@@ -108,25 +168,24 @@ function SingleProduct() {
           setAddToCart((pre) => pre + 1);
         });
       }
-    }else{
-        var cartFormData = new FormData();
-        cartFormData.append("id_client", "0");
-        cartFormData.append("id_product", productInfo.id_product);
-        cartFormData.append("quantity",q);
-        cartFormData.append("unite", "itme");
-        api({
-          method: "post",
-          url: "cart-new",
-          data: cartFormData,
-          headers: { "Content-Type": "multipart/form-data" },
-        })
-          .then((res) => {
-            setUpdateCart((p) => p + 1);
-            setAddToCart((pre) => pre + 1);
-            setQ((pre) => pre + 1);
-            setUserId(res.data)
-            localStorage.setItem("GoftyUserId", res.data)
-          })
+    } else {
+      var cartFormData = new FormData();
+      cartFormData.append("id_client", "0");
+      cartFormData.append("id_product", productInfo.id_product);
+      cartFormData.append("quantity", q);
+      cartFormData.append("unite", "itme");
+      api({
+        method: "post",
+        url: "cart-new",
+        data: cartFormData,
+        headers: { "Content-Type": "multipart/form-data" },
+      }).then((res) => {
+        setUpdateCart((p) => p + 1);
+        setAddToCart((pre) => pre + 1);
+        setQ((pre) => pre + 1);
+        setUserId(res.data);
+        localStorage.setItem("GoftyUserId", res.data);
+      });
     }
   };
   const handelQChange = (i) => {
@@ -136,7 +195,6 @@ function SingleProduct() {
       setQ((q) => q + i);
     }
   };
-  const [favorite, setFavorite] = useState(false);
 
   return (
     <div className="mt-14 md:mt-20 select-none w-full max-w-[1200px] mx-auto px-5 drop-shadow-xl">
@@ -186,7 +244,7 @@ function SingleProduct() {
           <div className="flex-1 flex gap-2 justify-center sm:justify-end">
             <Tooltip title="add to favoret" arrow>
               <button
-                onClick={() => setFavorite(!favorite)}
+                onClick={handleFav}
                 className="hover:bg-[#f1f1f1] button bg-white  drop-shadow-md border text-[#F39221] p-2"
               >
                 {favorite ? <FavoriteRoundedIcon /> : <FavoriteBorderIcon />}{" "}

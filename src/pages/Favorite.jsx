@@ -3,6 +3,7 @@ import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Card from "../components/Card";
+import { FavContext } from "../context/FavContext";
 import { LogedinContext } from "../context/Logedin";
 import { UserId } from "../context/userId";
 
@@ -11,16 +12,8 @@ const api = axios.create({
 });
 
 function Favorite() {
-  const [products, setProducts] = useState([
-    {},
-    {},
-    {},
-    {},
-    {},
-    {},
-    {},
-    {},
-  ]);
+  const [products, setProducts] = useState([]);
+  const {favs , setFavs }= useContext(FavContext)
 
 
   const { userId, setUserId } = useContext(UserId);
@@ -34,15 +27,8 @@ function Favorite() {
 
 
   useEffect(() => {
-    let cartFormData = new FormData();
-    cartFormData.append("nbr_products", 20);
-    api({
-      method: "post",
-      url: "products-random",
-      data: cartFormData,
-      headers: { "Content-Type": "multipart/form-data" },
-    }).then((res) => setProducts(res.data));
-  }, []);
+    setProducts(favs)
+  }, [favs]);
 
   return (
     <div className="mx-auto max-w-[1100px] w-full mt-16 md:mt-28 px-4 text-gray-700 items-center">

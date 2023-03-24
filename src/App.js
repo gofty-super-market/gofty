@@ -2,8 +2,6 @@ import { useContext, useEffect, useState } from "react";
 import { BrowserRouter, useLocation } from "react-router-dom";
 // hello
 
-import Navbar from "./components/navbar";
-import { CartContext } from "./context/cartContext";
 import { EditContext } from "./context/edit";
 import { UpdateCart } from "./context/updateCart";
 import { AddToCart } from "./context/addToCart";
@@ -16,6 +14,8 @@ import ScrollToTop from "./components/ScrollToTop";
 import Loading from "./components/loading";
 import { CatsContext } from "./context/cats";
 import { LogedinContext, LogedinProvider } from "./context/Logedin";
+import { CartContext } from "./context/cartContext";
+import { FavContext } from "./context/FavContext";
 
 const api = axios.create({
   baseURL: "https://ayshadashboard.com/api",
@@ -29,12 +29,37 @@ function App() {
   const [updateCart, setUpdateCart] = useState(0);
   const [loading, setLoading] = useState(true);
   const [addToCart, setAddToCart] = useState(0);
-  const {logedin,setLogedin} = useContext(LogedinContext);
+  const { logedin, setLogedin } = useContext(LogedinContext);
+
+  const [favs, setFavs] = useState([]);
+
+  const FavFormData = new FormData();
+  useEffect(() => {
+    FavFormData.append("id_client", userId );
+    api({
+      method: "post",
+      url: "favorites",
+      data: FavFormData,
+      headers: { "Content-Type": "multipart/form-data" },
+    }).then((res) => {
+      setFavs(res.data);
+    });
+  }, [userId]);
+  useEffect(() => {
+    FavFormData.append("id_client", userId );
+    api({
+      method: "post",
+      url: "favorites",
+      data: FavFormData,
+      headers: { "Content-Type": "multipart/form-data" },
+    }).then((res) => {
+      setFavs(res.data);
+    });
+  }, [updateCart]);
 
   useEffect(() => {
     api.get("/categories").then((res) => {
       setCats(res.data.reverse());
-      console.log(res.data);
     });
   }, []);
   const cartFormData = new FormData();
@@ -88,24 +113,26 @@ function App() {
   return (
     <BrowserRouter>
       <div>
-        <CartContext.Provider value={{ cart, setCart }}>
-          <EditContext.Provider value={{ edit, setEdit }}>
-            <AddToCart.Provider value={{ addToCart, setAddToCart }}>
-              <UpdateCart.Provider value={{ updateCart, setUpdateCart }}>
-                <UserId.Provider value={{ userId, setUserId }}>
-                  <CatsContext.Provider value={{ cats,setCats }}>
-                    <ScrollToTop />
-                    {loading ? (
-                      <Loading />
+        <FavContext.Provider value={{ favs, setFavs }}>
+          <CartContext.Provider value={{ cart, setCart }}>
+            <EditContext.Provider value={{ edit, setEdit }}>
+              <AddToCart.Provider value={{ addToCart, setAddToCart }}>
+                <UpdateCart.Provider value={{ updateCart, setUpdateCart }}>
+                  <UserId.Provider value={{ userId, setUserId }}>
+                    <CatsContext.Provider value={{ cats, setCats }}>
+                      <ScrollToTop />
+                      {loading ? (
+                        <Loading />
                       ) : (
                         <Pages cart={cart} setCart={setCart} />
-                        )}
-                  </CatsContext.Provider>
-                </UserId.Provider>
-              </UpdateCart.Provider>
-            </AddToCart.Provider>
-          </EditContext.Provider>
-        </CartContext.Provider>
+                      )}
+                    </CatsContext.Provider>
+                  </UserId.Provider>
+                </UpdateCart.Provider>
+              </AddToCart.Provider>
+            </EditContext.Provider>
+          </CartContext.Provider>
+        </FavContext.Provider>
       </div>
     </BrowserRouter>
   );

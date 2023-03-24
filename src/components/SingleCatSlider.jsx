@@ -7,6 +7,7 @@ import { motion } from "framer-motion";
 import EastRoundedIcon from "@mui/icons-material/EastRounded";
 import Card from "./Card";
 import { CatsContext } from "../context/cats";
+import { FavContext } from "../context/FavContext";
 
 const api = axios.create({
   baseURL: "https://ayshadashboard.com/api",
@@ -16,6 +17,7 @@ export default function SingleCatSlider({ cat, link, cat_id }) {
   const [products, setProducts] = useState([{},{},{}]);
   const [totalProducts , setTotalProducts] = useState(0);
   const { cats , setCats } = useContext(CatsContext)
+  const { favs , setFavs } = useContext(FavContext)
   useEffect(() => {
     var total = cats.filter((cat) => cat.id_category === cat_id);
     try{
@@ -37,6 +39,8 @@ export default function SingleCatSlider({ cat, link, cat_id }) {
       }).then((res) => setProducts(res.data));
     } else if(cat_id=="products-new"){
       api.get("/products-new").then((res) => setProducts(res.data));
+    }else if(cat_id=="favorite"){
+      setProducts(favs)
     }else {
       api.get("/products-" + cat_id).then((res) => setProducts(res.data));
     }

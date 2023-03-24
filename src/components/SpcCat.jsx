@@ -1,6 +1,5 @@
 import React, { useContext } from "react";
 import Card from "./Card";
-import CardV2 from "./Card";
 import GoftyOffer from "./GoftyOffer";
 import { Splide, SplideSlide } from "@splidejs/react-splide";
 import { Link, useParams } from "react-router-dom";
@@ -78,7 +77,7 @@ function SpcCat() {
       return (
         <SplideSlide key={key}>
           <div className="mx-2 md:mx-4 my-2">
-            <CardV2
+            <Card
               unite={product.unite}
               productId={product.id_product}
               img={product.image}

@@ -27,6 +27,29 @@ function Profile() {
   const navigate = useNavigate()
   const { userId, setUserId } = useContext(UserId);
   const { logedin, setLogedin } = useContext(LogedinContext);
+
+
+
+  const [history, setHistory] = useState([]);
+
+  const HisFormData = new FormData();
+  useEffect(() => {
+    HisFormData.append("nbr_orders", 2 );
+    api({
+      method: "post",
+      url: "orders-111",
+      data: HisFormData,
+      headers: { "Content-Type": "multipart/form-data" },
+    }).then((res) => {
+      setHistory(res.data);
+      console.log(res.data);
+      console.log(userId)
+    });
+  }, [userId]);
+
+
+
+
   useEffect(()=>{
     if(logedin==!true && !userId){
       navigate("/signin") 
@@ -88,7 +111,7 @@ function Profile() {
           </button>
           </Link>
         </div>
-          <SingleCatSlider cat={""} link={null} cat_id={"random"}/>
+          <SingleCatSlider cat={""} link={null} cat_id={"favorite"}/>
       </div>
       <div>
         <div className="flex items-center">
