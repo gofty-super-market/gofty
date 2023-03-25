@@ -49,14 +49,16 @@ function Cart() {
   const [deleveryMethod,setDeliveryMethod]=useState(0)
   const dayHours = ["00:00","01:00","02:00","03:00","04:00","05:00","06:00","07:00","08:00","09:00","10:00","11:00","12:00","13:00","14:00","15:00","16:00","17:00","18:00","19:00","20:00","21:00","22:00","23:00"]
   const [Hours , setHours]=useState(dayHours)
-  const [HourSelect, setHourSelect]=useState(0)
+  const [HourSelect, setHourSelect]=useState(" ")
 
   useEffect(()=>{
     if(deleveryMethod==0){
       setHours(dayHours)
+      setDelivery(20)
     }else{
       api.get("sl5-hours").then((res)=>{
         setHours(res.data)
+        setDelivery(5)
         console.log(res.data)
       })
     }
@@ -347,7 +349,7 @@ const handleHourChange = (event) => {
               </div>
 
               {err ? "something went wrong" : null}
-              {price() && name && phone && address ? (
+              {cart.length>0 && HourSelect!=" " && deleveryMethod!=null && name && phone && address ? (
                 <div className="flex gap-2 justify-center md:justify-end items-center mt-5">
                   <button className="flex-1 md:flex-none button bg-prime ease-in-out duration-200 text-white flex items-center justify-center gap-2 hover:gap-3 hover:opacity-90">
                     Check out <ArrowForwardIcon />{" "}

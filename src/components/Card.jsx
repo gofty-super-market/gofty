@@ -65,7 +65,6 @@ function Card({ img, title, price, description, productId, unite }) {
     }, 800);
   }, [productId]);
 
-
   const isAdded = () => {
     for (let i = 0; i < cart.length; i++) {
       if (cart[i].product.id_product == productId) {
@@ -144,28 +143,28 @@ function Card({ img, title, price, description, productId, unite }) {
   };
   const [q, setQ] = useState(0);
 
-  const getProduct = !cart?.length==0
-    ? cart.filter((item) => {
-        return item.product.id_product == productId;
-      })
-    : false;
+  const getProduct =
+    !cart?.length == 0
+      ? cart.filter((item) => {
+          return item.product.id_product == productId;
+        })
+      : false;
 
   useEffect(() => {
-      if (getProduct?.length != 0) {
-        setQ(Number(getProduct[0]?.quantity));
-      } else {
-        setQ(0);
-      }
+    if (getProduct?.length != 0) {
+      setQ(Number(getProduct[0]?.quantity));
+    } else {
+      setQ(0);
+    }
   }, [cart]);
 
   useEffect(() => {
-      if (getProduct?.length != 0) {
-        setQ(Number(getProduct[0]?.quantity));
-      } else {
-        setQ(0);
-      }
+    if (getProduct?.length != 0) {
+      setQ(Number(getProduct[0]?.quantity));
+    } else {
+      setQ(0);
+    }
   }, [productId]);
-
 
   const removefromcartHandler = () => {
     var cartFormData = new FormData();
@@ -199,20 +198,6 @@ function Card({ img, title, price, description, productId, unite }) {
     });
   };
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   const [favorite, setFavorite] = useState(false);
   const { favs, setFavs } = useContext(FavContext);
 
@@ -233,7 +218,6 @@ function Card({ img, title, price, description, productId, unite }) {
       setFavorite(false);
     }
   }, [productId]);
-
 
   const getIdFavorite = () => {
     const favF = favs.filter((fav) => fav.id_product == productId);
@@ -269,25 +253,19 @@ function Card({ img, title, price, description, productId, unite }) {
         setFavorite(false);
       });
     }
-    setUpdateCart(p=>p+1)
+    setUpdateCart((p) => p + 1);
   };
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   return (
-    <MuiCard sx={{ padding: 1, maxWidth: 360, marginY: 2, borderRadius: 6,position : "relative" }}>
+    <MuiCard
+      sx={{
+        padding: 1,
+        maxWidth: 360,
+        marginY: 2,
+        borderRadius: 6,
+        position: "relative",
+      }}
+    >
       <div className="flex justify-center">
         <Link to={"/market/product/" + productId}>
           <img
@@ -338,15 +316,14 @@ function Card({ img, title, price, description, productId, unite }) {
         >
           <AddIcon />
         </button>
-{logedin &&
-
-              <button
-              onClick={handleFav}
-                className="hover:bg-[#f1f1f1] button bg-white  drop-shadow-sm border text-[#F39221] p-2 absolute top-2 right-2"
-                >
-                {favorite ? <FavoriteRoundedIcon /> : <FavoriteBorderIcon />}{" "}
-              </button>
-              }
+        {logedin && (
+          <button
+            onClick={handleFav}
+            className="hover:bg-[#f1f1f1] button bg-white  drop-shadow-sm border text-[#F39221] p-2 absolute top-2 right-2"
+          >
+            {favorite ? <FavoriteRoundedIcon /> : <FavoriteBorderIcon />}{" "}
+          </button>
+        )}
       </div>
     </MuiCard>
   );
