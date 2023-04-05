@@ -25,8 +25,8 @@ const api = axios.create({
 function Profile() {
   const [userInfo, setUserInfo] = useState({ fname: " ", lname: " " });
   const navigate = useNavigate()
-  const { userId, setUserId } = useContext(UserId);
   const { logedin, setLogedin } = useContext(LogedinContext);
+  const { userId, setUserId } = useContext(UserId);
 
 
 

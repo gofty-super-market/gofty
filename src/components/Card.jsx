@@ -25,7 +25,6 @@ import { motion, useAnimation } from "framer-motion";
 import { UserId } from "../context/userId";
 import { FavContext } from "../context/FavContext";
 import { LogedinContext } from "../context/Logedin";
-
 const api = axios.create({
   baseURL: "https://ayshadashboard.com/api",
 });
@@ -39,6 +38,8 @@ function Card({ img, title, price, description, productId, unite }) {
   const { addtocart, setAddToCart } = useContext(AddToCart);
   const [loading, setLoading] = useState(false);
   const { logedin, setLogedin } = useContext(LogedinContext);
+
+
 
   const { ref, inView } = useInView({
     threshold: 0.3,
@@ -293,8 +294,8 @@ function Card({ img, title, price, description, productId, unite }) {
       <div
         className={
           q > 0
-            ? "flex justify-between items-center px-2"
-            : "flex justify-end px-2"
+            ? "flex justify-between items-center "
+            : "flex justify-end "
         }
       >
         {q > 0 && (
@@ -310,7 +311,7 @@ function Card({ img, title, price, description, productId, unite }) {
           </>
         )}
         <button
-          onClick={addtocartHandler}
+          onClick={()=>{addtocartHandler()}}
           size="small"
           className="bg-prime button p-1 px-2 text-white"
         >
