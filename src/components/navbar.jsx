@@ -20,6 +20,7 @@ import { UserId } from "../context/userId";
 import { UpdateCart } from "../context/updateCart";
 import axios from "axios";
 import { LogedinContext } from "../context/Logedin";
+import { AccountCircle, Favorite, History } from "@mui/icons-material";
 
 const api = axios.create({
   baseURL: "https://ayshadashboard.com/api",
@@ -324,13 +325,38 @@ function Navbar() {
                   userInfo?.lname[0].toUpperCase()}
               </Avatar>
                   </NavLink>
-              <div className="logoutbtndiv h-16 absolute w-32 hidden gap-3 justify-center items-end text-gray-700 left-[50%] translate-x-[-50%] top-10 ">
-                <button
-                  onClick={logout}
-                  className="bg-white py-2 px-4 rounded-lg border drop-shadow-lg"
+              <div className="logoutbtndiv absolute w-56 hidden justify-center items-end text-gray-700 left-[50%] translate-x-[-50%] top-[30px] pt-6">
+                <div className="flex flex-col bg-white rounded-lg border drop-shadow-lg p-3 ">
+
+                <NavLink
+                  to={"/profile"}
+                  className="bg-white py-2 px-4 hover:bg-gray-200 rounded-md"
                 >
-                  Log out <LogoutIcon />
-                </button>
+                 <AccountCircle/> Profile 
+                </NavLink>
+
+                <NavLink
+                  to={"/favorite"}
+                  className="bg-white py-2 px-4  hover:bg-gray-200 rounded-md"
+                >
+                 <Favorite/> Favorite 
+                </NavLink>
+                <NavLink
+                  to={"/history"}
+                  className="bg-white py-2 px-4  hover:bg-gray-200 rounded-md"
+                >
+                 <History/> Orders History 
+                </NavLink>
+                  <hr />
+                <div
+                  onClick={logout}
+                  className="bg-white py-2 px-4 cursor-pointer hover:bg-gray-200 rounded-md"
+                >
+                 <LogoutIcon /> Log out 
+                </div>
+                </div>
+
+
               </div>
             </div>
 
@@ -395,10 +421,19 @@ function Navbar() {
                 </li>
               </ul>
               <ul className="flex flex-col gap-2 text-gray-600 items-center">
+                <li
+                className="navlinkPhone"
+                >
+              <NavLink
+                to={"/profile"}
+                onClick={() => setShowMenu(false)}
+                ><AccountCircle/> Profile</NavLink>
+                </li>
                 <li className="navlinkPhone " onClick={logout}>
                   {" "}
-                  <LogoutIcon /> Logout{" "}
+                  <LogoutIcon /> Logout {" "}
                 </li>
+
               </ul>
             </div>
           </div>
