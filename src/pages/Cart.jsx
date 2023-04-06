@@ -25,6 +25,7 @@ import { motion } from "framer-motion";
 import { UpdateCart } from "../context/updateCart";
 import axios from "axios";
 import { LogedinContext } from "../context/Logedin";
+import { CheckCircle } from "@mui/icons-material";
 // import { Select } from "@chakra-ui/react";
 
 const api = axios.create({
@@ -315,9 +316,9 @@ const handleHourChange = (event) => {
               </div>
 
               <div>
-                <p>delivery :</p>
-                <div className="flex flex-col md:flex-row p-4 gap-4">
-                  <FormControl fullWidth>
+                <p>Delivery Method:</p>
+                <div className="flex flex-col md:flex-row py-4 gap-4">
+                  {/* <FormControl fullWidth>
                     <InputLabel id="demo-simple-select-label">
                       delivery method
                     </InputLabel>
@@ -329,8 +330,26 @@ const handleHourChange = (event) => {
                       <MenuItem value={0}>normal delivery</MenuItem>
                       <MenuItem value={1}>SL5 delivery</MenuItem>
                     </Select>
-                  </FormControl>
+                  </FormControl> */}
 
+                  <div className="flex-1">
+                    <div className="flex gap-2">
+                    <div onClick={()=>setDeliveryMethod(0)} className={deleveryMethod==0?"border text-white p-4 rounded-lg shadow-md flex gap-2 bg-prime cursor-pointer":" cursor-pointer border p-4 rounded-lg shadow-md flex gap-2"}>
+                      Normal
+                      {
+                        deleveryMethod==0&&
+                        <CheckCircle/>
+                      }
+                    </div>
+                    <div onClick={()=>setDeliveryMethod(1)} className={deleveryMethod==1?"border text-white p-4 rounded-lg shadow-md flex gap-2 bg-prime cursor-pointer":" cursor-pointer border p-4 rounded-lg shadow-md flex gap-2"}>
+                      SL5
+                      {
+                        deleveryMethod==1&&
+                        <CheckCircle/>
+                      }
+                    </div>
+                    </div>
+                  </div>
                   <FormControl fullWidth>
                     <InputLabel id="demo-simple-select-label">
                       delivery time

@@ -332,7 +332,7 @@ function Navbar() {
                   to={"/profile"}
                   className="bg-white py-2 px-4 hover:bg-gray-200 rounded-md"
                 >
-                 <AccountCircle/> Profile 
+                 <AccountCircle/> Your Profile 
                 </NavLink>
 
                 <NavLink
@@ -347,7 +347,7 @@ function Navbar() {
                 >
                  <History/> Orders History 
                 </NavLink>
-                  <hr />
+                  <hr className="m-2"/>
                 <div
                   onClick={logout}
                   className="bg-white py-2 px-4 cursor-pointer hover:bg-gray-200 rounded-md"
