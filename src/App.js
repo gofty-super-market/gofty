@@ -16,10 +16,30 @@ import { CatsContext } from "./context/cats";
 import { LogedinContext, LogedinProvider } from "./context/Logedin";
 import { CartContext } from "./context/cartContext";
 import { FavContext } from "./context/FavContext";
+import { LangContext } from "./context/langContext";
+import { CurrentLang } from "./context/CurrentLang";
+
 
 const api = axios.create({
   baseURL: "https://ayshadashboard.com/api",
 });
+
+const simpleLangFr = {
+  heroWelcome: "gofty supermarché électronique",
+  secHeroWelcome:"Sur la place de “super healthy” on mettre “Tout est proche de vous”",
+  home: "accueil",
+  market: "marché" ,
+  contact: "contact" ,
+  startShopping:"aller au marché",
+};
+const simpleLangEn = {
+  heroWelcome: "gofty supermarket electronic",
+  secHeroWelcome:"On the place of “super healthy” we put “Everything is close to you” ",
+  home: "home",
+  market: "market" ,
+  contact: "contact" ,
+  startShopping:"Shop now",
+};
 
 function App() {
   const [cart, setCart] = useState([]);
@@ -30,12 +50,38 @@ function App() {
   const [loading, setLoading] = useState(true);
   const [addToCart, setAddToCart] = useState(0);
   const { logedin, setLogedin } = useContext(LogedinContext);
+  const [langs, setLangs] = useState({});
+  const [currentLang, setCurrentLang] = useState("En");
 
   const [favs, setFavs] = useState([]);
 
+
+  const langFormData = new FormData();
+  useEffect(()=>{
+    langFormData.append("lang", currentLang);
+    api({
+      method: "post",
+      url: "language",
+      data: langFormData,
+      headers: { "Content-Type": "multipart/form-data" },
+    }).then((res) => {
+      setLangs(res.data)
+    });
+  },[currentLang])
+
+  useEffect(()=>{
+    if(currentLang=="Fr"){
+      setLangs(simpleLangFr)
+    }
+    if(currentLang=="En"){
+      setLangs(simpleLangEn)
+    }
+  },[currentLang])
+
+
   const FavFormData = new FormData();
   useEffect(() => {
-    FavFormData.append("id_client", userId );
+    FavFormData.append("id_client", userId);
     api({
       method: "post",
       url: "favorites",
@@ -45,9 +91,9 @@ function App() {
       setFavs(res.data);
     });
   }, [userId]);
-  
+
   useEffect(() => {
-    FavFormData.append("id_client", userId );
+    FavFormData.append("id_client", userId);
     api({
       method: "post",
       url: "favorites",
@@ -121,12 +167,17 @@ function App() {
                 <UpdateCart.Provider value={{ updateCart, setUpdateCart }}>
                   <UserId.Provider value={{ userId, setUserId }}>
                     <CatsContext.Provider value={{ cats, setCats }}>
-                      <ScrollToTop />
-                      {loading ? (
-                        <Loading />
-                      ) : (
-                        <Pages cart={cart} setCart={setCart} />
-                      )}
+                      <LangContext.Provider value={{ langs, setLangs }}>
+                        <CurrentLang.Provider value={{ currentLang, setCurrentLang }}>
+
+                        <ScrollToTop />
+                        {loading ? (
+                          <Loading />
+                          ) : (
+                          <Pages cart={cart} setCart={setCart} />
+                          )}
+                          </CurrentLang.Provider>
+                      </LangContext.Provider>
                     </CatsContext.Provider>
                   </UserId.Provider>
                 </UpdateCart.Provider>

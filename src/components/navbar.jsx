@@ -21,6 +21,8 @@ import { UpdateCart } from "../context/updateCart";
 import axios from "axios";
 import { LogedinContext } from "../context/Logedin";
 import { AccountCircle, Favorite, History } from "@mui/icons-material";
+import { LangContext } from "../context/langContext";
+import { CurrentLang } from "../context/CurrentLang";
 
 const api = axios.create({
   baseURL: "https://ayshadashboard.com/api",
@@ -34,6 +36,11 @@ function Navbar() {
   const [showMenu, setShowMenu] = useState(false);
   const [userInfo, setUserInfo] = useState({ fname: " ", lname: " " });
   const { logedin, setLogedin } = useContext(LogedinContext);
+
+
+  const {langs,setLangs}=useContext(LangContext);
+  const {currentLang,setCurrentLang}=useContext(CurrentLang);
+ 
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -101,7 +108,7 @@ function Navbar() {
               }
               to="/"
             >
-              Home
+              {langs.HOME}
             </NavLink>
           </li>
           <li className="navlink">
@@ -116,7 +123,7 @@ function Navbar() {
               }
               to="/market/"
             >
-              Market
+              {langs.MARKET}
             </NavLink>
           </li>
           <li className="navlink">
@@ -131,7 +138,7 @@ function Navbar() {
               }
               to="/contact"
             >
-              Contact
+              {langs.CONTACT}
             </NavLink>
           </li>
         </ul>
@@ -150,14 +157,14 @@ function Navbar() {
                   "relative  hover:border-[#95bf6d] hover:border-2 ease-in-out duration-300 cursor-pointer border-2 border-gray-300 text-gray-500 flex h-fit gap-2 items-center justify-center rounded-full py-1 px-[10px] bg-white drop-shadow-sm "
                 }
               >
-                <span className="">En</span>
+                <span className="">{currentLang}</span>
 
                 <div className="absolute top left-[50%] translate-x-[-50%] top-[30px] pt-3 ">
                   <div className="langbtndiv hidden  gap-1 justify-center items-end text-gray-700 bg-white py-1 px-2 rounded-lg border drop-shadow-lg">
-                    <button className="py-2 px-4 hover:bg-gray-100">
+                    <button className="py-2 px-4 hover:bg-gray-100" onClick={()=>setCurrentLang("En")}>
                       English
                     </button>
-                    <button className="py-2 hover:bg-gray-100 px-4">
+                    <button className="py-2 hover:bg-gray-100 px-4" onClick={()=>setCurrentLang("Fr")}>
                       French
                     </button>
                   </div>
@@ -214,7 +221,7 @@ function Navbar() {
                     }
                     to="/"
                   >
-                    <HomeRoundedIcon /> Home
+                    <HomeRoundedIcon /> {langs.HOME}
                   </NavLink>
                 </li>
                 <li
@@ -227,7 +234,7 @@ function Navbar() {
                     }
                     to="/market/"
                   >
-                    <StorefrontRoundedIcon /> Market
+                    <StorefrontRoundedIcon /> {langs.MARKET}
                   </NavLink>
                 </li>
                 <li
@@ -241,7 +248,7 @@ function Navbar() {
                     to="/contact"
                   >
                     <CallRoundedIcon />
-                    Contact
+                    {langs.CONTACT}
                   </NavLink>
                 </li>
               </ul>
@@ -284,14 +291,14 @@ function Navbar() {
                   "relative mx-2 relative hover:border-[#95bf6d] hover:border-2 ease-in-out duration-300 cursor-pointer border-2 border-gray-300 text-gray-500 flex h-fit gap-2 items-center justify-center rounded-full py-1 px-[10px] bg-white drop-shadow-sm "
                 }
               >
-                <span className="">En</span>
+                <span className="">{currentLang}</span>
 
                 <div className="absolute top left-[50%] translate-x-[-50%] top-[30px] pt-3 ">
                   <div className="langbtndiv hidden  gap-1 justify-center items-end text-gray-700 bg-white py-1 px-2 rounded-lg border drop-shadow-lg">
-                    <button className="py-2 px-4 hover:bg-gray-100">
+                    <button className="py-2 px-4 hover:bg-gray-100" onClick={()=>setCurrentLang("En")}>
                       English
                     </button>
-                    <button className="py-2 hover:bg-gray-100 px-4">
+                    <button className="py-2 hover:bg-gray-100 px-4" onClick={()=>setCurrentLang("Fr")}>
                       French
                     </button>
                   </div>
@@ -389,7 +396,9 @@ function Navbar() {
                     }
                     to="/"
                   >
-                    <HomeRoundedIcon /> Home
+                    <HomeRoundedIcon /> 
+                    {langs.HOME}
+
                   </NavLink>
                 </li>
                 <li
@@ -402,7 +411,8 @@ function Navbar() {
                     }
                     to="/market/"
                   >
-                    <StorefrontRoundedIcon /> Market
+                    <StorefrontRoundedIcon /> 
+                    {langs.MARKET}
                   </NavLink>
                 </li>
                 <li
@@ -416,7 +426,7 @@ function Navbar() {
                     to="/contact"
                   >
                     <CallRoundedIcon />
-                    Contact
+                    {langs.CONTACT}
                   </NavLink>
                 </li>
               </ul>
