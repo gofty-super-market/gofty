@@ -169,7 +169,7 @@ const handleHourChange = (event) => {
       cartFormData.append("name", name);
       cartFormData.append("phone", phone);
       cartFormData.append("address", address);
-      cartFormData.append("delivery_method", deleveryMethod? "normal":"Sl5");
+      cartFormData.append("delivery_method", deleveryMethod? "Sl5":"normal");
       cartFormData.append("delivery_hour", Hours[HourSelect]);
       api({
         method: "post",
