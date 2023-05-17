@@ -63,6 +63,7 @@ export default function SignInPage() {
         <h1>Welcome back to gofty </h1>
         <div className='w-full border-2 border-gray-300 rounded-xl h-10 overflow-hidden gap-2 bg-white flex pl-2 items-center  '>
           <EmailIcon />
+          
           <input onChange={e => setEmail(e.target.value)} value={email} type="text" placeholder='Your Email' className='flex-1 h-full outline-none' />
         </div>
         <div className='w-full border-2 border-gray-300 rounded-xl h-10 overflow-hidden gap-2 bg-white flex pl-2 items-center  '>
