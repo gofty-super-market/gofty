@@ -27,7 +27,7 @@ function DownloadApp() {
 
   return (
     <motion.div transition={{duration:.6}}  ref={ref} animate={animation}  className='bg-white rounded-xl border drop-shadow-lg p-5 mt-6 m-4 md:mx-auto max-w-[900px] flex flex-col items-center md:flex-row gap-4'>
-        <img src={app}></img>
+        <img className='w-full md:w-[400px]' src={app}></img>
         <div>
         <h3 className='text-2xl font-semibold text-gray-700 md:text-4xl py-3'>
             Download our app for android and ois
