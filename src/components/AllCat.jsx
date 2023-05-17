@@ -83,7 +83,7 @@ function AllCat() {
 
             {
                 search&&
-      <div className="bg-[#eee] rounded-2xl p-4 mb-4">
+      <div className=" rounded-2xl  mb-4">
         
         {search&&(loadingSearch ? (
           <h3 className="text-2xl text-gray-600 py-8">Searching...</h3>

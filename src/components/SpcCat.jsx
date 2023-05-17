@@ -134,13 +134,13 @@ function SpcCat() {
   return (
     <motion.div
       animate={animation}
-      className=" select-none w-full max-w-[1200px] mx-auto px-5 "
+      className=" select-none w-full max-w-[1200px] mx-auto px-2 "
     >
-      <h1 className="text-gray-700 mt-5 md:mt-10 mb-5 text-3xl font-medium flex items-center gap-2">
+      <h1 className="text-gray-700 px-1 mt-5 md:mt-10 mb-5 text-3xl font-medium flex items-center gap-2">
         {" "}
         {cat}{" "}
       </h1>
-      <div className=" overflow-hidden my-5 md:my-10 border rounded-full max-w-xs w-full h-11 flex items-center gap-2 px-1 text-gray-600 drop-shadow-md bg-white">
+      <div className=" overflow-hidden my-5 md:my-10 border rounded-full max-w-xs w-full h-11 flex items-center gap-2 px-2 text-gray-600 drop-shadow-md bg-white">
         <IconButton>
           <SearchRoundedIcon className="cursor-pointer "></SearchRoundedIcon>
         </IconButton>
@@ -173,7 +173,7 @@ function SpcCat() {
                     : " no results"}
                 </h3>
               ))}
-          <div className="mx-auto flex flex-col w-full max-w-[1200px] grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
+          <div className="mx-auto  flex-col w-full max-w-[1200px] grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
             {search ? finalproductsSearch : finalproducts}
           </div>
           {

@@ -3,6 +3,7 @@ import BestSeller from '../components/BestSeller'
 import Categories from '../components/Categories'
 import GoftyOffer from '../components/GoftyOffer'
 import Hero from '../components/Hero'
+import DownloadApp from '../components/DownloadApp'
 
 function Home() {
   return (
@@ -12,6 +13,7 @@ function Home() {
            <Categories/>
            <GoftyOffer/>
            <BestSeller/>
+           <DownloadApp/>
         </div>
     </div>
   )

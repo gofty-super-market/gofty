@@ -67,7 +67,7 @@ export default function SignInPage() {
         </div>
         <div className='w-full border-2 border-gray-300 rounded-xl h-10 overflow-hidden gap-2 bg-white flex pl-2 items-center  '>
           <HttpsIcon />
-          <input onChange={e => setPassword(e.target.value)} value={password} type="password" placeholder='Your Email' className='flex-1 h-full outline-none' />
+          <input onChange={e => setPassword(e.target.value)} value={password} type="password" placeholder='Your password' className='flex-1 h-full outline-none' />
         </div>
 
         <div className='w-full flex items-center justify-center flex-col'>

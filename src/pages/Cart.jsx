@@ -350,7 +350,8 @@ const handleHourChange = (event) => {
                     </div>
                     </div>
                   </div>
-                  <FormControl fullWidth>
+                  <FormControl fullWidth  >
+                      
                     <InputLabel id="demo-simple-select-label">
                       delivery time
                     </InputLabel>
@@ -358,6 +359,11 @@ const handleHourChange = (event) => {
                       value={HourSelect}
                       label="delivery time"
                       onChange={handleHourChange}
+                      MenuProps={{
+                        style: {
+                           maxHeight: 400,
+                              },
+                        }}
                     >
                       {
                         Hours.map((hour,key)=>{

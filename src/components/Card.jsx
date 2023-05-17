@@ -262,7 +262,7 @@ function Card({ img, title, price, description, productId, unite }) {
       sx={{
         padding: 1,
         maxWidth: 360,
-        marginY: 2,
+        marginY: 1,
         borderRadius: 6,
         position: "relative",
       }}
@@ -281,7 +281,7 @@ function Card({ img, title, price, description, productId, unite }) {
           <Typography
             gutterBottom
             variant="body2"
-            className="break-all"
+            className=" h-5 overflow-hidden"
             color="text.secondary"
           >
             {title?.substr(0, 19)}
